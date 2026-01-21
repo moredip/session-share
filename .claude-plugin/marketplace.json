@@ -9,22 +9,7 @@
   "plugins": [
     {
       "name": "session-share",
-      "source": "./claude-code-session-share",
-      "description": "Publish Claude Code session transcripts to GitHub Gists",
-      "version": "0.1.0",
-      "author": {
-        "name": "Pete Hodgson (thepete.net)"
-      },
-      "keywords": [
-        "session",
-        "transcript",
-        "gist",
-        "share",
-        "publish",
-        "thread",
-        "conversation",
-        "history"
-      ]
+      "source": "./claude-code-session-share"
     }
   ]
 }
