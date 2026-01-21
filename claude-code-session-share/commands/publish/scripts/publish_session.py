@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
 """Publish current Claude Code session transcript to GitHub Gist using gh CLI."""
+import glob
 import os
 import subprocess
 import sys
+
+
+def find_transcript_path(session_id: str) -> str | None:
+    """Find the transcript file for a given session ID."""
+    claude_dir = os.path.expanduser("~/.claude")
+    pattern = os.path.join(claude_dir, "projects", "*", "sessions", f"{session_id}.jsonl")
+    matches = glob.glob(pattern)
+    return matches[0] if matches else None
 
 
 def create_gist(filepath: str, description: str) -> str:
@@ -23,14 +32,16 @@ def create_gist(filepath: str, description: str) -> str:
 
 
 def main():
-    transcript_path = os.environ.get("SESSION_SHARE_TRANSCRIPT_PATH")
+    session_id = os.environ.get("SESSION_SHARE_SESSION_ID")
 
-    if not transcript_path:
-        print("Error: Session info not available. Was the plugin installed correctly?")
+    if not session_id:
+        print("Error: Session ID not available. Was the plugin installed correctly?")
         sys.exit(1)
 
-    if not os.path.exists(transcript_path):
-        print(f"Error: Transcript file not found: {transcript_path}")
+    transcript_path = find_transcript_path(session_id)
+
+    if not transcript_path:
+        print(f"Error: Transcripts not found for session: {session_id}")
         sys.exit(1)
 
     description = "Claude Code session transcript"
