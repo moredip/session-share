@@ -14,6 +14,10 @@ def main():
     session_id = input_data.get("session_id", "")
     transcript_path = input_data.get("transcript_path", "")
 
+    # DEBUGGING OUTPUT - only shown if you run `claude --debug`
+    print(f"  session_id: {session_id}")
+    print(f"  transcript_path: {transcript_path}")
+
     env_file = os.environ.get("CLAUDE_ENV_FILE")
     if env_file and session_id:
         with open(env_file, "a") as f:

@@ -1,6 +1,6 @@
 {
   "name": "session-share",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "Publish Claude Code session transcripts to GitHub Gists",
   "author": {
     "name": "Pete Hodgson (thepete.net)"
