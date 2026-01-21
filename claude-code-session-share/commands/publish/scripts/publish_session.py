@@ -11,7 +11,7 @@ def find_transcript_paths(session_id: str) -> list[str]:
     claude_dir = os.path.expanduser("~/.claude")
 
     # Find main transcript
-    main_pattern = os.path.join(claude_dir, "projects", "*", "sessions", f"{session_id}.jsonl")
+    main_pattern = os.path.join(claude_dir, "projects", "*", f"{session_id}.jsonl")
     main_matches = glob.glob(main_pattern)
 
     if not main_matches:
