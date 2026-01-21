@@ -6,18 +6,33 @@ import subprocess
 import sys
 
 
-def find_transcript_path(session_id: str) -> str | None:
-    """Find the transcript file for a given session ID."""
+def find_transcript_paths(session_id: str) -> list[str]:
+    """Find the main transcript and any subagent transcripts for a session ID."""
     claude_dir = os.path.expanduser("~/.claude")
-    pattern = os.path.join(claude_dir, "projects", "*", "sessions", f"{session_id}.jsonl")
-    matches = glob.glob(pattern)
-    return matches[0] if matches else None
+
+    # Find main transcript
+    main_pattern = os.path.join(claude_dir, "projects", "*", "sessions", f"{session_id}.jsonl")
+    main_matches = glob.glob(main_pattern)
+
+    if not main_matches:
+        return []
+
+    main_transcript = main_matches[0]
+    transcripts = [main_transcript]
+
+    # Find any additional files in <session_id>/ directory
+    sessions_dir = os.path.dirname(main_transcript)
+    session_dir = os.path.join(sessions_dir, session_id)
+    additional_files = glob.glob(os.path.join(session_dir, "**", "*"), recursive=True)
+    transcripts.extend(f for f in additional_files if os.path.isfile(f))
+
+    return transcripts
 
 
-def create_gist(filepath: str, description: str) -> str:
+def create_gist(filepaths: list[str], description: str) -> str:
     """Create a GitHub Gist using gh CLI and return its URL."""
     result = subprocess.run(
-        ["gh", "gist", "create", filepath, "--desc", description],
+        ["gh", "gist", "create", *filepaths, "--desc", description],
         capture_output=True,
         text=True,
     )
@@ -38,15 +53,21 @@ def main():
         print("Error: Session ID not available. Was the plugin installed correctly?")
         sys.exit(1)
 
-    transcript_path = find_transcript_path(session_id)
+    transcript_paths = find_transcript_paths(session_id)
 
-    if not transcript_path:
+    if not transcript_paths:
         print(f"Error: Transcripts not found for session: {session_id}")
         sys.exit(1)
 
     description = "Claude Code session transcript"
-    url = create_gist(transcript_path, description)
-    print(f"Session published: {url}")
+    url = create_gist(transcript_paths, description)
+
+    file_count = len(transcript_paths)
+    subagent_count = file_count - 1
+    if subagent_count > 0:
+        print(f"Session published ({subagent_count} subagent transcript(s) included): {url}")
+    else:
+        print(f"Session published: {url}")
 
 
 if __name__ == "__main__":
