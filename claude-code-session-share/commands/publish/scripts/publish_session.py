@@ -47,11 +47,11 @@ def create_gist(filepaths: list[str], description: str) -> str:
 
 
 def main():
-    session_id = os.environ.get("SESSION_SHARE_SESSION_ID")
-
-    if not session_id:
-        print("Error: Session ID not available. Was the plugin installed correctly?")
+    if len(sys.argv) < 2 or not sys.argv[1]:
+        print("Error: Session ID not provided.")
         sys.exit(1)
+
+    session_id = sys.argv[1]
 
     transcript_paths = find_transcript_paths(session_id)
 

@@ -9,5 +9,5 @@ model: haiku
 Publish the current session transcript by running:
 
 ```bash
-python3 ${CLAUDE_PLUGIN_ROOT}/commands/publish/scripts/publish_session.py
+python3 ${CLAUDE_PLUGIN_ROOT}/commands/publish/scripts/publish_session.py ${CLAUDE_SESSION_ID}
 ```

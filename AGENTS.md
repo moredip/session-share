@@ -4,3 +4,6 @@
 - /docs project documentation
 - /samples/claude-code-projects
   - examples of raw claude code transcript files (JSONL, with subagents)
+
+## general rules
+- whenever you're asked to make a commit that includes changes to a Claude Code plugin, also update the teeny part of that plugin's version number in plugin.json
