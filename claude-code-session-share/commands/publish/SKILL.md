@@ -3,6 +3,7 @@ name: publish-session
 description: Publish the current session transcript to a GitHub Gist
 disable-model-invocation: true
 allowed-tools: Bash(python3:*)
+model: haiku
 ---
 
 Publish the current session transcript by running:
