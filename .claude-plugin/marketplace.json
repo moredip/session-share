@@ -1,7 +1,7 @@
 {
   "name": "session-share-marketplace",
   "owner": {
-    "name": "Pete Hodgson"
+    "name": "Pete Hodgson (thepete.net)"
   },
   "metadata": {
     "description": "Claude Code plugins for sharing session transcripts"
@@ -13,7 +13,7 @@
       "description": "Publish Claude Code session transcripts to GitHub Gists",
       "version": "0.1.0",
       "author": {
-        "name": "Pete Hodgson"
+        "name": "Pete Hodgson (thepete.net)"
       },
       "keywords": [
         "session",
