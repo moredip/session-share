@@ -59,7 +59,11 @@ def main():
         print(f"Error: Transcripts not found for session: {session_id}")
         sys.exit(1)
 
-    description = "Claude Code session transcript"
+    description = (
+        f"Claude Code session transcript - {session_id}\n\n"
+        "Created by the session-share plugin: "
+        "https://github.com/moredip/session-share"
+    )
     url = create_gist(transcript_paths, description)
 
     file_count = len(transcript_paths)
