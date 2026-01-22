@@ -5,5 +5,6 @@
 - /samples/claude-code-projects
   - examples of raw claude code transcript files (JSONL, with subagents)
 
-## general rules
+## general guidance
 - whenever you're asked to make a commit that includes changes to a Claude Code plugin, also update the teeny part of that plugin's version number in plugin.json
+- You have playwright available for testing your changes in a browser. Use it after you've made meaningful changes to a UI.

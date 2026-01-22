@@ -3,7 +3,14 @@
     "allow": [
       "Bash(npm run check)",
       "Bash(npm run check:fix)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(npm run build:*)",
+      "mcp__plugin_playwright_playwright",
+      "Bash(npm run dev:*)"
     ]
+  },
+  "enabledPlugins": {
+    "playwright@claude-plugins-official": true,
+    "session-share@session-share-marketplace": true
   }
 }
