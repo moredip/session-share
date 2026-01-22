@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { DisplayMessage } from "../domain/messages";
+import type { RawTranscriptEntry } from "../domain/rawEntry";
 
 interface GistFile {
   filename: string;
@@ -79,6 +80,30 @@ const MessageEntrySchema = z.discriminatedUnion("type", [
 ]);
 
 type TextBlock = z.infer<typeof TextBlockSchema>;
+
+export interface TranscriptData {
+  messages: DisplayMessage[];
+  rawEntries: RawTranscriptEntry[];
+}
+
+function parseRawEntries(jsonlContent: string): RawTranscriptEntry[] {
+  const lines = jsonlContent.trim().split("\n");
+  const entries: RawTranscriptEntry[] = [];
+
+  for (const line of lines) {
+    if (!line.trim()) continue;
+
+    const parsed = JSON.parse(line);
+    entries.push({
+      uuid: parsed.uuid ?? crypto.randomUUID(),
+      raw: parsed,
+      type: parsed.type ?? "unknown",
+      timestamp: parsed.timestamp,
+    });
+  }
+
+  return entries;
+}
 
 function parseTranscript(jsonlContent: string): DisplayMessage[] {
   const lines = jsonlContent.trim().split("\n");
@@ -162,4 +187,36 @@ export async function fetchGistTranscript(
 
   const content = await contentResponse.text();
   return parseTranscript(content);
+}
+
+export async function fetchGistTranscriptFull(
+  gistId: string,
+): Promise<TranscriptData> {
+  const metaResponse = await fetch(`https://api.github.com/gists/${gistId}`);
+  if (!metaResponse.ok) {
+    throw new Error(`Failed to fetch gist metadata: ${metaResponse.status}`);
+  }
+
+  const gist: GistResponse = await metaResponse.json();
+
+  const jsonlFile = Object.values(gist.files).find((f) =>
+    f.filename.endsWith(".jsonl"),
+  );
+
+  if (!jsonlFile) {
+    throw new Error("No .jsonl file found in gist");
+  }
+
+  const contentResponse = await fetch(jsonlFile.raw_url);
+  if (!contentResponse.ok) {
+    throw new Error(
+      `Failed to fetch transcript content: ${contentResponse.status}`,
+    );
+  }
+
+  const content = await contentResponse.text();
+  return {
+    messages: parseTranscript(content),
+    rawEntries: parseRawEntries(content),
+  };
 }
