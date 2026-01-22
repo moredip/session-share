@@ -1,33 +1,18 @@
-import {
-  type TranscriptEntry,
-  isDisplayableEntry,
-} from "../domain/transcriptEntry";
-import { MessageBubble } from "./MessageBubble";
+import { type TranscriptEntry, isDisplayableEntry } from '../domain/transcriptEntry'
+import { MessageEntry } from './MessageEntry'
 
 interface MessageThreadProps {
-  entries: TranscriptEntry[];
+  entries: TranscriptEntry[]
 }
 
 export function MessageThread({ entries }: MessageThreadProps) {
-  const displayableEntries = entries.filter(isDisplayableEntry);
+  const displayableEntries = entries.filter(isDisplayableEntry)
 
   return (
     <div className="flex flex-col gap-4">
-      {displayableEntries.map((entry, index) => {
-        const thinkingContent =
-          entry.structuredEntry.kind === "assistant"
-            ? entry.structuredEntry.thinkingContent
-            : undefined;
-
-        return (
-          <MessageBubble
-            key={entry.uuid ?? index}
-            role={entry.structuredEntry.role}
-            content={entry.structuredEntry.content}
-            thinkingContent={thinkingContent}
-          />
-        );
-      })}
+      {displayableEntries.map((entry, index) => (
+        <MessageEntry key={entry.uuid ?? index} entry={entry} />
+      ))}
     </div>
-  );
+  )
 }
