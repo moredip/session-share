@@ -1,5 +1,5 @@
-import { Routes, Route } from "react-router-dom";
-import { TranscriptViewer } from "./components/TranscriptViewer";
+import { Routes, Route } from 'react-router-dom'
+import { TranscriptViewer } from './components/TranscriptViewer'
 
 function App() {
   return (
@@ -9,9 +9,7 @@ function App() {
         path="/"
         element={
           <div className="p-8">
-            <h1 className="text-xl font-semibold mb-4 text-gray-700">
-              Session Viewer
-            </h1>
+            <h1 className="text-xl font-semibold mb-4 text-gray-700">Session Viewer</h1>
             <p className="text-gray-600 mb-4">
               View Claude Code session transcripts from GitHub Gists.
             </p>
@@ -38,7 +36,7 @@ function App() {
         }
       />
     </Routes>
-  );
+  )
 }
 
-export default App;
+export default App

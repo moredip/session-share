@@ -1,17 +1,17 @@
-import { useState } from "react";
-import type { TranscriptEntry } from "../domain/transcriptEntry";
-import { RawEntryCard } from "./RawEntryCard";
+import { useState } from 'react'
+import type { TranscriptEntry } from '../domain/transcriptEntry'
+import { RawEntryCard } from './RawEntryCard'
 
 interface RawTranscriptViewProps {
-  entries: TranscriptEntry[];
+  entries: TranscriptEntry[]
 }
 
 export function RawTranscriptView({ entries }: RawTranscriptViewProps) {
-  const [forceExpanded, setForceExpanded] = useState<boolean | null>(null);
+  const [forceExpanded, setForceExpanded] = useState<boolean | null>(null)
 
-  const handleExpandAll = () => setForceExpanded(true);
-  const handleCollapseAll = () => setForceExpanded(false);
-  const handleManualToggle = () => setForceExpanded(null);
+  const handleExpandAll = () => setForceExpanded(true)
+  const handleCollapseAll = () => setForceExpanded(false)
+  const handleManualToggle = () => setForceExpanded(null)
 
   return (
     <div className="flex flex-col gap-2">
@@ -38,5 +38,5 @@ export function RawTranscriptView({ entries }: RawTranscriptViewProps) {
         />
       ))}
     </div>
-  );
+  )
 }

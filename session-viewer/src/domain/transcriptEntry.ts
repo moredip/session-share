@@ -2,30 +2,30 @@
  * Content block types for message entries
  */
 export interface TextBlock {
-  type: "text";
-  text: string;
+  type: 'text'
+  text: string
 }
 
 export interface ToolUseBlock {
-  type: "tool_use";
-  id: string;
-  name: string;
-  input: Record<string, unknown>;
+  type: 'tool_use'
+  id: string
+  name: string
+  input: Record<string, unknown>
 }
 
 export interface ThinkingBlock {
-  type: "thinking";
-  thinking: string;
+  type: 'thinking'
+  thinking: string
 }
 
 export interface ToolResultBlock {
-  type: "tool_result";
-  tool_use_id: string;
-  content: string | TextBlock[];
+  type: 'tool_result'
+  tool_use_id: string
+  content: string | TextBlock[]
 }
 
-export type UserContentBlock = TextBlock | ToolResultBlock;
-export type AssistantContentBlock = TextBlock | ToolUseBlock | ThinkingBlock;
+export type UserContentBlock = TextBlock | ToolResultBlock
+export type AssistantContentBlock = TextBlock | ToolUseBlock | ThinkingBlock
 
 /**
  * Structured entry variants for different entry types.
@@ -36,41 +36,41 @@ export type StructuredEntry =
   | AssistantStructuredEntry
   | ProgressStructuredEntry
   | SystemStructuredEntry
-  | FileHistorySnapshotStructuredEntry;
+  | FileHistorySnapshotStructuredEntry
 
 export interface UserStructuredEntry {
-  kind: "user";
-  role: "user";
-  content: string;
+  kind: 'user'
+  role: 'user'
+  content: string
 }
 
 export interface AssistantStructuredEntry {
-  kind: "assistant";
-  role: "assistant";
-  content: string;
-  thinkingContent?: string;
-  hasToolUse: boolean;
-  hasThinking: boolean;
+  kind: 'assistant'
+  role: 'assistant'
+  content: string
+  thinkingContent?: string
+  hasToolUse: boolean
+  hasThinking: boolean
 }
 
 export interface ProgressStructuredEntry {
-  kind: "progress";
-  progressType: string;
-  toolUseID?: string;
-  parentToolUseID?: string;
-  agentId?: string;
+  kind: 'progress'
+  progressType: string
+  toolUseID?: string
+  parentToolUseID?: string
+  agentId?: string
 }
 
 export interface SystemStructuredEntry {
-  kind: "system";
-  subtype: string;
-  durationMs?: number;
+  kind: 'system'
+  subtype: string
+  durationMs?: number
 }
 
 export interface FileHistorySnapshotStructuredEntry {
-  kind: "file-history-snapshot";
-  messageId: string;
-  isSnapshotUpdate: boolean;
+  kind: 'file-history-snapshot'
+  messageId: string
+  isSnapshotUpdate: boolean
 }
 
 /**
@@ -78,31 +78,26 @@ export interface FileHistorySnapshotStructuredEntry {
  */
 export interface TranscriptEntry {
   /** Unique identifier - optional, some entry types don't have it */
-  uuid?: string;
+  uuid?: string
 
   /** ISO timestamp - optional */
-  timestamp?: string;
+  timestamp?: string
 
   /** Entry type from raw data */
-  type: string;
+  type: string
 
   /** The original unparsed JSON object */
-  raw: unknown;
+  raw: unknown
 
   /** Parsed structured content, present when the entry type has a known schema */
-  structuredEntry?: StructuredEntry;
+  structuredEntry?: StructuredEntry
 }
 
 /**
  * Type guards for checking structured entry kinds
  */
-export function isDisplayableEntry(
-  entry: TranscriptEntry,
-): entry is TranscriptEntry & {
-  structuredEntry: UserStructuredEntry | AssistantStructuredEntry;
+export function isDisplayableEntry(entry: TranscriptEntry): entry is TranscriptEntry & {
+  structuredEntry: UserStructuredEntry | AssistantStructuredEntry
 } {
-  return (
-    entry.structuredEntry?.kind === "user" ||
-    entry.structuredEntry?.kind === "assistant"
-  );
+  return entry.structuredEntry?.kind === 'user' || entry.structuredEntry?.kind === 'assistant'
 }

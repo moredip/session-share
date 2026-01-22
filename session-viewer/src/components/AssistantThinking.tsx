@@ -18,9 +18,7 @@ export function AssistantThinking({ content, defaultExpanded = false }: Assistan
           <span>Assistant [thinking]</span>
           <span>{expanded ? '▼' : '▶'}</span>
         </button>
-        {expanded && (
-          <div className="prose prose-sm max-w-none whitespace-pre-wrap">{content}</div>
-        )}
+        {expanded && <div className="prose prose-sm max-w-none whitespace-pre-wrap">{content}</div>}
       </div>
     </div>
   )

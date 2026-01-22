@@ -1,86 +1,79 @@
-import { z } from "zod";
-import type {
-  TranscriptEntry,
-  StructuredEntry,
-  TextBlock,
-} from "../domain/transcriptEntry";
+import { z } from 'zod'
+import type { TranscriptEntry, StructuredEntry, TextBlock } from '../domain/transcriptEntry'
 
 interface GistFile {
-  filename: string;
-  raw_url: string;
+  filename: string
+  raw_url: string
 }
 
 interface GistResponse {
-  files: Record<string, GistFile>;
+  files: Record<string, GistFile>
 }
 
 // Zod schemas for validation
 const TextBlockSchema = z.object({
-  type: z.literal("text"),
+  type: z.literal('text'),
   text: z.string(),
-});
+})
 
 const ToolUseBlockSchema = z.object({
-  type: z.literal("tool_use"),
+  type: z.literal('tool_use'),
   id: z.string(),
   name: z.string(),
   input: z.record(z.unknown()),
-});
+})
 
 const ThinkingBlockSchema = z.object({
-  type: z.literal("thinking"),
+  type: z.literal('thinking'),
   thinking: z.string(),
-});
+})
 
 const ToolResultBlockSchema = z.object({
-  type: z.literal("tool_result"),
+  type: z.literal('tool_result'),
   tool_use_id: z.string(),
   content: z.union([z.string(), z.array(TextBlockSchema)]),
-});
+})
 
-const AssistantContentBlockSchema = z.discriminatedUnion("type", [
+const AssistantContentBlockSchema = z.discriminatedUnion('type', [
   TextBlockSchema,
   ToolUseBlockSchema,
   ThinkingBlockSchema,
-]);
+])
 
-const UserContentBlockSchema = z.discriminatedUnion("type", [
+const UserContentBlockSchema = z.discriminatedUnion('type', [
   TextBlockSchema,
   ToolResultBlockSchema,
-]);
+])
 
-const UserContentSchema = z.union([
-  z.string(),
-  z.array(UserContentBlockSchema),
-]);
+const UserContentSchema = z.union([z.string(), z.array(UserContentBlockSchema)])
 
 const UserMessageEntrySchema = z.object({
   uuid: z.string(),
   parentUuid: z.string().nullable(),
-  type: z.literal("user"),
+  type: z.literal('user'),
   timestamp: z.string(),
   sessionId: z.string(),
   message: z.object({
-    role: z.literal("user"),
+    role: z.literal('user'),
     content: UserContentSchema,
   }),
-});
+})
 
 const AssistantMessageEntrySchema = z.object({
   uuid: z.string(),
   parentUuid: z.string().nullable(),
-  type: z.literal("assistant"),
+  type: z.literal('assistant'),
   timestamp: z.string(),
   sessionId: z.string().optional(),
   message: z.object({
-    role: z.literal("assistant"),
+    role: z.literal('assistant'),
     content: z.array(AssistantContentBlockSchema),
   }),
-});
+})
 
 const ProgressEntrySchema = z.object({
   uuid: z.string(),
-  type: z.literal("progress"),
+  type: z.literal('progress'),
   timestamp: z.string(),
   data: z
     .object({
@@ -89,168 +82,145 @@ const ProgressEntrySchema = z.object({
     .passthrough(),
   toolUseID: z.string().optional(),
   parentToolUseID: z.string().optional(),
-});
+})
 
 const SystemEntrySchema = z.object({
   uuid: z.string(),
-  type: z.literal("system"),
+  type: z.literal('system'),
   timestamp: z.string(),
   subtype: z.string(),
   durationMs: z.number().optional(),
-});
+})
 
 const FileHistorySnapshotEntrySchema = z.object({
-  type: z.literal("file-history-snapshot"),
+  type: z.literal('file-history-snapshot'),
   messageId: z.string(),
   isSnapshotUpdate: z.boolean(),
-});
+})
 
 export interface TranscriptData {
-  entries: TranscriptEntry[];
+  entries: TranscriptEntry[]
 }
 
 /**
  * Parse a user message entry into a structured entry
  */
-function parseUserStructuredEntry(
-  parsed: unknown,
-): StructuredEntry | undefined {
-  const result = UserMessageEntrySchema.safeParse(parsed);
-  if (!result.success) return undefined;
+function parseUserStructuredEntry(parsed: unknown): StructuredEntry | undefined {
+  const result = UserMessageEntrySchema.safeParse(parsed)
+  if (!result.success) return undefined
 
-  const entry = result.data;
+  const entry = result.data
   const content =
-    typeof entry.message.content === "string"
+    typeof entry.message.content === 'string'
       ? entry.message.content
       : entry.message.content
-          .filter((block): block is TextBlock => block.type === "text")
+          .filter((block): block is TextBlock => block.type === 'text')
           .map((block) => block.text)
-          .join("\n");
+          .join('\n')
 
   return {
-    kind: "user",
-    role: "user",
+    kind: 'user',
+    role: 'user',
     content,
-  };
+  }
 }
 
-function parseAssistantStructuredEntry(
-  parsed: unknown,
-): StructuredEntry | undefined {
-  const result = AssistantMessageEntrySchema.safeParse(parsed);
-  if (!result.success) return undefined;
+function parseAssistantStructuredEntry(parsed: unknown): StructuredEntry | undefined {
+  const result = AssistantMessageEntrySchema.safeParse(parsed)
+  if (!result.success) return undefined
 
-  const entry = result.data;
+  const entry = result.data
   const textContent = entry.message.content
-    .filter(
-      (block): block is z.infer<typeof TextBlockSchema> =>
-        block.type === "text",
-    )
+    .filter((block): block is z.infer<typeof TextBlockSchema> => block.type === 'text')
     .map((block) => block.text)
-    .join("\n");
+    .join('\n')
 
   const thinkingContent = entry.message.content
-    .filter(
-      (block): block is z.infer<typeof ThinkingBlockSchema> =>
-        block.type === "thinking",
-    )
+    .filter((block): block is z.infer<typeof ThinkingBlockSchema> => block.type === 'thinking')
     .map((block) => block.thinking)
-    .join("\n");
+    .join('\n')
 
-  const hasToolUse = entry.message.content.some(
-    (block) => block.type === "tool_use",
-  );
-  const hasThinking = entry.message.content.some(
-    (block) => block.type === "thinking",
-  );
+  const hasToolUse = entry.message.content.some((block) => block.type === 'tool_use')
+  const hasThinking = entry.message.content.some((block) => block.type === 'thinking')
 
   return {
-    kind: "assistant",
-    role: "assistant",
+    kind: 'assistant',
+    role: 'assistant',
     content: textContent,
     thinkingContent: hasThinking ? thinkingContent : undefined,
     hasToolUse,
     hasThinking,
-  };
+  }
 }
 
-function parseProgressStructuredEntry(
-  parsed: unknown,
-): StructuredEntry | undefined {
-  const result = ProgressEntrySchema.safeParse(parsed);
-  if (!result.success) return undefined;
+function parseProgressStructuredEntry(parsed: unknown): StructuredEntry | undefined {
+  const result = ProgressEntrySchema.safeParse(parsed)
+  if (!result.success) return undefined
 
-  const entry = result.data;
-  const data = entry.data as { type: string; agentId?: string };
+  const entry = result.data
+  const data = entry.data as { type: string; agentId?: string }
 
   return {
-    kind: "progress",
+    kind: 'progress',
     progressType: data.type,
     toolUseID: entry.toolUseID,
     parentToolUseID: entry.parentToolUseID,
     agentId: data.agentId,
-  };
+  }
 }
 
-function parseSystemStructuredEntry(
-  parsed: unknown,
-): StructuredEntry | undefined {
-  const result = SystemEntrySchema.safeParse(parsed);
-  if (!result.success) return undefined;
+function parseSystemStructuredEntry(parsed: unknown): StructuredEntry | undefined {
+  const result = SystemEntrySchema.safeParse(parsed)
+  if (!result.success) return undefined
 
-  const entry = result.data;
+  const entry = result.data
 
   return {
-    kind: "system",
+    kind: 'system',
     subtype: entry.subtype,
     durationMs: entry.durationMs,
-  };
+  }
 }
 
-function parseFileHistorySnapshotStructuredEntry(
-  parsed: unknown,
-): StructuredEntry | undefined {
-  const result = FileHistorySnapshotEntrySchema.safeParse(parsed);
-  if (!result.success) return undefined;
+function parseFileHistorySnapshotStructuredEntry(parsed: unknown): StructuredEntry | undefined {
+  const result = FileHistorySnapshotEntrySchema.safeParse(parsed)
+  if (!result.success) return undefined
 
-  const entry = result.data;
+  const entry = result.data
 
   return {
-    kind: "file-history-snapshot",
+    kind: 'file-history-snapshot',
     messageId: entry.messageId,
     isSnapshotUpdate: entry.isSnapshotUpdate,
-  };
+  }
 }
 
-function parseStructuredEntry(
-  parsed: unknown,
-  type: string,
-): StructuredEntry | undefined {
+function parseStructuredEntry(parsed: unknown, type: string): StructuredEntry | undefined {
   switch (type) {
-    case "user":
-      return parseUserStructuredEntry(parsed);
-    case "assistant":
-      return parseAssistantStructuredEntry(parsed);
-    case "progress":
-      return parseProgressStructuredEntry(parsed);
-    case "system":
-      return parseSystemStructuredEntry(parsed);
-    case "file-history-snapshot":
-      return parseFileHistorySnapshotStructuredEntry(parsed);
+    case 'user':
+      return parseUserStructuredEntry(parsed)
+    case 'assistant':
+      return parseAssistantStructuredEntry(parsed)
+    case 'progress':
+      return parseProgressStructuredEntry(parsed)
+    case 'system':
+      return parseSystemStructuredEntry(parsed)
+    case 'file-history-snapshot':
+      return parseFileHistorySnapshotStructuredEntry(parsed)
     default:
-      return undefined;
+      return undefined
   }
 }
 
 function parseEntries(jsonlContent: string): TranscriptEntry[] {
-  const lines = jsonlContent.trim().split("\n");
-  const entries: TranscriptEntry[] = [];
+  const lines = jsonlContent.trim().split('\n')
+  const entries: TranscriptEntry[] = []
 
   for (const line of lines) {
-    if (!line.trim()) continue;
+    if (!line.trim()) continue
 
-    const parsed = JSON.parse(line);
-    const type = parsed.type ?? "unknown";
+    const parsed = JSON.parse(line)
+    const type = parsed.type ?? 'unknown'
 
     entries.push({
       uuid: parsed.uuid,
@@ -258,39 +228,33 @@ function parseEntries(jsonlContent: string): TranscriptEntry[] {
       type,
       raw: parsed,
       structuredEntry: parseStructuredEntry(parsed, type),
-    });
+    })
   }
 
-  return entries;
+  return entries
 }
 
-export async function fetchGistTranscriptFull(
-  gistId: string,
-): Promise<TranscriptData> {
-  const metaResponse = await fetch(`https://api.github.com/gists/${gistId}`);
+export async function fetchGistTranscriptFull(gistId: string): Promise<TranscriptData> {
+  const metaResponse = await fetch(`https://api.github.com/gists/${gistId}`)
   if (!metaResponse.ok) {
-    throw new Error(`Failed to fetch gist metadata: ${metaResponse.status}`);
+    throw new Error(`Failed to fetch gist metadata: ${metaResponse.status}`)
   }
 
-  const gist: GistResponse = await metaResponse.json();
+  const gist: GistResponse = await metaResponse.json()
 
-  const jsonlFile = Object.values(gist.files).find((f) =>
-    f.filename.endsWith(".jsonl"),
-  );
+  const jsonlFile = Object.values(gist.files).find((f) => f.filename.endsWith('.jsonl'))
 
   if (!jsonlFile) {
-    throw new Error("No .jsonl file found in gist");
+    throw new Error('No .jsonl file found in gist')
   }
 
-  const contentResponse = await fetch(jsonlFile.raw_url);
+  const contentResponse = await fetch(jsonlFile.raw_url)
   if (!contentResponse.ok) {
-    throw new Error(
-      `Failed to fetch transcript content: ${contentResponse.status}`,
-    );
+    throw new Error(`Failed to fetch transcript content: ${contentResponse.status}`)
   }
 
-  const content = await contentResponse.text();
+  const content = await contentResponse.text()
   return {
     entries: parseEntries(content),
-  };
+  }
 }
