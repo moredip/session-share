@@ -13,13 +13,21 @@ export function MessageThread({ entries }: MessageThreadProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      {displayableEntries.map((entry, index) => (
-        <MessageBubble
-          key={entry.uuid ?? index}
-          role={entry.structuredEntry.role}
-          content={entry.structuredEntry.content}
-        />
-      ))}
+      {displayableEntries.map((entry, index) => {
+        const thinkingContent =
+          entry.structuredEntry.kind === "assistant"
+            ? entry.structuredEntry.thinkingContent
+            : undefined;
+
+        return (
+          <MessageBubble
+            key={entry.uuid ?? index}
+            role={entry.structuredEntry.role}
+            content={entry.structuredEntry.content}
+            thinkingContent={thinkingContent}
+          />
+        );
+      })}
     </div>
   );
 }

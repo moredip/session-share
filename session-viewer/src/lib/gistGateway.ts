@@ -82,9 +82,11 @@ const ProgressEntrySchema = z.object({
   uuid: z.string(),
   type: z.literal("progress"),
   timestamp: z.string(),
-  data: z.object({
-    type: z.string(),
-  }).passthrough(),
+  data: z
+    .object({
+      type: z.string(),
+    })
+    .passthrough(),
   toolUseID: z.string().optional(),
   parentToolUseID: z.string().optional(),
 });
@@ -132,9 +134,6 @@ function parseUserStructuredEntry(
   };
 }
 
-/**
- * Parse an assistant message entry into a structured entry
- */
 function parseAssistantStructuredEntry(
   parsed: unknown,
 ): StructuredEntry | undefined {
@@ -143,8 +142,19 @@ function parseAssistantStructuredEntry(
 
   const entry = result.data;
   const textContent = entry.message.content
-    .filter((block): block is z.infer<typeof TextBlockSchema> => block.type === "text")
+    .filter(
+      (block): block is z.infer<typeof TextBlockSchema> =>
+        block.type === "text",
+    )
     .map((block) => block.text)
+    .join("\n");
+
+  const thinkingContent = entry.message.content
+    .filter(
+      (block): block is z.infer<typeof ThinkingBlockSchema> =>
+        block.type === "thinking",
+    )
+    .map((block) => block.thinking)
     .join("\n");
 
   const hasToolUse = entry.message.content.some(
@@ -158,14 +168,12 @@ function parseAssistantStructuredEntry(
     kind: "assistant",
     role: "assistant",
     content: textContent,
+    thinkingContent: hasThinking ? thinkingContent : undefined,
     hasToolUse,
     hasThinking,
   };
 }
 
-/**
- * Parse a progress entry into a structured entry
- */
 function parseProgressStructuredEntry(
   parsed: unknown,
 ): StructuredEntry | undefined {
@@ -184,9 +192,6 @@ function parseProgressStructuredEntry(
   };
 }
 
-/**
- * Parse a system entry into a structured entry
- */
 function parseSystemStructuredEntry(
   parsed: unknown,
 ): StructuredEntry | undefined {
@@ -202,9 +207,6 @@ function parseSystemStructuredEntry(
   };
 }
 
-/**
- * Parse a file-history-snapshot entry into a structured entry
- */
 function parseFileHistorySnapshotStructuredEntry(
   parsed: unknown,
 ): StructuredEntry | undefined {
@@ -220,9 +222,6 @@ function parseFileHistorySnapshotStructuredEntry(
   };
 }
 
-/**
- * Parse a raw entry into a structured entry based on its type
- */
 function parseStructuredEntry(
   parsed: unknown,
   type: string,
@@ -243,9 +242,6 @@ function parseStructuredEntry(
   }
 }
 
-/**
- * Parse JSONL content into unified transcript entries
- */
 function parseEntries(jsonlContent: string): TranscriptEntry[] {
   const lines = jsonlContent.trim().split("\n");
   const entries: TranscriptEntry[] = [];

@@ -48,6 +48,7 @@ export interface AssistantStructuredEntry {
   kind: "assistant";
   role: "assistant";
   content: string;
+  thinkingContent?: string;
   hasToolUse: boolean;
   hasThinking: boolean;
 }

@@ -1,11 +1,17 @@
 import ReactMarkdown from "react-markdown";
+import { ThinkingBlock } from "./ThinkingBlock";
 
 interface MessageBubbleProps {
   role: "user" | "assistant";
   content: string;
+  thinkingContent?: string;
 }
 
-export function MessageBubble({ role, content }: MessageBubbleProps) {
+export function MessageBubble({
+  role,
+  content,
+  thinkingContent,
+}: MessageBubbleProps) {
   const isUser = role === "user";
 
   return (
@@ -18,6 +24,7 @@ export function MessageBubble({ role, content }: MessageBubbleProps) {
         <div className="text-xs opacity-60 mb-1">
           {isUser ? "User" : "Assistant"}
         </div>
+        {thinkingContent && <ThinkingBlock content={thinkingContent} />}
         <div className="prose prose-sm max-w-none dark:prose-invert">
           <ReactMarkdown>{content}</ReactMarkdown>
         </div>
