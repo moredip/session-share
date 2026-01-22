@@ -1,12 +1,12 @@
 import ReactMarkdown from "react-markdown";
-import type { DisplayMessage } from "../domain/messages";
 
 interface MessageBubbleProps {
-  message: DisplayMessage;
+  role: "user" | "assistant";
+  content: string;
 }
 
-export function MessageBubble({ message }: MessageBubbleProps) {
-  const isUser = message.role === "user";
+export function MessageBubble({ role, content }: MessageBubbleProps) {
+  const isUser = role === "user";
 
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
@@ -19,7 +19,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
           {isUser ? "User" : "Assistant"}
         </div>
         <div className="prose prose-sm max-w-none dark:prose-invert">
-          <ReactMarkdown>{message.content}</ReactMarkdown>
+          <ReactMarkdown>{content}</ReactMarkdown>
         </div>
       </div>
     </div>

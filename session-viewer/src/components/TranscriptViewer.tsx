@@ -65,9 +65,9 @@ export function TranscriptViewer() {
         <ViewToggle currentView={viewMode} onViewChange={setViewMode} />
       </div>
       {viewMode === "conversation" ? (
-        <MessageThread messages={data.messages} />
+        <MessageThread entries={data.entries} />
       ) : (
-        <RawTranscriptView entries={data.rawEntries} />
+        <RawTranscriptView entries={data.entries} />
       )}
     </div>
   );

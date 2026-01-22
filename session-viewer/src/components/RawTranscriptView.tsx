@@ -1,9 +1,9 @@
 import { useState } from "react";
-import type { RawTranscriptEntry } from "../domain/rawEntry";
+import type { TranscriptEntry } from "../domain/transcriptEntry";
 import { RawEntryCard } from "./RawEntryCard";
 
 interface RawTranscriptViewProps {
-  entries: RawTranscriptEntry[];
+  entries: TranscriptEntry[];
 }
 
 export function RawTranscriptView({ entries }: RawTranscriptViewProps) {
@@ -29,9 +29,9 @@ export function RawTranscriptView({ entries }: RawTranscriptViewProps) {
           Collapse All
         </button>
       </div>
-      {entries.map((entry) => (
+      {entries.map((entry, index) => (
         <RawEntryCard
-          key={entry.uuid}
+          key={entry.uuid ?? index}
           entry={entry}
           forceExpanded={forceExpanded}
           onManualToggle={handleManualToggle}

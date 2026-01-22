@@ -1,15 +1,24 @@
-import type { DisplayMessage } from "../domain/messages";
+import {
+  type TranscriptEntry,
+  isDisplayableEntry,
+} from "../domain/transcriptEntry";
 import { MessageBubble } from "./MessageBubble";
 
 interface MessageThreadProps {
-  messages: DisplayMessage[];
+  entries: TranscriptEntry[];
 }
 
-export function MessageThread({ messages }: MessageThreadProps) {
+export function MessageThread({ entries }: MessageThreadProps) {
+  const displayableEntries = entries.filter(isDisplayableEntry);
+
   return (
     <div className="flex flex-col gap-4">
-      {messages.map((message) => (
-        <MessageBubble key={message.uuid} message={message} />
+      {displayableEntries.map((entry, index) => (
+        <MessageBubble
+          key={entry.uuid ?? index}
+          role={entry.structuredEntry.role}
+          content={entry.structuredEntry.content}
+        />
       ))}
     </div>
   );

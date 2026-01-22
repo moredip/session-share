@@ -1,6 +1,9 @@
 import { z } from "zod";
-import type { DisplayMessage } from "../domain/messages";
-import type { RawTranscriptEntry } from "../domain/rawEntry";
+import type {
+  TranscriptEntry,
+  StructuredEntry,
+  TextBlock,
+} from "../domain/transcriptEntry";
 
 interface GistFile {
   filename: string;
@@ -11,6 +14,7 @@ interface GistResponse {
   files: Record<string, GistFile>;
 }
 
+// Zod schemas for validation
 const TextBlockSchema = z.object({
   type: z.literal("text"),
   text: z.string(),
@@ -74,119 +78,194 @@ const AssistantMessageEntrySchema = z.object({
   }),
 });
 
-const MessageEntrySchema = z.discriminatedUnion("type", [
-  UserMessageEntrySchema,
-  AssistantMessageEntrySchema,
-]);
+const ProgressEntrySchema = z.object({
+  uuid: z.string(),
+  type: z.literal("progress"),
+  timestamp: z.string(),
+  data: z.object({
+    type: z.string(),
+  }).passthrough(),
+  toolUseID: z.string().optional(),
+  parentToolUseID: z.string().optional(),
+});
 
-type TextBlock = z.infer<typeof TextBlockSchema>;
+const SystemEntrySchema = z.object({
+  uuid: z.string(),
+  type: z.literal("system"),
+  timestamp: z.string(),
+  subtype: z.string(),
+  durationMs: z.number().optional(),
+});
+
+const FileHistorySnapshotEntrySchema = z.object({
+  type: z.literal("file-history-snapshot"),
+  messageId: z.string(),
+  isSnapshotUpdate: z.boolean(),
+});
 
 export interface TranscriptData {
-  messages: DisplayMessage[];
-  rawEntries: RawTranscriptEntry[];
+  entries: TranscriptEntry[];
 }
 
-function parseRawEntries(jsonlContent: string): RawTranscriptEntry[] {
+/**
+ * Parse a user message entry into a structured entry
+ */
+function parseUserStructuredEntry(
+  parsed: unknown,
+): StructuredEntry | undefined {
+  const result = UserMessageEntrySchema.safeParse(parsed);
+  if (!result.success) return undefined;
+
+  const entry = result.data;
+  const content =
+    typeof entry.message.content === "string"
+      ? entry.message.content
+      : entry.message.content
+          .filter((block): block is TextBlock => block.type === "text")
+          .map((block) => block.text)
+          .join("\n");
+
+  return {
+    kind: "user",
+    role: "user",
+    content,
+  };
+}
+
+/**
+ * Parse an assistant message entry into a structured entry
+ */
+function parseAssistantStructuredEntry(
+  parsed: unknown,
+): StructuredEntry | undefined {
+  const result = AssistantMessageEntrySchema.safeParse(parsed);
+  if (!result.success) return undefined;
+
+  const entry = result.data;
+  const textContent = entry.message.content
+    .filter((block): block is z.infer<typeof TextBlockSchema> => block.type === "text")
+    .map((block) => block.text)
+    .join("\n");
+
+  const hasToolUse = entry.message.content.some(
+    (block) => block.type === "tool_use",
+  );
+  const hasThinking = entry.message.content.some(
+    (block) => block.type === "thinking",
+  );
+
+  return {
+    kind: "assistant",
+    role: "assistant",
+    content: textContent,
+    hasToolUse,
+    hasThinking,
+  };
+}
+
+/**
+ * Parse a progress entry into a structured entry
+ */
+function parseProgressStructuredEntry(
+  parsed: unknown,
+): StructuredEntry | undefined {
+  const result = ProgressEntrySchema.safeParse(parsed);
+  if (!result.success) return undefined;
+
+  const entry = result.data;
+  const data = entry.data as { type: string; agentId?: string };
+
+  return {
+    kind: "progress",
+    progressType: data.type,
+    toolUseID: entry.toolUseID,
+    parentToolUseID: entry.parentToolUseID,
+    agentId: data.agentId,
+  };
+}
+
+/**
+ * Parse a system entry into a structured entry
+ */
+function parseSystemStructuredEntry(
+  parsed: unknown,
+): StructuredEntry | undefined {
+  const result = SystemEntrySchema.safeParse(parsed);
+  if (!result.success) return undefined;
+
+  const entry = result.data;
+
+  return {
+    kind: "system",
+    subtype: entry.subtype,
+    durationMs: entry.durationMs,
+  };
+}
+
+/**
+ * Parse a file-history-snapshot entry into a structured entry
+ */
+function parseFileHistorySnapshotStructuredEntry(
+  parsed: unknown,
+): StructuredEntry | undefined {
+  const result = FileHistorySnapshotEntrySchema.safeParse(parsed);
+  if (!result.success) return undefined;
+
+  const entry = result.data;
+
+  return {
+    kind: "file-history-snapshot",
+    messageId: entry.messageId,
+    isSnapshotUpdate: entry.isSnapshotUpdate,
+  };
+}
+
+/**
+ * Parse a raw entry into a structured entry based on its type
+ */
+function parseStructuredEntry(
+  parsed: unknown,
+  type: string,
+): StructuredEntry | undefined {
+  switch (type) {
+    case "user":
+      return parseUserStructuredEntry(parsed);
+    case "assistant":
+      return parseAssistantStructuredEntry(parsed);
+    case "progress":
+      return parseProgressStructuredEntry(parsed);
+    case "system":
+      return parseSystemStructuredEntry(parsed);
+    case "file-history-snapshot":
+      return parseFileHistorySnapshotStructuredEntry(parsed);
+    default:
+      return undefined;
+  }
+}
+
+/**
+ * Parse JSONL content into unified transcript entries
+ */
+function parseEntries(jsonlContent: string): TranscriptEntry[] {
   const lines = jsonlContent.trim().split("\n");
-  const entries: RawTranscriptEntry[] = [];
+  const entries: TranscriptEntry[] = [];
 
   for (const line of lines) {
     if (!line.trim()) continue;
 
     const parsed = JSON.parse(line);
+    const type = parsed.type ?? "unknown";
+
     entries.push({
-      uuid: parsed.uuid ?? crypto.randomUUID(),
-      raw: parsed,
-      type: parsed.type ?? "unknown",
+      uuid: parsed.uuid,
       timestamp: parsed.timestamp,
+      type,
+      raw: parsed,
+      structuredEntry: parseStructuredEntry(parsed, type),
     });
   }
 
   return entries;
-}
-
-function parseTranscript(jsonlContent: string): DisplayMessage[] {
-  const lines = jsonlContent.trim().split("\n");
-  const messages: DisplayMessage[] = [];
-
-  for (const line of lines) {
-    if (!line.trim()) continue;
-
-    const parsed = JSON.parse(line);
-
-    if (parsed.type !== "user" && parsed.type !== "assistant") {
-      console.log("skipping unhandled message type:", parsed.type);
-      continue;
-    }
-
-    const entry = MessageEntrySchema.parse(parsed);
-
-    if (entry.type === "user") {
-      const content =
-        typeof entry.message.content === "string"
-          ? entry.message.content
-          : entry.message.content
-              .filter(
-                (block): block is z.infer<typeof TextBlockSchema> =>
-                  block.type === "text",
-              )
-              .map((block) => block.text)
-              .join("\n");
-      if (content.trim()) {
-        messages.push({
-          uuid: entry.uuid,
-          role: "user",
-          content,
-          timestamp: entry.timestamp,
-        });
-      }
-    } else if (entry.type === "assistant") {
-      const textContent = entry.message.content
-        .filter((block): block is TextBlock => block.type === "text")
-        .map((block) => block.text)
-        .join("\n");
-
-      if (textContent.trim()) {
-        messages.push({
-          uuid: entry.uuid,
-          role: "assistant",
-          content: textContent,
-          timestamp: entry.timestamp,
-        });
-      }
-    }
-  }
-
-  return messages;
-}
-
-export async function fetchGistTranscript(
-  gistId: string,
-): Promise<DisplayMessage[]> {
-  const metaResponse = await fetch(`https://api.github.com/gists/${gistId}`);
-  if (!metaResponse.ok) {
-    throw new Error(`Failed to fetch gist metadata: ${metaResponse.status}`);
-  }
-
-  const gist: GistResponse = await metaResponse.json();
-
-  const jsonlFile = Object.values(gist.files).find((f) =>
-    f.filename.endsWith(".jsonl"),
-  );
-
-  if (!jsonlFile) {
-    throw new Error("No .jsonl file found in gist");
-  }
-
-  const contentResponse = await fetch(jsonlFile.raw_url);
-  if (!contentResponse.ok) {
-    throw new Error(
-      `Failed to fetch transcript content: ${contentResponse.status}`,
-    );
-  }
-
-  const content = await contentResponse.text();
-  return parseTranscript(content);
 }
 
 export async function fetchGistTranscriptFull(
@@ -216,7 +295,6 @@ export async function fetchGistTranscriptFull(
 
   const content = await contentResponse.text();
   return {
-    messages: parseTranscript(content),
-    rawEntries: parseRawEntries(content),
+    entries: parseEntries(content),
   };
 }

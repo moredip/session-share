@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import type { RawTranscriptEntry } from "../domain/rawEntry";
+import type { TranscriptEntry } from "../domain/transcriptEntry";
 
 interface RawEntryCardProps {
-  entry: RawTranscriptEntry;
+  entry: TranscriptEntry;
   defaultExpanded?: boolean;
   forceExpanded?: boolean | null; // null = use local state, true/false = override
   onManualToggle?: () => void; // Called when user manually toggles, to reset forceExpanded
