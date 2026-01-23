@@ -1,0 +1,3 @@
+- [ ] handle special-case "user" messages
+  - [ ] <task-notification>
+  - [ ] <ide-file-open>
