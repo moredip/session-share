@@ -6,6 +6,11 @@ terraform {
       version = "~> 5.0"
     }
   }
+
+  backend "gcs" {
+    bucket = "custardseed-session-share-tfstate"
+    prefix = "terraform/state"
+  }
 }
 
 provider "google" {
