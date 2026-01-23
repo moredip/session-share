@@ -1,5 +1,12 @@
 import { z } from 'zod'
-import type { TranscriptEntry, StructuredEntry, TextBlock } from '../domain/transcriptEntry'
+import type {
+  TranscriptEntry,
+  StructuredEntry,
+  TextBlock,
+  ToolCall,
+  AssistantStructuredEntry,
+  UserStructuredEntry,
+} from '../domain/transcriptEntry'
 
 interface GistFile {
   filename: string
@@ -102,30 +109,73 @@ export interface TranscriptData {
   entries: TranscriptEntry[]
 }
 
+/** Extracted tool result for correlation */
+interface ExtractedToolResult {
+  toolUseId: string
+  content: string
+}
+
 /**
  * Parse a user message entry into a structured entry
  */
-function parseUserStructuredEntry(parsed: unknown): StructuredEntry | undefined {
+function parseUserStructuredEntry(parsed: unknown): {
+  entry: UserStructuredEntry
+  toolResults: ExtractedToolResult[]
+} | undefined {
   const result = UserMessageEntrySchema.safeParse(parsed)
   if (!result.success) return undefined
 
-  const entry = result.data
-  const content =
-    typeof entry.message.content === 'string'
-      ? entry.message.content
-      : entry.message.content
-          .filter((block): block is TextBlock => block.type === 'text')
-          .map((block) => block.text)
-          .join('\n')
+  const entryData = result.data
+  const toolResults: ExtractedToolResult[] = []
+
+  if (typeof entryData.message.content === 'string') {
+    return {
+      entry: {
+        kind: 'user',
+        role: 'user',
+        content: entryData.message.content,
+      },
+      toolResults: [],
+    }
+  }
+
+  // Extract text content
+  const textBlocks = entryData.message.content.filter(
+    (block): block is TextBlock => block.type === 'text'
+  )
+  const content = textBlocks.map((block) => block.text).join('\n')
+
+  // Extract tool results
+  const toolResultBlocks = entryData.message.content.filter(
+    (block): block is z.infer<typeof ToolResultBlockSchema> => block.type === 'tool_result'
+  )
+
+  for (const block of toolResultBlocks) {
+    const resultContent =
+      typeof block.content === 'string'
+        ? block.content
+        : block.content.map((tb) => tb.text).join('\n')
+    toolResults.push({
+      toolUseId: block.tool_use_id,
+      content: resultContent,
+    })
+  }
+
+  // Determine if this is a tool-result-only message (no text content)
+  const isToolResultOnly = textBlocks.length === 0 && toolResultBlocks.length > 0
 
   return {
-    kind: 'user',
-    role: 'user',
-    content,
+    entry: {
+      kind: 'user',
+      role: 'user',
+      content,
+      isToolResultOnly,
+    },
+    toolResults,
   }
 }
 
-function parseAssistantStructuredEntry(parsed: unknown): StructuredEntry | undefined {
+function parseAssistantStructuredEntry(parsed: unknown): AssistantStructuredEntry | undefined {
   const result = AssistantMessageEntrySchema.safeParse(parsed)
   if (!result.success) return undefined
 
@@ -140,8 +190,19 @@ function parseAssistantStructuredEntry(parsed: unknown): StructuredEntry | undef
     .map((block) => block.thinking)
     .join('\n')
 
-  const hasToolUse = entry.message.content.some((block) => block.type === 'tool_use')
+  const toolUseBlocks = entry.message.content.filter(
+    (block): block is z.infer<typeof ToolUseBlockSchema> => block.type === 'tool_use'
+  )
+
+  const hasToolUse = toolUseBlocks.length > 0
   const hasThinking = entry.message.content.some((block) => block.type === 'thinking')
+
+  // Extract tool calls (results will be attached in correlation pass)
+  const toolCalls: ToolCall[] = toolUseBlocks.map((block) => ({
+    id: block.id,
+    name: block.name,
+    input: block.input,
+  }))
 
   return {
     kind: 'assistant',
@@ -150,6 +211,7 @@ function parseAssistantStructuredEntry(parsed: unknown): StructuredEntry | undef
     thinkingContent: hasThinking ? thinkingContent : undefined,
     hasToolUse,
     hasThinking,
+    toolCalls: hasToolUse ? toolCalls : undefined,
   }
 }
 
@@ -197,8 +259,10 @@ function parseFileHistorySnapshotStructuredEntry(parsed: unknown): StructuredEnt
 
 function parseStructuredEntry(parsed: unknown, type: string): StructuredEntry | undefined {
   switch (type) {
-    case 'user':
-      return parseUserStructuredEntry(parsed)
+    case 'user': {
+      const result = parseUserStructuredEntry(parsed)
+      return result?.entry
+    }
     case 'assistant':
       return parseAssistantStructuredEntry(parsed)
     case 'progress':
@@ -216,18 +280,48 @@ function parseEntries(jsonlContent: string): TranscriptEntry[] {
   const lines = jsonlContent.trim().split('\n')
   const entries: TranscriptEntry[] = []
 
+  // Map of tool_use_id → ToolCall reference for correlation
+  const toolCallMap = new Map<string, ToolCall>()
+
   for (const line of lines) {
     if (!line.trim()) continue
 
     const parsed = JSON.parse(line)
     const type = parsed.type ?? 'unknown'
 
+    let structuredEntry: StructuredEntry | undefined
+
+    if (type === 'user') {
+      const result = parseUserStructuredEntry(parsed)
+      if (result) {
+        structuredEntry = result.entry
+        // Correlate tool results to their calls
+        for (const toolResult of result.toolResults) {
+          const toolCall = toolCallMap.get(toolResult.toolUseId)
+          if (toolCall) {
+            toolCall.result = toolResult.content
+          }
+        }
+      }
+    } else if (type === 'assistant') {
+      const assistantEntry = parseAssistantStructuredEntry(parsed)
+      structuredEntry = assistantEntry
+      // Register tool calls for later correlation
+      if (assistantEntry?.toolCalls) {
+        for (const toolCall of assistantEntry.toolCalls) {
+          toolCallMap.set(toolCall.id, toolCall)
+        }
+      }
+    } else {
+      structuredEntry = parseStructuredEntry(parsed, type)
+    }
+
     entries.push({
       uuid: parsed.uuid,
       timestamp: parsed.timestamp,
       type,
       raw: parsed,
-      structuredEntry: parseStructuredEntry(parsed, type),
+      structuredEntry,
     })
   }
 

@@ -28,6 +28,16 @@ export type UserContentBlock = TextBlock | ToolResultBlock
 export type AssistantContentBlock = TextBlock | ToolUseBlock | ThinkingBlock
 
 /**
+ * A tool call paired with its result (if available)
+ */
+export interface ToolCall {
+  id: string
+  name: string
+  input: Record<string, unknown>
+  result?: string
+}
+
+/**
  * Structured entry variants for different entry types.
  * Discriminated union on the `kind` field.
  */
@@ -42,6 +52,7 @@ export interface UserStructuredEntry {
   kind: 'user'
   role: 'user'
   content: string
+  isToolResultOnly?: boolean
 }
 
 export interface AssistantStructuredEntry {
@@ -51,6 +62,7 @@ export interface AssistantStructuredEntry {
   thinkingContent?: string
   hasToolUse: boolean
   hasThinking: boolean
+  toolCalls?: ToolCall[]
 }
 
 export interface ProgressStructuredEntry {
@@ -99,5 +111,9 @@ export interface TranscriptEntry {
 export function isDisplayableEntry(entry: TranscriptEntry): entry is TranscriptEntry & {
   structuredEntry: UserStructuredEntry | AssistantStructuredEntry
 } {
-  return entry.structuredEntry?.kind === 'user' || entry.structuredEntry?.kind === 'assistant'
+  if (entry.structuredEntry?.kind === 'user') {
+    // Skip user messages that only contain tool results
+    return !entry.structuredEntry.isToolResultOnly
+  }
+  return entry.structuredEntry?.kind === 'assistant'
 }

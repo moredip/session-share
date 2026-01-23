@@ -15,8 +15,8 @@ export function AssistantThinking({ content, defaultExpanded = false }: Assistan
           onClick={() => setExpanded(!expanded)}
           className="flex items-center gap-2 text-xs opacity-60 mb-1 hover:opacity-100 transition-opacity"
         >
-          <span>Assistant [thinking]</span>
           <span>{expanded ? '▼' : '▶'}</span>
+          <span>Assistant [thinking]</span>
         </button>
         {expanded && <div className="prose prose-sm max-w-none whitespace-pre-wrap">{content}</div>}
       </div>

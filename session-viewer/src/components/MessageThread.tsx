@@ -7,6 +7,7 @@ import {
 import { UserMessage } from './UserMessage'
 import { AssistantMessage } from './AssistantMessage'
 import { AssistantThinking } from './AssistantThinking'
+import { ToolCallEntry } from './ToolCallEntry'
 
 interface MessageEntryProps {
   entry: TranscriptEntry & {
@@ -27,6 +28,9 @@ function MessageEntry({ entry }: MessageEntryProps) {
         <AssistantThinking content={structuredEntry.thinkingContent} />
       )}
       {structuredEntry.content && <AssistantMessage content={structuredEntry.content} />}
+      {structuredEntry.toolCalls?.map((toolCall) => (
+        <ToolCallEntry key={toolCall.id} toolCall={toolCall} />
+      ))}
     </>
   )
 }
