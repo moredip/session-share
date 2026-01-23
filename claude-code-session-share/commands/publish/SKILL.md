@@ -18,5 +18,5 @@ Then check for plugin updates:
 python3 ${CLAUDE_PLUGIN_ROOT}/commands/publish/scripts/check_version.py
 ```
 
-If there's a new version available, inform the user (they should be able to upgrade by running the /plugin command and then navigating to the Installed tab)
+If there's a new version available, inform the user (they should be able to upgrade by running the /plugin command and then navigating to the Installed tab). Don't say a single thing if the plugin is up-to-date.
 
