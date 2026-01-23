@@ -3,22 +3,22 @@ import {
   type UserStructuredEntry,
   type AssistantStructuredEntry,
   isDisplayableEntry,
-} from '../domain/transcriptEntry';
-import { UserMessage } from './UserMessage';
-import { AssistantMessage } from './AssistantMessage';
-import { AssistantThinking } from './AssistantThinking';
+} from '../domain/transcriptEntry'
+import { UserMessage } from './UserMessage'
+import { AssistantMessage } from './AssistantMessage'
+import { AssistantThinking } from './AssistantThinking'
 
 interface MessageEntryProps {
   entry: TranscriptEntry & {
-    structuredEntry: UserStructuredEntry | AssistantStructuredEntry;
-  };
+    structuredEntry: UserStructuredEntry | AssistantStructuredEntry
+  }
 }
 
 function MessageEntry({ entry }: MessageEntryProps) {
-  const { structuredEntry } = entry;
+  const { structuredEntry } = entry
 
   if (structuredEntry.kind === 'user') {
-    return <UserMessage content={structuredEntry.content} />;
+    return <UserMessage content={structuredEntry.content} />
   }
 
   return (
@@ -28,15 +28,15 @@ function MessageEntry({ entry }: MessageEntryProps) {
       )}
       {structuredEntry.content && <AssistantMessage content={structuredEntry.content} />}
     </>
-  );
+  )
 }
 
 interface MessageThreadProps {
-  entries: TranscriptEntry[];
+  entries: TranscriptEntry[]
 }
 
 export function MessageThread({ entries }: MessageThreadProps) {
-  const displayableEntries = entries.filter(isDisplayableEntry);
+  const displayableEntries = entries.filter(isDisplayableEntry)
 
   return (
     <div className="flex flex-col gap-4">
@@ -44,5 +44,5 @@ export function MessageThread({ entries }: MessageThreadProps) {
         <MessageEntry key={entry.uuid ?? index} entry={entry} />
       ))}
     </div>
-  );
+  )
 }
