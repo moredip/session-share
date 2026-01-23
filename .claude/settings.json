@@ -16,7 +16,6 @@
     ]
   },
   "enabledPlugins": {
-    "playwright@claude-plugins-official": true,
-    "session-share@session-share-marketplace": true
+    "playwright@claude-plugins-official": true
   }
 }
