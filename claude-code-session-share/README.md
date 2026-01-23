@@ -20,7 +20,7 @@ claude --plugin-dir /path/to/claude-code-session-share
 During any Claude Code session, run:
 
 ```
-/session-share:publish
+/publish-session
 ```
 
 This creates an unlisted GitHub Gist containing your session transcript and returns the URL.
