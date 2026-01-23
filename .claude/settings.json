@@ -6,7 +6,10 @@
       "Bash(git add:*)",
       "Bash(npm run build:*)",
       "mcp__plugin_playwright_playwright",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(/Users/pete/git/moredip/session-share/infra/bin/dterraform init:*)",
+      "Bash(/Users/pete/git/moredip/session-share/infra/bin/dterraform fmt:*)",
+      "Bash(gcloud auth:*)"
     ]
   },
   "enabledPlugins": {

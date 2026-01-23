@@ -19,6 +19,7 @@ GitHub handles storage and access control. The viewer is a static site that fetc
 |-----------|-------------|
 | [claude-code-session-share](claude-code-session-share/) | Claude Code plugin for publishing sessions |
 | [session-viewer](session-viewer/) | React app that renders transcripts |
+| [infra](infra/) | Terraform IaC for GCP hosting |
 | [docs](docs/) | Architecture and roadmap |
 
 ## Current status

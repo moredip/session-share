@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e -u
+
+# a simple wrapper around the dockerized terraform CLI, so that we
+#  can replace `terraform foo` with `./bin/dterraform foo` and not have to install the terraform CLI locally
+
+# Only allocate a TTY if running interactively.
+# This allows Claude Code (and other non-TTY environments) to run docker commands.
+TTY_FLAG=""
+if [ -t 0 ]; then
+  TTY_FLAG="-t"
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+INFRA_DIR="$(dirname "$SCRIPT_DIR")"
+
+docker run \
+	-v "${HOME}/.config/gcloud":/root/.config/gcloud \
+	-v "${INFRA_DIR}":/workplace \
+	-w /workplace \
+	-e GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json \
+	-i $TTY_FLAG hashicorp/terraform:1.11 "$@"
