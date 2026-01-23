@@ -36,3 +36,76 @@ resource "google_storage_bucket_iam_member" "session_viewer_public" {
   role   = "roles/storage.objectViewer"
   member = "allUsers"
 }
+
+# Reserve a global static IP
+resource "google_compute_global_address" "session_viewer" {
+  name = "session-viewer-ip"
+}
+
+# Backend bucket for CDN
+resource "google_compute_backend_bucket" "session_viewer" {
+  name        = "session-viewer-backend"
+  bucket_name = google_storage_bucket.session_viewer.name
+  enable_cdn  = true
+}
+
+# URL map for routing
+resource "google_compute_url_map" "session_viewer" {
+  name            = "session-viewer-url-map"
+  default_service = google_compute_backend_bucket.session_viewer.id
+}
+
+# Google-managed SSL certificate
+resource "google_compute_managed_ssl_certificate" "session_viewer" {
+  name = "session-viewer-cert"
+
+  managed {
+    domains = ["custardseed.com"]
+  }
+}
+
+# HTTPS target proxy
+resource "google_compute_target_https_proxy" "session_viewer" {
+  name             = "session-viewer-https-proxy"
+  url_map          = google_compute_url_map.session_viewer.id
+  ssl_certificates = [google_compute_managed_ssl_certificate.session_viewer.id]
+}
+
+# HTTPS forwarding rule
+resource "google_compute_global_forwarding_rule" "session_viewer_https" {
+  name       = "session-viewer-https"
+  target     = google_compute_target_https_proxy.session_viewer.id
+  port_range = "443"
+  ip_address = google_compute_global_address.session_viewer.address
+}
+
+# HTTP to HTTPS redirect
+resource "google_compute_url_map" "session_viewer_redirect" {
+  name = "session-viewer-http-redirect"
+
+  default_url_redirect {
+    https_redirect = true
+    strip_query    = false
+  }
+}
+
+resource "google_compute_target_http_proxy" "session_viewer_redirect" {
+  name    = "session-viewer-http-proxy"
+  url_map = google_compute_url_map.session_viewer_redirect.id
+}
+
+resource "google_compute_global_forwarding_rule" "session_viewer_http" {
+  name       = "session-viewer-http"
+  target     = google_compute_target_http_proxy.session_viewer_redirect.id
+  port_range = "80"
+  ip_address = google_compute_global_address.session_viewer.address
+}
+
+# DNS A record pointing to the load balancer
+resource "google_dns_record_set" "custardseed_a" {
+  name         = "custardseed.com."
+  managed_zone = google_dns_managed_zone.custardseed.name
+  type         = "A"
+  ttl          = 300
+  rrdatas      = [google_compute_global_address.session_viewer.address]
+}

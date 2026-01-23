@@ -17,3 +17,13 @@ output "session_viewer_url" {
   value       = "https://storage.googleapis.com/${google_storage_bucket.session_viewer.name}/index.html"
   description = "Direct GCS URL for session-viewer (use CDN URL in production)"
 }
+
+output "site_url" {
+  value       = "https://custardseed.com"
+  description = "Production URL for session-viewer"
+}
+
+output "load_balancer_ip" {
+  value       = google_compute_global_address.session_viewer.address
+  description = "Global IP address for the load balancer"
+}
