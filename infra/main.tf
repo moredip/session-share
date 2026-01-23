@@ -49,18 +49,37 @@ resource "google_compute_backend_bucket" "session_viewer" {
   enable_cdn  = true
 }
 
-# URL map for routing
+# URL map for routing (serves apex, redirects www to apex)
 resource "google_compute_url_map" "session_viewer" {
   name            = "session-viewer-url-map"
   default_service = google_compute_backend_bucket.session_viewer.id
+
+  # Redirect www to apex
+  host_rule {
+    hosts        = ["www.custardseed.com"]
+    path_matcher = "www-redirect"
+  }
+
+  path_matcher {
+    name = "www-redirect"
+    default_url_redirect {
+      host_redirect  = "custardseed.com"
+      https_redirect = true
+      strip_query    = false
+    }
+  }
 }
 
 # Google-managed SSL certificate
 resource "google_compute_managed_ssl_certificate" "session_viewer" {
-  name = "session-viewer-cert"
+  name = "session-viewer-cert-v2"
 
   managed {
-    domains = ["custardseed.com"]
+    domains = ["custardseed.com", "www.custardseed.com"]
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
@@ -108,4 +127,13 @@ resource "google_dns_record_set" "custardseed_a" {
   type         = "A"
   ttl          = 300
   rrdatas      = [google_compute_global_address.session_viewer.address]
+}
+
+# DNS CNAME for www -> apex
+resource "google_dns_record_set" "custardseed_www" {
+  name         = "www.custardseed.com."
+  managed_zone = google_dns_managed_zone.custardseed.name
+  type         = "CNAME"
+  ttl          = 300
+  rrdatas      = ["custardseed.com."]
 }
