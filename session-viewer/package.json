@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:prod": "rm -rf dist && tsc && vite build",
     "preview": "vite preview",
     "check": "tsc --noEmit && eslint src && prettier --check src",
     "check:fix": "eslint src --fix && prettier --write src"
