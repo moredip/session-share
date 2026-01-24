@@ -5,4 +5,4 @@
 - [x] create Claude Code plugin that will push current session's transcript to a gist
 - [x] create static client-only viewer that will render claude jsonl
 - [x] deploy viewer somewhere
-- [ ] create marketing site
+- [x] create marketing site
