@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ChevronUp, ChevronDown, Tool } from '@geist-ui/icons'
 import type { ToolCall } from '../domain/transcriptEntry'
 
 interface ToolCallEntryProps {
@@ -15,8 +16,10 @@ export function ToolCallEntry({ toolCall }: ToolCallEntryProps) {
           onClick={() => setExpanded(!expanded)}
           className="w-full bg-gray-500 text-white px-4 py-1.5 font-medium hover:bg-gray-600 transition-colors flex items-center justify-between"
         >
-          <span>Tool: {toolCall.name}</span>
-          <span className="text-xs">{expanded ? '▲' : '▼'}</span>
+          <span className="flex items-center gap-1.5">
+            <Tool size={14} /> {toolCall.name}
+          </span>
+          {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </button>
         {expanded && (
           <div className="bg-white px-6 py-4 space-y-4">

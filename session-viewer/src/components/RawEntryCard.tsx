@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { ChevronDown, ChevronRight } from '@geist-ui/icons'
 import type { TranscriptEntry } from '../domain/transcriptEntry'
 
 interface RawEntryCardProps {
@@ -55,7 +56,7 @@ export function RawEntryCard({
           {entry.type}
         </span>
         <span className="text-gray-500 text-sm flex-1">{formatTimestamp(entry.timestamp)}</span>
-        <span className="text-gray-400">{expanded ? '▼' : '▶'}</span>
+        <span className="text-gray-400">{expanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}</span>
       </button>
       {expanded && (
         <pre className="p-3 bg-gray-50 text-xs font-mono overflow-x-auto border-t border-gray-200">
