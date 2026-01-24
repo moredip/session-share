@@ -10,15 +10,19 @@ export function AssistantThinking({ content, defaultExpanded = false }: Assistan
 
   return (
     <div className="flex justify-start">
-      <div className="max-w-[80%] rounded-lg px-4 py-2 bg-indigo-50 text-gray-900 italic">
+      <div className="w-[80%] border border-gray-300 overflow-hidden shadow-sm">
         <button
           onClick={() => setExpanded(!expanded)}
-          className="flex items-center gap-2 text-xs opacity-60 mb-1 hover:opacity-100 transition-opacity"
+          className="w-full bg-gray-500 text-white px-4 py-1.5 font-medium hover:bg-gray-600 transition-colors flex items-center justify-between"
         >
-          <span>{expanded ? '▼' : '▶'}</span>
-          <span>Assistant [thinking]</span>
+          <span>Assistant (thinking)</span>
+          <span className="text-xs">{expanded ? '▲' : '▼'}</span>
         </button>
-        {expanded && <div className="prose prose-sm max-w-none whitespace-pre-wrap">{content}</div>}
+        {expanded && (
+          <div className="bg-white px-6 py-4">
+            <div className="prose prose-sm max-w-none whitespace-pre-wrap italic">{content}</div>
+          </div>
+        )}
       </div>
     </div>
   )

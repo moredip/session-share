@@ -43,7 +43,7 @@ export function MessageThread({ entries }: MessageThreadProps) {
   const displayableEntries = entries.filter(isDisplayableEntry)
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
       {displayableEntries.map((entry, index) => (
         <MessageEntry key={entry.uuid ?? index} entry={entry} />
       ))}

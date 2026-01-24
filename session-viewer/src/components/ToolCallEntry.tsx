@@ -10,29 +10,26 @@ export function ToolCallEntry({ toolCall }: ToolCallEntryProps) {
 
   return (
     <div className="flex justify-start">
-      <div className="max-w-[80%] rounded-lg px-4 py-2 bg-amber-50 border border-amber-200 text-gray-900">
+      <div className="w-[80%] border border-gray-300 overflow-hidden shadow-sm">
         <button
           onClick={() => setExpanded(!expanded)}
-          className="flex items-center gap-2 text-xs hover:opacity-80 transition-opacity w-full"
+          className="w-full bg-gray-500 text-white px-4 py-1.5 font-medium hover:bg-gray-600 transition-colors flex items-center justify-between"
         >
-          <span className="opacity-60">{expanded ? '▼' : '▶'}</span>
-          <span className="font-medium text-amber-700">🔧 {toolCall.name} tool</span>
-          {toolCall.result !== undefined && (
-            <span className="ml-auto text-green-600 text-xs">✓ completed</span>
-          )}
+          <span>Tool: {toolCall.name}</span>
+          <span className="text-xs">{expanded ? '▲' : '▼'}</span>
         </button>
         {expanded && (
-          <div className="mt-2 space-y-2">
+          <div className="bg-white px-6 py-4 space-y-4">
             <div>
-              <div className="text-xs font-medium text-gray-500 mb-1">Input:</div>
-              <pre className="text-xs bg-white rounded p-2 overflow-x-auto border border-amber-100">
+              <div className="text-sm font-medium text-gray-600 mb-2">Input:</div>
+              <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200">
                 {JSON.stringify(toolCall.input, null, 2)}
               </pre>
             </div>
             {toolCall.result !== undefined && (
               <div>
-                <div className="text-xs font-medium text-gray-500 mb-1">Result:</div>
-                <pre className="text-xs bg-white rounded p-2 overflow-x-auto border border-amber-100 whitespace-pre-wrap">
+                <div className="text-sm font-medium text-gray-600 mb-2">Result:</div>
+                <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
                   {toolCall.result}
                 </pre>
               </div>
