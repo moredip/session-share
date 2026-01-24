@@ -1,7 +1,9 @@
 import { z } from 'zod'
 import type {
   TranscriptEntry,
-  StructuredEntry,
+  MessageEntry,
+  MetaEntry,
+  MessageStructuredEntry,
   TextBlock,
   ToolCall,
   AssistantStructuredEntry,
@@ -99,11 +101,8 @@ const SystemEntrySchema = z.object({
   durationMs: z.number().optional(),
 })
 
-const FileHistorySnapshotEntrySchema = z.object({
-  type: z.literal('file-history-snapshot'),
-  messageId: z.string(),
-  isSnapshotUpdate: z.boolean(),
-})
+/** Meta entry types - no structured parsing needed */
+const META_TYPES = ['file-history-snapshot', 'queue-operation', 'summary'] as const
 
 export interface TranscriptData {
   entries: TranscriptEntry[]
@@ -215,7 +214,7 @@ function parseAssistantStructuredEntry(parsed: unknown): AssistantStructuredEntr
   }
 }
 
-function parseProgressStructuredEntry(parsed: unknown): StructuredEntry | undefined {
+function parseProgressStructuredEntry(parsed: unknown): MessageStructuredEntry | undefined {
   const result = ProgressEntrySchema.safeParse(parsed)
   if (!result.success) return undefined
 
@@ -231,7 +230,7 @@ function parseProgressStructuredEntry(parsed: unknown): StructuredEntry | undefi
   }
 }
 
-function parseSystemStructuredEntry(parsed: unknown): StructuredEntry | undefined {
+function parseSystemStructuredEntry(parsed: unknown): MessageStructuredEntry | undefined {
   const result = SystemEntrySchema.safeParse(parsed)
   if (!result.success) return undefined
 
@@ -244,20 +243,7 @@ function parseSystemStructuredEntry(parsed: unknown): StructuredEntry | undefine
   }
 }
 
-function parseFileHistorySnapshotStructuredEntry(parsed: unknown): StructuredEntry | undefined {
-  const result = FileHistorySnapshotEntrySchema.safeParse(parsed)
-  if (!result.success) return undefined
-
-  const entry = result.data
-
-  return {
-    kind: 'file-history-snapshot',
-    messageId: entry.messageId,
-    isSnapshotUpdate: entry.isSnapshotUpdate,
-  }
-}
-
-function parseStructuredEntry(parsed: unknown, type: string): StructuredEntry | undefined {
+function parseStructuredEntry(parsed: unknown, type: string): MessageStructuredEntry | undefined {
   switch (type) {
     case 'user': {
       const result = parseUserStructuredEntry(parsed)
@@ -269,11 +255,13 @@ function parseStructuredEntry(parsed: unknown, type: string): StructuredEntry | 
       return parseProgressStructuredEntry(parsed)
     case 'system':
       return parseSystemStructuredEntry(parsed)
-    case 'file-history-snapshot':
-      return parseFileHistorySnapshotStructuredEntry(parsed)
     default:
       return undefined
   }
+}
+
+function isMetaType(type: string): type is typeof META_TYPES[number] {
+  return META_TYPES.includes(type as typeof META_TYPES[number])
 }
 
 function parseEntries(jsonlContent: string): TranscriptEntry[] {
@@ -289,7 +277,19 @@ function parseEntries(jsonlContent: string): TranscriptEntry[] {
     const parsed = JSON.parse(line)
     const type = parsed.type ?? 'unknown'
 
-    let structuredEntry: StructuredEntry | undefined
+    // Meta entries - no uuid, no structured parsing
+    if (isMetaType(type)) {
+      const metaEntry: MetaEntry = {
+        timestamp: parsed.timestamp,
+        type,
+        raw: parsed,
+      }
+      entries.push(metaEntry)
+      continue
+    }
+
+    // Message entries - have uuid and must parse successfully
+    let structuredEntry: MessageStructuredEntry | undefined
 
     if (type === 'user') {
       const result = parseUserStructuredEntry(parsed)
@@ -316,13 +316,18 @@ function parseEntries(jsonlContent: string): TranscriptEntry[] {
       structuredEntry = parseStructuredEntry(parsed, type)
     }
 
-    entries.push({
+    if (!structuredEntry) {
+      throw new Error(`Failed to parse message entry of type "${type}": ${JSON.stringify(parsed)}`)
+    }
+
+    const messageEntry: MessageEntry = {
       uuid: parsed.uuid,
       timestamp: parsed.timestamp,
-      type,
+      type: type as MessageEntry['type'],
       raw: parsed,
       structuredEntry,
-    })
+    }
+    entries.push(messageEntry)
   }
 
   return entries

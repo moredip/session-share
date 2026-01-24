@@ -31,7 +31,7 @@ export function RawTranscriptView({ entries }: RawTranscriptViewProps) {
       </div>
       {entries.map((entry, index) => (
         <RawEntryCard
-          key={entry.uuid ?? index}
+          key={index}
           entry={entry}
           forceExpanded={forceExpanded}
           onManualToggle={handleManualToggle}

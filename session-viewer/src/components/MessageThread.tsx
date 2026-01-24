@@ -1,5 +1,6 @@
 import {
   type TranscriptEntry,
+  type MessageEntry,
   type UserStructuredEntry,
   type AssistantStructuredEntry,
   isDisplayableEntry,
@@ -10,7 +11,7 @@ import { AssistantThinking } from './AssistantThinking'
 import { ToolCallEntry } from './ToolCallEntry'
 
 interface MessageEntryProps {
-  entry: TranscriptEntry & {
+  entry: MessageEntry & {
     structuredEntry: UserStructuredEntry | AssistantStructuredEntry
   }
   anchorId: string
@@ -54,11 +55,11 @@ export function MessageThread({ entries }: MessageThreadProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      {displayableEntries.map((entry, index) => (
+      {displayableEntries.map((entry) => (
         <MessageEntry
-          key={entry.uuid ?? index}
+          key={entry.uuid}
           entry={entry}
-          anchorId={entry.uuid ? `msg-${entry.uuid}` : `msg-${index}`}
+          anchorId={`msg-${entry.uuid}`}
         />
       ))}
     </div>

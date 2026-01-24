@@ -38,15 +38,14 @@ export interface ToolCall {
 }
 
 /**
- * Structured entry variants for different entry types.
+ * Structured entry variants for message types.
  * Discriminated union on the `kind` field.
  */
-export type StructuredEntry =
+export type MessageStructuredEntry =
   | UserStructuredEntry
   | AssistantStructuredEntry
   | ProgressStructuredEntry
   | SystemStructuredEntry
-  | FileHistorySnapshotStructuredEntry
 
 export interface UserStructuredEntry {
   kind: 'user'
@@ -79,41 +78,55 @@ export interface SystemStructuredEntry {
   durationMs?: number
 }
 
-export interface FileHistorySnapshotStructuredEntry {
-  kind: 'file-history-snapshot'
-  messageId: string
-  isSnapshotUpdate: boolean
+
+/** Message types that represent actual conversation content */
+export type MessageType = 'user' | 'assistant' | 'progress' | 'system'
+
+/** Meta types that represent bookkeeping/internal state */
+export type MetaType = 'file-history-snapshot' | 'queue-operation' | 'summary'
+
+/**
+ * Message entry - actual conversation content, always has uuid, timestamp, and parsed structure
+ */
+export interface MessageEntry {
+  uuid: string
+  timestamp: string
+  type: MessageType
+  raw: unknown
+  structuredEntry: MessageStructuredEntry
+}
+
+/**
+ * Meta entry - bookkeeping/snapshots, no uuid
+ */
+export interface MetaEntry {
+  timestamp?: string
+  type: MetaType
+  raw: unknown
 }
 
 /**
  * Unified transcript entry - maps 1:1 with JSONL lines
  */
-export interface TranscriptEntry {
-  /** Unique identifier - optional, some entry types don't have it */
-  uuid?: string
+export type TranscriptEntry = MessageEntry | MetaEntry
 
-  /** ISO timestamp - optional */
-  timestamp?: string
-
-  /** Entry type from raw data */
-  type: string
-
-  /** The original unparsed JSON object */
-  raw: unknown
-
-  /** Parsed structured content, present when the entry type has a known schema */
-  structuredEntry?: StructuredEntry
+/**
+ * Type guard for message entries (vs meta entries)
+ */
+export function isMessageEntry(entry: TranscriptEntry): entry is MessageEntry {
+  return 'uuid' in entry
 }
 
 /**
- * Type guards for checking structured entry kinds
+ * Type guard for displayable entries (user/assistant messages)
  */
-export function isDisplayableEntry(entry: TranscriptEntry): entry is TranscriptEntry & {
+export function isDisplayableEntry(entry: TranscriptEntry): entry is MessageEntry & {
   structuredEntry: UserStructuredEntry | AssistantStructuredEntry
 } {
-  if (entry.structuredEntry?.kind === 'user') {
+  if (!isMessageEntry(entry)) return false
+  if (entry.structuredEntry.kind === 'user') {
     // Skip user messages that only contain tool results
     return !entry.structuredEntry.isToolResultOnly
   }
-  return entry.structuredEntry?.kind === 'assistant'
+  return entry.structuredEntry.kind === 'assistant'
 }
