@@ -78,16 +78,12 @@ export interface SystemStructuredEntry {
   durationMs?: number
 }
 
-
 /** Message types that represent actual conversation content */
 export type MessageType = 'user' | 'assistant' | 'progress' | 'system'
 
 /** Meta types that represent bookkeeping/internal state */
 export type MetaType = 'file-history-snapshot' | 'queue-operation' | 'summary'
 
-/**
- * Message entry - actual conversation content, always has uuid, timestamp, and parsed structure
- */
 export interface MessageEntry {
   uuid: string
   timestamp: string
@@ -96,9 +92,6 @@ export interface MessageEntry {
   structuredEntry: MessageStructuredEntry
 }
 
-/**
- * Meta entry - bookkeeping/snapshots, no uuid
- */
 export interface MetaEntry {
   timestamp?: string
   type: MetaType
@@ -110,9 +103,6 @@ export interface MetaEntry {
  */
 export type TranscriptEntry = MessageEntry | MetaEntry
 
-/**
- * Type guard for message entries (vs meta entries)
- */
 export function isMessageEntry(entry: TranscriptEntry): entry is MessageEntry {
   return 'uuid' in entry
 }
