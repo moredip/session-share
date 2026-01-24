@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { fetchGistTranscriptFull, type TranscriptData } from '../lib/gistGateway'
 import { MessageThread } from './MessageThread'
 import { RawTranscriptView } from './RawTranscriptView'
@@ -7,6 +7,7 @@ import { ViewToggle, type ViewMode } from './ViewToggle'
 
 export function TranscriptViewer() {
   const { gistId } = useParams<{ gistId: string }>()
+  const location = useLocation()
   const [data, setData] = useState<TranscriptData | null>(null)
   const [viewMode, setViewMode] = useState<ViewMode>('conversation')
   const [loading, setLoading] = useState(true)
@@ -30,6 +31,20 @@ export function TranscriptViewer() {
 
     loadTranscript()
   }, [gistId])
+
+  // Scroll to anchor when data loads and URL has a hash
+  useEffect(() => {
+    if (data && location.hash) {
+      const anchorId = location.hash.slice(1) // Remove #
+      const element = document.getElementById(anchorId)
+      if (element) {
+        // Small delay to ensure DOM is fully rendered
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 100)
+      }
+    }
+  }, [data, location.hash])
 
   if (loading) {
     return (

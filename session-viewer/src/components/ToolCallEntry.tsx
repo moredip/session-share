@@ -1,17 +1,20 @@
 import { useState } from 'react'
 import { ChevronUp, ChevronDown, Tool } from '@geist-ui/icons'
 import type { ToolCall } from '../domain/transcriptEntry'
+import { AnchorLink } from './AnchorLink'
 
 interface ToolCallEntryProps {
   toolCall: ToolCall
+  anchorId: string
 }
 
-export function ToolCallEntry({ toolCall }: ToolCallEntryProps) {
+export function ToolCallEntry({ toolCall, anchorId }: ToolCallEntryProps) {
   const [expanded, setExpanded] = useState(false)
   const hasResult = toolCall.result !== undefined
 
   return (
-    <div className="flex justify-start">
+    <div id={anchorId} className="group flex justify-start items-start gap-2">
+      <AnchorLink anchorId={anchorId} />
       <div className="w-[80%] border border-gray-300 overflow-hidden shadow-sm">
         <button
           onClick={() => hasResult && setExpanded(!expanded)}

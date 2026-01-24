@@ -13,23 +13,33 @@ interface MessageEntryProps {
   entry: TranscriptEntry & {
     structuredEntry: UserStructuredEntry | AssistantStructuredEntry
   }
+  anchorId: string
 }
 
-function MessageEntry({ entry }: MessageEntryProps) {
+function MessageEntry({ entry, anchorId }: MessageEntryProps) {
   const { structuredEntry } = entry
 
   if (structuredEntry.kind === 'user') {
-    return <UserMessage content={structuredEntry.content} />
+    return <UserMessage content={structuredEntry.content} anchorId={anchorId} />
   }
 
   return (
     <>
       {structuredEntry.thinkingContent && (
-        <AssistantThinking content={structuredEntry.thinkingContent} />
+        <AssistantThinking
+          content={structuredEntry.thinkingContent}
+          anchorId={`${anchorId}-thinking`}
+        />
       )}
-      {structuredEntry.content && <AssistantMessage content={structuredEntry.content} />}
+      {structuredEntry.content && (
+        <AssistantMessage content={structuredEntry.content} anchorId={anchorId} />
+      )}
       {structuredEntry.toolCalls?.map((toolCall) => (
-        <ToolCallEntry key={toolCall.id} toolCall={toolCall} />
+        <ToolCallEntry
+          key={toolCall.id}
+          toolCall={toolCall}
+          anchorId={`msg-${toolCall.id}`}
+        />
       ))}
     </>
   )
@@ -45,7 +55,11 @@ export function MessageThread({ entries }: MessageThreadProps) {
   return (
     <div className="flex flex-col gap-6">
       {displayableEntries.map((entry, index) => (
-        <MessageEntry key={entry.uuid ?? index} entry={entry} />
+        <MessageEntry
+          key={entry.uuid ?? index}
+          entry={entry}
+          anchorId={entry.uuid ? `msg-${entry.uuid}` : `msg-${index}`}
+        />
       ))}
     </div>
   )

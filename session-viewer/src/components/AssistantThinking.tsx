@@ -1,17 +1,20 @@
 import { useState } from 'react'
 import { ChevronUp, ChevronDown } from '@geist-ui/icons'
 import { BrainIcon } from './icons/BrainIcon'
+import { AnchorLink } from './AnchorLink'
 
 interface AssistantThinkingProps {
   content: string
   defaultExpanded?: boolean
+  anchorId: string
 }
 
-export function AssistantThinking({ content, defaultExpanded = false }: AssistantThinkingProps) {
+export function AssistantThinking({ content, defaultExpanded = false, anchorId }: AssistantThinkingProps) {
   const [expanded, setExpanded] = useState(defaultExpanded)
 
   return (
-    <div className="flex justify-start">
+    <div id={anchorId} className="group flex justify-start items-start gap-2">
+      <AnchorLink anchorId={anchorId} />
       <div className="w-[80%] border border-gray-300 overflow-hidden shadow-sm">
         <button
           onClick={() => setExpanded(!expanded)}

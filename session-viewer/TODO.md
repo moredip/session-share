@@ -5,5 +5,7 @@
 
 - [x] for tool calls, include the input in the contracted view, input + results in the expanded view
 - [ ] perform special-case rendering for internal tool invocation
+  - [ ] Read XXX
+  - [ ] Edit XXX
 
-- [ ] anchors, links between messages
+- [x] anchors, links between messages
