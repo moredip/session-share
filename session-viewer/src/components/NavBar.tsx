@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Github from '@geist-ui/icons/github'
 
 export function NavBar() {
+  // Height set by py-3. If changed, update scroll-padding-top in index.css
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 px-4 py-3">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
