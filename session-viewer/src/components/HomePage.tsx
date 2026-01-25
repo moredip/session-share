@@ -3,12 +3,12 @@ export function HomePage() {
     <div className="min-h-screen flex flex-col items-center">
       <div className="w-full bg-gray-800 py-16 px-8 flex justify-center">
         <h1 className="text-4xl md:text-5xl font-bold text-center text-white max-w-3xl leading-tight">
-          Publish your Claude Code sessions online in 5 seconds or less
+          Publish your Claude Code sessions online
         </h1>
       </div>
 
       <div className="w-full max-w-xl px-8 py-12">
-        <h2 className="text-3xl font-bold text-gray-800">How?</h2>
+        <h2 className="text-3xl font-bold text-gray-800">It's really, really easy</h2>
 
         <div className="mt-6 space-y-6">
           <div className="flex gap-4">
