@@ -7,6 +7,29 @@ SESSION_VIEWER_DIR="$REPO_ROOT/session-viewer"
 
 BUCKET="custardseed-session-viewer"
 
+# Check if on main branch
+CURRENT_BRANCH=$(git -C "$REPO_ROOT" rev-parse --abbrev-ref HEAD)
+if [ "$CURRENT_BRANCH" != "main" ]; then
+  echo ""
+  echo "!!!!"
+  echo "!!!! WARNING: You are not on the main branch. Current branch: $CURRENT_BRANCH"
+  echo "!!!!"
+fi
+
+# Check for uncommitted changes
+if ! git -C "$REPO_ROOT" diff-index --quiet HEAD --; then
+  echo ""
+  echo "!!!!"
+  echo "!!!! WARNING: You have uncommitted changes in your repository"
+  echo "!!!!"
+fi
+
+# Ask for confirmation
+echo ""
+echo 'About to deploy to PRODUCTION!'
+read -p "Press any key to proceed, Ctrl-C to abort..." -n 1 -s
+echo ""
+
 # Build
 echo "Building session-viewer..."
 cd "$SESSION_VIEWER_DIR"
