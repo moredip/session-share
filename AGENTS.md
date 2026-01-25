@@ -10,3 +10,4 @@
 ## general guidance
 - whenever you're asked to make a commit that includes changes to a Claude Code plugin, also update the teeny part of that plugin's version number in plugin.json
 - You have playwright available for testing your changes in a browser. Use it after you've made meaningful changes to a UI.
+- if you attempt to run a local server and the port is in use, assume someone else is already running it for you

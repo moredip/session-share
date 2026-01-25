@@ -8,7 +8,7 @@ interface UserMessageProps {
 
 export function UserMessage({ content, anchorId }: UserMessageProps) {
   return (
-    <MessageCard anchorId={anchorId} label="user" align="right">
+    <MessageCard anchorId={anchorId} label="user" align="right" variant="sky">
       <div className="prose prose-sm max-w-none">
         <ReactMarkdown>{content}</ReactMarkdown>
       </div>
