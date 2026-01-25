@@ -25,3 +25,7 @@ GitHub handles storage and access control. The viewer is a static site that fetc
 ## Current status
 
 Phase 1 (MVP) - Public and unlisted sharing via GitHub Gists. No login required to view or publish (just a logged in `gh` cli, for creating gists).
+
+## License
+
+MIT
