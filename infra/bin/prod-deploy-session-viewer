@@ -40,4 +40,8 @@ npm run build:prod
 echo "Deploying to gs://$BUCKET..."
 gcloud storage rsync -r --delete-unmatched-destination-objects dist gs://$BUCKET
 
+# Invalidate CDN cache
+echo "Invalidating CDN cache..."
+gcloud compute url-maps invalidate-cdn-cache session-viewer-url-map --path "/*" --project=custardseed-session-share
+
 echo "Deployed to https://custardseed.com"
