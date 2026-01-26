@@ -26,7 +26,7 @@ resource "google_storage_bucket" "session_viewer" {
 
   website {
     main_page_suffix = "index.html"
-    not_found_page   = "index.html"
+    not_found_page   = "app.html"
   }
 }
 
