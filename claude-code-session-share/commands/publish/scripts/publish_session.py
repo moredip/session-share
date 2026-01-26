@@ -48,6 +48,17 @@ def create_gist(filepaths: list[str], description: str) -> str:
     return gist_id
 
 
+def update_gist_description(gist_id: str, description: str) -> None:
+    """Update a gist's description."""
+    result = subprocess.run(
+        ["gh", "gist", "edit", gist_id, "--desc", description],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"gh gist edit failed: {result.stderr}")
+
+
 def main():
     if len(sys.argv) < 2 or not sys.argv[1]:
         print("Error: Session ID not provided.")
@@ -61,13 +72,9 @@ def main():
         print(f"Error: Transcripts not found for session: {session_id}")
         sys.exit(1)
 
-    description = (
-        f"Claude Code session transcript - {session_id}\n\n"
-        "Created by the session-share plugin: "
-        "https://github.com/moredip/session-share"
-    )
-    gist_id = create_gist(transcript_paths, description)
+    gist_id = create_gist(transcript_paths, "")
     viewer_url = f"https://custardseed.com/g/{gist_id}"
+    update_gist_description(gist_id, f"Claude Code session transcript: {viewer_url}")
 
     file_count = len(transcript_paths)
     subagent_count = file_count - 1
