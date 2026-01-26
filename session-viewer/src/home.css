@@ -10,3 +10,17 @@ html {
 body {
   @apply bg-gray-100 min-h-screen;
 }
+
+/* Hide video controls until hover */
+.video-hover-controls video {
+  /* Controls are hidden by default via CSS clip-path on the control area */
+}
+
+.video-hover-controls video::-webkit-media-controls-panel {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.video-hover-controls:hover video::-webkit-media-controls-panel {
+  opacity: 1;
+}
