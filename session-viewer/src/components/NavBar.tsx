@@ -6,8 +6,8 @@ export function NavBar() {
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 px-4 py-3">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         {/* Use <a> instead of <Link> to force full page reload to static homepage */}
-        <a href="/" className="text-xl font-bold text-gray-800 hover:text-gray-600">
-          CustardSeed
+        <a href="/" className="text-xl text-gray-800 hover:text-gray-600">
+          <span className="font-bold">Custard</span><span className="font-thin text-leaf-600">Seed</span>
         </a>
         <a
           href="https://github.com/moredip/session-share"
