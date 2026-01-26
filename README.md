@@ -1,8 +1,8 @@
-# Session Share
+# CustardSeed
 
-Share Claude Code session transcripts with a simple command.
+Instantly share your Claude Code sessions online.
 
-Use Session Share to publish your session transcripts and share them via a link.
+A Claude Code slash command which publishes your session transcripts as a github gist, plus an online viewer so you can share your session via a URL.
 
 ## How it works
 
