@@ -78,6 +78,108 @@
             another.
           </p>
         </div>
+
+        <!-- How it works -->
+        <div class="mt-16 flex flex-col items-center">
+          <h2 class="mb-6 text-3xl font-bold text-gray-800">How it works</h2>
+          <div class="space-y-4 text-gray-600 max-w-2xl">
+            <p>CustardSeed is a simple two-part system:</p>
+            <ol class="list-decimal list-inside space-y-3 ml-4">
+              <li>
+                <strong>A Claude Code slash command</strong> (<code class="bg-gray-100 px-1 rounded"
+                  >/publish-session</code
+                >) that finds Claude Code's internal transcript for your current session transcript,
+                then publishes it to a GitHub Gist using your existing
+                <code class="bg-gray-100 px-1 rounded">gh</code> CLI authentication.
+              </li>
+              <li>
+                <strong>A web viewer</strong> that fetches a published transcript directly from a
+                GitHub Gist, then renders it into a readable format, right in your browser.
+              </li>
+            </ol>
+            <p class="mt-4">
+              That's it. GitHub handles storage and access control. The viewer is a static site with
+              no backend— your browser fetches and renders the transcripts directly from GitHub's
+              servers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Privacy -->
+        <div class="mt-16 flex flex-col items-center">
+          <h2 class="mb-6 text-3xl font-bold text-gray-800">Privacy</h2>
+          <div class="space-y-4 text-gray-600 max-w-2xl">
+            <p>
+              CustardSeed uses GitHub Gists for storage, which means your published sessions follow
+
+              <a
+                href="https://docs.github.com/en/get-started/writing-on-github/editing-and-sharing-content-with-gists/creating-gists#about-gists"
+                class="text-blue-600 hover:underline"
+                >GitHub Gist's security model</a
+              >
+              exactly.
+            </p>
+            <p>
+              By default, sessions transcripts are stored as <strong>secret gists</strong>. Secret
+              gists are not listed on your public profile and won't appear in search results—but
+              <strong>anyone with the URL can view them</strong>.
+            </p>
+            <p>
+              This security model is designed for sharing a session link with a colleague or posting
+              to a private Slack channel.
+            </p>
+            <p>
+              You should be aware that your <em>full session transcript</em> will be published in
+              the gist. This transcript will include every interaction you've had in that session,
+              including any sensitive or personal information. The transcript will also include the
+              result of tool calls, which means it can include very sensitive data, such as the
+              contents of your local .env file. Proceed with caution.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="mt-16 flex flex-col items-center">
+          <h2 class="mb-6 text-3xl font-bold text-gray-800">FAQ</h2>
+          <div class="space-y-6 text-gray-600 max-w-2xl">
+            <div>
+              <h3 class="font-semibold text-gray-800">Do I need a CustardSeed account?</h3>
+              <p class="mt-1">
+                No. CustardSeed doesn't have accounts. Publishing requires a working
+                <code class="bg-gray-100 px-1 rounded">gh</code> CLI (GitHub's official CLI) logged
+                in on your machine. Viewing published sessions requires nothing at all.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">Where are my sessions stored?</h3>
+              <p class="mt-1">
+                In your own GitHub account, as gists. CustardSeed doesn't store anything—it just
+                helps you publish to GitHub and provides a nice viewer.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">Can I delete a published session?</h3>
+              <p class="mt-1">
+                Yes. Since sessions are stored as gists in your GitHub account, you can delete them
+                anytime from
+                <a href="https://gist.github.com" class="text-blue-600 hover:underline"
+                  >gist.github.com</a
+                >.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">Is CustardSeed open source?</h3>
+              <p class="mt-1">
+                Yes! Both the Claude Code plugin and the web viewer are open source. Check out the
+                <a
+                  href="https://github.com/moredip/session-share"
+                  class="text-blue-600 hover:underline"
+                  >GitHub repo</a
+                >.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
