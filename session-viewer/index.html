@@ -10,12 +10,28 @@
     <div class="min-h-screen flex flex-col items-center">
       <!-- Hero Banner -->
       <div class="w-full bg-sky-800 py-16 px-8 flex flex-col items-center">
-        <h1 class="text-6xl md:text-8xl text-center text-custard-100">
+        <h1 class="text-4xl md:text-6xl text-center text-custard-100">
           <span class="font-bold">Custard</span><span class="font-thin text-leaf-400">Seed</span>
         </h1>
-        <p class="mt-4 text-2xl md:text-3xl text-center text-cream-300 max-w-3xl">
-          Instantly publish your Claude Code session online
+        <p class="font-thin mt-6 text-5xl md:text-6xl text-center text-cream-300 max-w-3xl">
+          instantly share your Claude Code session
         </p>
+
+        <!-- Intro Text -->
+        <div class="max-w-2xl space-y-4 text-3xl mt-12 text-center text-cream-200">
+          <p>
+            Turn your Claude Code session into a
+            <a
+              href="/g/45fbc3aaf7337f4fa22d6440b9441ad0"
+              class="text-leaf-200 hover:text-leaf-300 underline"
+              >shareable web page.</a
+            >
+          </p>
+          <p>
+            Share your session with colleagues on Slack! Include it in a PR! Use it however you
+            want!
+          </p>
+        </div>
 
         <!-- Demo Video -->
         <div class="w-full max-w-4xl mt-12 video-hover-controls">
@@ -38,15 +54,16 @@
                 class="text-blue-600 hover:underline"
                 target="_blank"
                 >claude-code-transcripts</a
-              >, but with the <strong>simplicity and usability turned up to 11.</strong>
+              >, then <strong>turns the simplicity and usability up to 11.</strong>
             </p>
             <p>
-              Just run
-              <code class="bg-gray-100 px-1 rounded">/publish-session</code> from right within your
-              Claude Code and you're done. <strong>No need to looking up the right session.</strong>
+              Just run the
+              <code class="bg-gray-100 font-bold px-1 rounded">/publish-session</code> slash command
+              from right within the Claude Code session you want to publish - and you're done.
+              <strong>No need to looking up the right session.</strong>
             </p>
             <p>
-              Because Claude sees the published URL, you can
+              Because Claude sees the published URL, you can also
               <strong>prompt Claude to include the link in a PR</strong> description or commit
               message.
             </p>
