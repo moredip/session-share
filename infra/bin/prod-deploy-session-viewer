@@ -27,8 +27,14 @@ fi
 # Ask for confirmation
 echo ""
 echo 'About to deploy to PRODUCTION!'
-read -p "Press any key to proceed, Ctrl-C to abort..." -n 1 -s
+echo -n "Press ENTER or SPACE to proceed, any other key to abort... "
+read -r -n 1 key
 echo ""
+
+if [ -n "$key" ] && [ "$key" != $'\x0a' ] && [ "$key" != " " ]; then
+  echo "Deployment aborted."
+  exit 1
+fi
 
 # Build
 echo "Building session-viewer..."
