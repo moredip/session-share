@@ -42,3 +42,7 @@
   - [ ] (bonus) instructions on how to resume session locally
   - [ ] time the session started
   - [ ] what else can we extract?
+
+
+## BUGS
+- https://custardseed.com/g/e192764590e0f0d9bce55596672bbd84
