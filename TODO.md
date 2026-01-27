@@ -8,6 +8,8 @@
   - [ ] if they don't specify, ask them
 - [ ] if we publish multiple times, update the existing gist
 
+- [ ] make best-effort attempt to detect secrets (using https://pypi.org/project/detect-secrets/?)
+
 ## Session Viewer
 
 - [ ] handle images
