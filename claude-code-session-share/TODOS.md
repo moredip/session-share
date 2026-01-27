@@ -1,5 +1,0 @@
-- [x] check version of plugin against marketplace, tell the user if it's due for update
-- [ ] check for `gh` and auth, fail gracefully with report to user if not available
-- [ ] add an arg to the slash command that lets the user specify private or public
-  - [ ] if they don't specify, ask them
-- [ ] if we publish multiple times, update the existing gist

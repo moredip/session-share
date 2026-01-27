@@ -1,3 +1,15 @@
+# TODO
+
+## Claude Code Session Share Plugin
+
+- [x] check version of plugin against marketplace, tell the user if it's due for update
+- [ ] check for `gh` and auth, fail gracefully with report to user if not available
+- [ ] add an arg to the slash command that lets the user specify private or public
+  - [ ] if they don't specify, ask them
+- [ ] if we publish multiple times, update the existing gist
+
+## Session Viewer
+
 - [ ] handle images
     - e.g. https://gist.github.com/moredip/ca8020ccee67d8bd1d8d2243e7ff75f0
 
@@ -19,11 +31,11 @@
   - [ ] Fetch(url)
   - [ ] Web Search(query)
   - [ ] Bash(command)
-  
+
 - [x] anchors, links between messages
 
 - [ ] add some metadata to the top of the session
-  - [ ] claude session id 
+  - [ ] claude session id
   - [ ] working/project dir
   - [ ] (bonus) instructions on how to resume session locally
   - [ ] time the session started
