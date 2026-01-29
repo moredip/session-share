@@ -8,44 +8,26 @@ It exercises the flow:
 4. View it in the browser and verify all content renders correctly
 """
 
-from playwright.sync_api import Page, expect
-
-from conftest import publish_session, run_claude_session
+from playwright.sync_api import expect
 
 
-def test_publish_multi_file_session(page: Page):
+def test_publish_multi_file_session(create_publish_then_view_session):
     """Test that a session with subagent transcripts can be published successfully.
 
     This test verifies the fix for #1 where 'gh gist edit' failed on multi-file gists
     because it prompted interactively for file selection. The fix uses 'gh api' instead.
     """
-    # Arrange & Act: Run a Claude session that will spawn subagents
-    # Using a prompt that triggers agent spawning (file exploration)
+    # Run a Claude session that will spawn subagents (file exploration triggers this)
     prompt = (
         "Search for all Python files in the e2e-tests directory. "
         "Use the Task tool with subagent_type=Explore to do this. "
         "List the files you find."
     )
-    session = run_claude_session(prompt)
-
-    # Publish the session to a gist
-    # This is the critical step - if gh gist edit fails (the bug), this will fail
-    viewer_url = publish_session(session.session_id)
-    print(f"\nPublished multi-file session: {viewer_url}")
-
-    # Navigate to the viewer
-    page.goto(viewer_url)
-
-    # Assert: The page loads and shows our content
-    # Wait for content to load (the viewer fetches from GitHub API)
-    page.wait_for_load_state("networkidle")
+    # The critical step - if gh gist edit fails (the bug), this will fail
+    page = create_publish_then_view_session(prompt)
 
     # Verify the user's prompt appears in the rendered transcript
     expect(page.locator("body")).to_contain_text("Search for all Python files")
 
     # Verify we see evidence of subagent execution or assistant response
     expect(page.locator("body")).to_contain_text("e2e-tests")
-
-    # Most importantly: verify the session was published successfully
-    # If the old 'gh gist edit' bug existed, we would have failed during publish_session()
-    print("\n✓ Multi-file session published successfully (issue #1 is fixed)")
