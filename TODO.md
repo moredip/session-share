@@ -45,6 +45,8 @@
   - [ ] time the session started
   - [ ] what else can we extract?
 
+- [ ] support subagent transcripts
+
 
 ## BUGS
 - https://custardseed.com/g/e192764590e0f0d9bce55596672bbd84

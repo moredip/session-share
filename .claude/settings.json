@@ -12,7 +12,8 @@
       "Bash(curl:*)",
       "Skill(orient)",
       "Skill(orient:*)",
-      "Bash(gh issue view:*)"
+      "Bash(gh issue view:*)",
+      "Bash(uv run pytest:*)"
     ]
   },
   "enabledPlugins": {
