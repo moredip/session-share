@@ -9,10 +9,10 @@
       "Bash(npm run dev:*)",
       "Bash(/Users/pete/git/moredip/session-share/infra/bin/dterraform init:*)",
       "Bash(/Users/pete/git/moredip/session-share/infra/bin/dterraform fmt:*)",
-      "Bash(gcloud auth:*)",
       "Bash(curl:*)",
       "Skill(orient)",
-      "Skill(orient:*)"
+      "Skill(orient:*)",
+      "Bash(gh issue view:*)"
     ]
   },
   "enabledPlugins": {
