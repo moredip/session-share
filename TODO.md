@@ -37,8 +37,10 @@
 - [x] anchors, links between messages
 
 - [ ] add some metadata to the top of the session
+  - from jabrahms: "I'd also love to know some session information like which repository(?) the session was in and what branch they were on."
   - [ ] claude session id
   - [ ] working/project dir
+  - [ ] branch, other git status
   - [ ] (bonus) instructions on how to resume session locally
   - [ ] time the session started
   - [ ] what else can we extract?
