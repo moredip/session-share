@@ -49,14 +49,22 @@ def create_gist(filepaths: list[str], description: str) -> str:
 
 
 def update_gist_description(gist_id: str, description: str) -> None:
-    """Update a gist's description."""
+
+    # Note: We update the description using 'gh api' instead of 'gh gist edit'
+    # because the latter prompts interactively for file selection on multi-file
+    # gists, which blocks subprocess execution.
     result = subprocess.run(
-        ["gh", "gist", "edit", gist_id, "--desc", description],
+        [
+            "gh", "api",
+            "-X", "PATCH",
+            f"/gists/{gist_id}",
+            "-f", f"description={description}"
+        ],
         capture_output=True,
         text=True,
     )
     if result.returncode != 0:
-        raise RuntimeError(f"gh gist edit failed: {result.stderr}")
+        raise RuntimeError(f"Failed to update gist description: {result.stderr}")
 
 
 def main():
