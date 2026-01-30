@@ -28,7 +28,13 @@ interface MessageCardProps {
   children: React.ReactNode
 }
 
-export function MessageCard({ anchorId, label, align, variant = 'gray', children }: MessageCardProps) {
+export function MessageCard({
+  anchorId,
+  label,
+  align,
+  variant = 'gray',
+  children,
+}: MessageCardProps) {
   const styles = variantStyles[variant]
 
   return (

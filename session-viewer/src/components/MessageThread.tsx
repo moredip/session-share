@@ -36,11 +36,7 @@ function MessageEntry({ entry, anchorId }: MessageEntryProps) {
         <AssistantMessage content={structuredEntry.content} anchorId={anchorId} />
       )}
       {structuredEntry.toolCalls?.map((toolCall) => (
-        <ToolCallEntry
-          key={toolCall.id}
-          toolCall={toolCall}
-          anchorId={`msg-${toolCall.id}`}
-        />
+        <ToolCallEntry key={toolCall.id} toolCall={toolCall} anchorId={`msg-${toolCall.id}`} />
       ))}
     </>
   )
@@ -56,11 +52,7 @@ export function MessageThread({ entries }: MessageThreadProps) {
   return (
     <div className="flex flex-col gap-6">
       {displayableEntries.map((entry) => (
-        <MessageEntry
-          key={entry.uuid}
-          entry={entry}
-          anchorId={`msg-${entry.uuid}`}
-        />
+        <MessageEntry key={entry.uuid} entry={entry} anchorId={`msg-${entry.uuid}`} />
       ))}
     </div>
   )

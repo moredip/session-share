@@ -4,7 +4,10 @@ import { AnchorLink } from './AnchorLink'
 
 type ColorVariant = 'sky' | 'custard' | 'gray'
 
-const variantStyles: Record<ColorVariant, { header: string; headerHover: string; border: string; body: string }> = {
+const variantStyles: Record<
+  ColorVariant,
+  { header: string; headerHover: string; border: string; body: string }
+> = {
   sky: {
     header: 'bg-sky-500 text-white',
     headerHover: 'hover:bg-sky-600',

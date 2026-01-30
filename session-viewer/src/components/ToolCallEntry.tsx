@@ -1,5 +1,6 @@
 import { Tool } from '@geist-ui/icons'
-import type { ToolCall } from '../domain/transcriptEntry'
+import type { ToolCall, ReadToolCall, GenericToolCall } from '../domain/transcriptEntry'
+import { isReadToolCall, extractFileName } from '../domain/transcriptEntry'
 import { ExpandableMessageCard } from './ExpandableMessageCard'
 
 interface ToolCallEntryProps {
@@ -7,7 +8,49 @@ interface ToolCallEntryProps {
   anchorId: string
 }
 
-export function ToolCallEntry({ toolCall, anchorId }: ToolCallEntryProps) {
+function formatReadToolHeader(toolCall: ReadToolCall): string {
+  const fileName = extractFileName(toolCall.input.file_path)
+  const { offset, limit } = toolCall.input
+
+  // Format line range notation, reproducing what the CC VS Code extension looks like
+  if (offset !== undefined && limit !== undefined) {
+    const endLine = offset + limit - 1
+    return `Read ${fileName} (lines ${offset}-${endLine})`
+  } else if (offset !== undefined) {
+    return `Read ${fileName} (from line ${offset})`
+  } else if (limit !== undefined) {
+    const endLine = limit - 1
+    return `Read ${fileName} (lines 0-${endLine})`
+  } else {
+    return `Read ${fileName}`
+  }
+}
+
+function ReadToolCallEntry({ toolCall, anchorId }: { toolCall: ReadToolCall; anchorId: string }) {
+  const hasResult = toolCall.result !== undefined
+
+  return (
+    <ExpandableMessageCard
+      anchorId={anchorId}
+      canExpand={hasResult}
+      headerContent={
+        <span className="flex items-center gap-1.5">
+          <Tool size={14} /> {formatReadToolHeader(toolCall)}
+        </span>
+      }
+      alwaysVisibleContent={null}
+      expandedContent={
+        hasResult ? (
+          <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
+            {toolCall.result}
+          </pre>
+        ) : undefined
+      }
+    />
+  )
+}
+
+function GenericToolCallEntry({ toolCall, anchorId }: { toolCall: GenericToolCall; anchorId: string }) {
   const hasResult = toolCall.result !== undefined
 
   return (
@@ -37,4 +80,12 @@ export function ToolCallEntry({ toolCall, anchorId }: ToolCallEntryProps) {
       }
     />
   )
+}
+
+export function ToolCallEntry({ toolCall, anchorId }: ToolCallEntryProps) {
+  if (isReadToolCall(toolCall)) {
+    return <ReadToolCallEntry toolCall={toolCall} anchorId={anchorId} />
+  }
+
+  return <GenericToolCallEntry toolCall={toolCall} anchorId={anchorId} />
 }

@@ -15,6 +15,26 @@ uv run playwright install chromium
 
 ## Running Tests
 
+### Testing Against Local Development Server (Default)
+
+By default, tests run against your local development server at http://localhost:5173:
+
 ```bash
+# First, start the dev server in another terminal
+cd session-viewer
+npm run dev
+
+# Then run tests
+cd ../e2e-tests
 uv run pytest -v -s
+```
+
+This publishes sessions to GitHub Gists (as normal) but views them on your local development server.
+
+### Testing Against Production
+
+To test the deployed production viewer, set the `VIEWER_BASE_URL` environment variable:
+
+```bash
+VIEWER_BASE_URL=https://custardseed.com uv run pytest -v -s
 ```

@@ -7,7 +7,11 @@ interface AssistantThinkingProps {
   anchorId: string
 }
 
-export function AssistantThinking({ content, defaultExpanded = false, anchorId }: AssistantThinkingProps) {
+export function AssistantThinking({
+  content,
+  defaultExpanded = false,
+  anchorId,
+}: AssistantThinkingProps) {
   return (
     <ExpandableMessageCard
       anchorId={anchorId}

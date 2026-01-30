@@ -30,11 +30,39 @@ export type AssistantContentBlock = TextBlock | ToolUseBlock | ThinkingBlock
 /**
  * A tool call paired with its result (if available)
  */
-export interface ToolCall {
+
+export interface BaseToolCall {
   id: string
   name: string
-  input: Record<string, unknown>
   result?: string
+}
+
+export interface GenericToolCall extends BaseToolCall {
+  kind: 'generic'
+  input: Record<string, unknown>
+}
+
+export interface ReadToolInput {
+  file_path: string
+  offset?: number
+  limit?: number
+}
+
+export interface ReadToolCall extends BaseToolCall {
+  kind: 'read'
+  name: 'Read'
+  input: ReadToolInput
+}
+
+// Discriminated union (extensible for future tools)
+export type ToolCall = GenericToolCall | ReadToolCall
+
+export function isReadToolCall(toolCall: ToolCall): toolCall is ReadToolCall {
+  return toolCall.kind === 'read'
+}
+
+export function extractFileName(filePath: string): string {
+  return filePath.split('/').pop() ?? filePath
 }
 
 /**
