@@ -1,16 +1,22 @@
 """Pytest configuration and fixtures for e2e tests."""
 
 import json
+import os
 import re
 import subprocess
 from pathlib import Path
 from typing import Callable
+from urllib.parse import urlparse, urlunparse
 
 import pytest
 from playwright.sync_api import Page
 
 # Path to the plugin directory
 PLUGIN_DIR = Path(__file__).parent.parent / "claude-code-session-share"
+
+# Viewer base URL - can be overridden with VIEWER_BASE_URL env var
+# Defaults to production, set to http://localhost:5173 for local development
+VIEWER_BASE_URL = os.environ.get("VIEWER_BASE_URL", "https://custardseed.com")
 
 
 def run_claude_session(prompt: str) -> str:
@@ -77,8 +83,23 @@ def create_publish_then_view_session(page: Page) -> Callable[[str], Page]:
     def _create(prompt: str) -> Page:
         session_id = run_claude_session(prompt)
         viewer_url = publish_session(session_id)
-        print(f"\n🔗 Viewer URL: {viewer_url}")
-        page.goto(viewer_url)
+
+        # Rewrite URL to use configured viewer base URL (production or local)
+        parsed_url = urlparse(viewer_url)
+        parsed_base = urlparse(VIEWER_BASE_URL)
+        final_url = urlunparse((
+            parsed_base.scheme,
+            parsed_base.netloc,
+            parsed_url.path,
+            parsed_url.params,
+            parsed_url.query,
+            parsed_url.fragment
+        ))
+
+        print(f"\n🔗 Published: {viewer_url}")
+        if VIEWER_BASE_URL != "https://custardseed.com":
+            print(f"🔗 Viewing at: {final_url}")
+        page.goto(final_url)
         page.wait_for_load_state("networkidle")
         return page
     return _create

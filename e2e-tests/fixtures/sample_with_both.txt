@@ -1,0 +1,12 @@
+Line 1 should be skipped
+Line 2 should be skipped
+Line 3 should be skipped
+Line 4 should be skipped
+Line 5 should be skipped
+Line 6 VISIBLE START
+Line 7 VISIBLE
+Line 8 VISIBLE
+Line 9 VISIBLE
+Line 10 VISIBLE END
+Line 11 should not be visible
+Line 12 should not be visible
