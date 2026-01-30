@@ -4,9 +4,13 @@
   "license": "MIT",
   "description": "Publish Claude Code session transcripts to GitHub Gists",
   "author": {
-    "name": "Pete Hodgson (thepete.net)"
+    "name": "Pete Hodgson",
+    "email": "workwith@thepete.net",
+    "url": "https://thepete.net"
   },
+  "homepage": "https://custardseed.com",
   "keywords": [
+    "custardseed",
     "session",
     "transcript",
     "gist",
@@ -14,6 +18,8 @@
     "publish",
     "thread",
     "conversation",
-    "history"
+    "history",
+    "custard",
+    "seed"
   ]
 }
