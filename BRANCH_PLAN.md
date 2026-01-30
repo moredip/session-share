@@ -33,7 +33,7 @@ Example session: https://custardseed.com/g/e74f702fc43c0cef06b16cd3c5dacb60
 - [x] Implement Read tool renderer component in session-viewer
   - [x] we'll do this by adding domain types which understand Read tool calls specifically,
   - [x]  and then modifying the JSX with a custom renderer for that specific subtype
-- [ ] Update e2e test with visual assertions
+- [x] Update e2e test with visual assertions
 
 ## CLI Rendering Analysis
 
