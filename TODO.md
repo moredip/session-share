@@ -26,9 +26,10 @@
 - [x] for tool calls, include the input in the contracted view, input + results in the expanded view
 - [ ] perform special-case rendering for internal tool invocation
   - good example to use
-    - http://localhost:5173/g/95599dbc3a863bd0febe19c323b8c24f
+    - https://custardseed.com/g/95599dbc3a863bd0febe19c323b8c24f
     - local session /resume 88f04c6a-d128-40bf-96b3-6b2aa787f62c
   - [ ] Read(XXX)
+    - https://custardseed.com/g/e74f702fc43c0cef06b16cd3c5dacb60 shows different Read variants we want to support
   - [ ] Edit(XXX)
   - [ ] Fetch(url)
   - [ ] Web Search(query)
