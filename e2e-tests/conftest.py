@@ -25,6 +25,8 @@ def run_claude_session(prompt: str) -> str:
         [
             "claude",
             "-p",
+            "--model",
+            "haiku",
             "--plugin-dir",
             str(PLUGIN_DIR),
             "--output-format",
@@ -46,6 +48,8 @@ def publish_session(session_id: str) -> str:
         [
             "claude",
             "-p",
+            "--model",
+            "haiku",
             "--plugin-dir",
             str(PLUGIN_DIR),
             "--resume",
