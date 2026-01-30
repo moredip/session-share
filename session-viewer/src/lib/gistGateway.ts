@@ -43,6 +43,12 @@ const ToolResultBlockSchema = z.object({
   content: z.union([z.string(), z.array(TextBlockSchema)]),
 })
 
+const ReadToolInputSchema = z.object({
+  file_path: z.string(),
+  offset: z.number().optional(),
+  limit: z.number().optional(),
+})
+
 const AssistantContentBlockSchema = z.discriminatedUnion('type', [
   TextBlockSchema,
   ToolUseBlockSchema,
@@ -114,13 +120,42 @@ interface ExtractedToolResult {
   content: string
 }
 
+function parseToolCall(block: z.infer<typeof ToolUseBlockSchema>): ToolCall {
+  if (block.name === 'Read') {
+    const result = ReadToolInputSchema.safeParse(block.input)
+    if (result.success) {
+      return {
+        kind: 'read',
+        id: block.id,
+        name: 'Read',
+        input: result.data,
+      }
+    }
+    // Invalid Read tool input - log warning and fall back to generic
+    console.warn(
+      `Read tool call has invalid input (id: ${block.id}):`,
+      result.error.format(),
+      block.input
+    )
+  }
+
+  return {
+    kind: 'generic',
+    id: block.id,
+    name: block.name,
+    input: block.input,
+  }
+}
+
 /**
  * Parse a user message entry into a structured entry
  */
-function parseUserStructuredEntry(parsed: unknown): {
-  entry: UserStructuredEntry
-  toolResults: ExtractedToolResult[]
-} | undefined {
+function parseUserStructuredEntry(parsed: unknown):
+  | {
+      entry: UserStructuredEntry
+      toolResults: ExtractedToolResult[]
+    }
+  | undefined {
   const result = UserMessageEntrySchema.safeParse(parsed)
   if (!result.success) return undefined
 
@@ -197,11 +232,7 @@ function parseAssistantStructuredEntry(parsed: unknown): AssistantStructuredEntr
   const hasThinking = entry.message.content.some((block) => block.type === 'thinking')
 
   // Extract tool calls (results will be attached in correlation pass)
-  const toolCalls: ToolCall[] = toolUseBlocks.map((block) => ({
-    id: block.id,
-    name: block.name,
-    input: block.input,
-  }))
+  const toolCalls: ToolCall[] = toolUseBlocks.map(parseToolCall)
 
   return {
     kind: 'assistant',
@@ -260,8 +291,8 @@ function parseStructuredEntry(parsed: unknown, type: string): MessageStructuredE
   }
 }
 
-function isMetaType(type: string): type is typeof META_TYPES[number] {
-  return META_TYPES.includes(type as typeof META_TYPES[number])
+function isMetaType(type: string): type is (typeof META_TYPES)[number] {
+  return META_TYPES.includes(type as (typeof META_TYPES)[number])
 }
 
 function parseEntries(jsonlContent: string): TranscriptEntry[] {
