@@ -51,3 +51,5 @@
 
 ## BUGS
 - https://custardseed.com/g/e192764590e0f0d9bce55596672bbd84
+- Parser fails on unknown message types (e.g. `custom-title`) - should skip gracefully
+  - repro: https://custardseed.com/g/fab752159c58ba0041bcbbdc500006d9
