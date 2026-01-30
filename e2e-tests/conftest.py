@@ -15,8 +15,8 @@ from playwright.sync_api import Page
 PLUGIN_DIR = Path(__file__).parent.parent / "claude-code-session-share"
 
 # Viewer base URL - can be overridden with VIEWER_BASE_URL env var
-# Defaults to production, set to http://localhost:5173 for local development
-VIEWER_BASE_URL = os.environ.get("VIEWER_BASE_URL", "https://custardseed.com")
+# Defaults to local development, set to https://custardseed.com for production testing
+VIEWER_BASE_URL = os.environ.get("VIEWER_BASE_URL", "http://localhost:5173")
 
 
 def run_claude_session(prompt: str) -> str:
