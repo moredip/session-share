@@ -1,0 +1,1 @@
+- Use uv run to run the tests

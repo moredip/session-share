@@ -77,6 +77,7 @@ def create_publish_then_view_session(page: Page) -> Callable[[str], Page]:
     def _create(prompt: str) -> Page:
         session_id = run_claude_session(prompt)
         viewer_url = publish_session(session_id)
+        print(f"\n🔗 Viewer URL: {viewer_url}")
         page.goto(viewer_url)
         page.wait_for_load_state("networkidle")
         return page
