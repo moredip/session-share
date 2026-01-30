@@ -38,3 +38,6 @@ To test the deployed production viewer, set the `VIEWER_BASE_URL` environment va
 ```bash
 VIEWER_BASE_URL=https://custardseed.com uv run pytest -v -s
 ```
+
+### Headed mode
+use `--headed` if you want to run playwright in non-headless mode so you can see the tests
