@@ -49,6 +49,31 @@ const ReadToolInputSchema = z.object({
   limit: z.number().optional(),
 })
 
+const EditToolInputSchema = z.object({
+  file_path: z.string(),
+  old_string: z.string(),
+  new_string: z.string(),
+  replace_all: z.boolean(),
+})
+
+const EditToolPatchHunkSchema = z.object({
+  oldStart: z.number(),
+  oldLines: z.number(),
+  newStart: z.number(),
+  newLines: z.number(),
+  lines: z.array(z.string()),
+})
+
+const EditToolResultSchema = z.object({
+  filePath: z.string(),
+  oldString: z.string(),
+  newString: z.string(),
+  originalFile: z.string(),
+  structuredPatch: z.array(EditToolPatchHunkSchema),
+  userModified: z.boolean(),
+  replaceAll: z.boolean(),
+})
+
 const AssistantContentBlockSchema = z.discriminatedUnion('type', [
   TextBlockSchema,
   ToolUseBlockSchema,
@@ -120,6 +145,12 @@ interface ExtractedToolResult {
   content: string
 }
 
+/** Extracted toolUseResult for correlation */
+interface ExtractedToolUseResult {
+  toolUseId: string
+  data: unknown
+}
+
 function parseToolCall(block: z.infer<typeof ToolUseBlockSchema>): ToolCall {
   if (block.name === 'Read') {
     const result = ReadToolInputSchema.safeParse(block.input)
@@ -134,6 +165,24 @@ function parseToolCall(block: z.infer<typeof ToolUseBlockSchema>): ToolCall {
     // Invalid Read tool input - log warning and fall back to generic
     console.warn(
       `Read tool call has invalid input (id: ${block.id}):`,
+      result.error.format(),
+      block.input
+    )
+  }
+
+  if (block.name === 'Edit') {
+    const result = EditToolInputSchema.safeParse(block.input)
+    if (result.success) {
+      return {
+        kind: 'edit',
+        id: block.id,
+        name: 'Edit',
+        input: result.data,
+      }
+    }
+    // Invalid Edit tool input - log warning and fall back to generic
+    console.warn(
+      `Edit tool call has invalid input (id: ${block.id}):`,
       result.error.format(),
       block.input
     )
@@ -154,6 +203,7 @@ function parseUserStructuredEntry(parsed: unknown):
   | {
       entry: UserStructuredEntry
       toolResults: ExtractedToolResult[]
+      toolUseResults: ExtractedToolUseResult[]
     }
   | undefined {
   const result = UserMessageEntrySchema.safeParse(parsed)
@@ -161,6 +211,7 @@ function parseUserStructuredEntry(parsed: unknown):
 
   const entryData = result.data
   const toolResults: ExtractedToolResult[] = []
+  const toolUseResults: ExtractedToolUseResult[] = []
 
   if (typeof entryData.message.content === 'string') {
     return {
@@ -170,6 +221,7 @@ function parseUserStructuredEntry(parsed: unknown):
         content: entryData.message.content,
       },
       toolResults: [],
+      toolUseResults: [],
     }
   }
 
@@ -193,6 +245,15 @@ function parseUserStructuredEntry(parsed: unknown):
       toolUseId: block.tool_use_id,
       content: resultContent,
     })
+
+    // Extract toolUseResult if present (for Edit tools)
+    const rawParsed = parsed as Record<string, unknown>
+    if (rawParsed.toolUseResult) {
+      toolUseResults.push({
+        toolUseId: block.tool_use_id,
+        data: rawParsed.toolUseResult,
+      })
+    }
   }
 
   // Determine if this is a tool-result-only message (no text content)
@@ -206,6 +267,7 @@ function parseUserStructuredEntry(parsed: unknown):
       isToolResultOnly,
     },
     toolResults,
+    toolUseResults,
   }
 }
 
@@ -331,6 +393,28 @@ function parseEntries(jsonlContent: string): TranscriptEntry[] {
           const toolCall = toolCallMap.get(toolResult.toolUseId)
           if (toolCall) {
             toolCall.result = toolResult.content
+          }
+        }
+        // Correlate toolUseResults to all tool calls
+        for (const toolUseResult of result.toolUseResults) {
+          const toolCall = toolCallMap.get(toolUseResult.toolUseId)
+          if (toolCall) {
+            // Store raw data for all tool types
+            toolCall.rawToolUseResult = toolUseResult.data
+
+            // For Edit tools, also validate and store parsed data for rendering
+            if (toolCall.kind === 'edit') {
+              const validationResult = EditToolResultSchema.safeParse(toolUseResult.data)
+              if (validationResult.success) {
+                toolCall.toolUseResult = validationResult.data
+              } else {
+                console.warn(
+                  `Edit tool result has invalid structure (id: ${toolUseResult.toolUseId}):`,
+                  validationResult.error.format(),
+                  toolUseResult.data
+                )
+              }
+            }
           }
         }
       }

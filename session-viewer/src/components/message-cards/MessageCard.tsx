@@ -1,24 +1,5 @@
 import { AnchorLink } from './AnchorLink'
-
-type ColorVariant = 'sky' | 'custard' | 'gray'
-
-const variantStyles: Record<ColorVariant, { header: string; border: string; body: string }> = {
-  sky: {
-    header: 'bg-sky-500 text-white',
-    border: 'border-sky-300',
-    body: 'bg-sky-50',
-  },
-  custard: {
-    header: 'bg-custard-500 text-white',
-    border: 'border-custard-300',
-    body: 'bg-custard-50',
-  },
-  gray: {
-    header: 'bg-custard-200 text-custard-700',
-    border: 'border-custard-100',
-    body: 'bg-custard-50/50',
-  },
-}
+import { type ColorVariant, variantStyles } from '../../styles/cardVariants'
 
 interface MessageCardProps {
   anchorId: string

@@ -31,6 +31,7 @@
   - [x] Read(XXX)
     - https://custardseed.com/g/e74f702fc43c0cef06b16cd3c5dacb60 shows different Read variants we want to support
   - [ ] Edit(XXX)
+    - https://custardseed.com/g/8871fc0f6a113826235b2428fbb27709 shows different Edit variants
   - [ ] Fetch(url)
   - [ ] Web Search(query)
   - [ ] Bash(command)
@@ -53,3 +54,5 @@
 - https://custardseed.com/g/e192764590e0f0d9bce55596672bbd84
 - Parser fails on unknown message types (e.g. `custom-title`) - should skip gracefully
   - repro: https://custardseed.com/g/fab752159c58ba0041bcbbdc500006d9
+- when there are subagent files, we can sometimes accidentally render the subagent session rather than the main session. I'm guessing we just render the first file we see in the gist!
+  - repro: https://gist.github.com/moredip/429aaa26b9ae6ecf0b1b0f5ca950df45

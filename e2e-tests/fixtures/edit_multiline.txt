@@ -1,0 +1,7 @@
+function example() {
+  const OLD_CODE = true;
+  if (OLD_CODE) {
+    console.log("old implementation");
+  }
+  return OLD_CODE;
+}

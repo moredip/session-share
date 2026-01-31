@@ -5,10 +5,10 @@ import {
   type AssistantStructuredEntry,
   isDisplayableEntry,
 } from '../domain/transcriptEntry'
-import { UserMessage } from './UserMessage'
-import { AssistantMessage } from './AssistantMessage'
-import { AssistantThinking } from './AssistantThinking'
-import { ToolCallEntry } from './ToolCallEntry'
+import { UserMessage } from './message-cards/UserMessage'
+import { AssistantMessage } from './message-cards/AssistantMessage'
+import { AssistantThinking } from './message-cards/AssistantThinking'
+import { ToolCallEntry } from './message-cards/tool-calls/ToolCallEntry'
 
 interface MessageEntryProps {
   entry: MessageEntry & {

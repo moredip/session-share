@@ -3,6 +3,7 @@
 import json
 import os
 import re
+import shutil
 import subprocess
 from pathlib import Path
 from typing import Callable
@@ -18,6 +19,36 @@ PLUGIN_DIR = Path(__file__).parent.parent / "claude-code-session-share"
 # Defaults to local development, set to https://custardseed.com for production testing
 VIEWER_BASE_URL = os.environ.get("VIEWER_BASE_URL", "http://localhost:5173")
 
+# Path to the fixtures directory
+FIXTURES_DIR = Path(__file__).parent / "fixtures"
+
+
+def copy_fixtures_to_temp(tmp_path: Path, *fixture_names: str) -> dict[str, Path]:
+    """Copy fixture files to a temporary directory.
+
+    This is useful for tests that need to modify files (e.g., Edit tool tests).
+    The fixtures remain unchanged and pytest automatically cleans up tmp_path.
+
+    Args:
+        tmp_path: Pytest's tmp_path fixture
+        *fixture_names: Names of fixture files to copy (e.g., "edit_basic.txt")
+
+    Returns:
+        Dictionary mapping fixture names to their temp paths
+
+    Example:
+        def test_something(tmp_path):
+            files = copy_fixtures_to_temp(tmp_path, "edit_basic.txt", "edit_other.txt")
+            # files["edit_basic.txt"] is the path to the temp copy
+    """
+    result = {}
+    for name in fixture_names:
+        source = FIXTURES_DIR / name
+        dest = tmp_path / name
+        shutil.copy(source, dest)
+        result[name] = dest
+    return result
+
 
 def run_claude_session(prompt: str) -> str:
     """Run a Claude Code session with the plugin loaded and return the session ID."""
@@ -31,6 +62,7 @@ def run_claude_session(prompt: str) -> str:
             str(PLUGIN_DIR),
             "--output-format",
             "json",
+            "--allowedTools=Edit,Read,Bash,Write",
             prompt,
         ],
         capture_output=True,

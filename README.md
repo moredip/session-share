@@ -22,6 +22,14 @@ GitHub handles storage and access control. The viewer is a static site that fetc
 | [infra](infra/) | Terraform IaC for GCP hosting |
 | [docs](docs/) | Architecture and roadmap |
 
+## Development
+
+After cloning, set up git hooks:
+
+```bash
+uvx pre-commit install
+```
+
 ## Current status
 
 Phase 1 (MVP) - Public and unlisted sharing via GitHub Gists. No login required to view or publish (just a logged in `gh` cli, for creating gists).

@@ -1,0 +1,5 @@
+This file has foo repeated several times.
+The first foo is on this line.
+Another foo appears here.
+And yet another foo is found here.
+The word foo appears a total of five times in this file.
