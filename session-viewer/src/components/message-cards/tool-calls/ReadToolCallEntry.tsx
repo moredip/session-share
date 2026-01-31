@@ -2,6 +2,7 @@ import { Tool } from '@geist-ui/icons'
 import type { ReadToolCall } from '../../../domain/transcriptEntry'
 import { extractFileName } from '../../../domain/transcriptEntry'
 import { ExpandableMessageCard } from '../ExpandableMessageCard'
+import { CodeBlock } from './CodeBlock'
 import { RawToolResult } from './RawToolResult'
 
 function formatReadToolHeader(toolCall: ReadToolCall): string {
@@ -43,9 +44,7 @@ export function ReadToolCallEntry({ toolCall, anchorId }: ReadToolCallEntryProps
       expandedContent={
         hasResult ? (
           <div>
-            <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
-              {toolCall.result}
-            </pre>
+            <CodeBlock>{toolCall.result}</CodeBlock>
             <RawToolResult data={toolCall.rawToolUseResult} />
           </div>
         ) : undefined

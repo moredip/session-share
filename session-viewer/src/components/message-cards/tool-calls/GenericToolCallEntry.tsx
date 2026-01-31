@@ -1,6 +1,7 @@
 import { Tool } from '@geist-ui/icons'
 import type { GenericToolCall } from '../../../domain/transcriptEntry'
 import { ExpandableMessageCard } from '../ExpandableMessageCard'
+import { CodeBlock } from './CodeBlock'
 import { RawToolResult } from './RawToolResult'
 
 interface GenericToolCallEntryProps {
@@ -21,18 +22,14 @@ export function GenericToolCallEntry({ toolCall, anchorId }: GenericToolCallEntr
         </span>
       }
       alwaysVisibleContent={
-        <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200">
-          {JSON.stringify(toolCall.input, null, 2)}
-        </pre>
+        <CodeBlock wrap={false}>{JSON.stringify(toolCall.input, null, 2)}</CodeBlock>
       }
       expandedContent={
         hasResult ? (
           <div>
             <hr className="border-gray-200 my-2" />
             <div className="text-sm font-medium text-gray-600 mb-2">Result:</div>
-            <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
-              {toolCall.result}
-            </pre>
+            <CodeBlock>{toolCall.result}</CodeBlock>
             <RawToolResult data={toolCall.rawToolUseResult} />
           </div>
         ) : undefined
