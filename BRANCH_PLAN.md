@@ -40,7 +40,7 @@ E2E test should exercise different Edit tool scenarios:
 
 ## Tasks
 
-- [ ] Add e2e test for Edit tool variants with fixture files
+- [x] Add e2e test for Edit tool variants with fixture files
 - [ ] Study Claude Code rendering format for Edit tools (human screenshot needed)
 - [ ] Add EditToolInputSchema to gistGateway.ts with Zod validation
 - [ ] Extend ToolCall discriminated union with EditToolCall type in transcriptEntry.ts
