@@ -40,6 +40,7 @@ fi
 echo "Building session-viewer..."
 cd "$SESSION_VIEWER_DIR"
 npm ci
+npm run check
 npm run build:prod
 
 # Deploy
