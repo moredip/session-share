@@ -2,6 +2,7 @@ import { Tool } from '@geist-ui/icons'
 import type { ToolCall, ReadToolCall, EditToolCall, GenericToolCall } from '../domain/transcriptEntry'
 import { isReadToolCall, isEditToolCall, extractFileName } from '../domain/transcriptEntry'
 import { ExpandableMessageCard } from './ExpandableMessageCard'
+import { RawToolResult } from './RawToolResult'
 import { parseDiff, Diff, Hunk } from 'react-diff-view'
 import 'react-diff-view/style/index.css'
 
@@ -30,7 +31,6 @@ function formatReadToolHeader(toolCall: ReadToolCall): string {
 
 function ReadToolCallEntry({ toolCall, anchorId }: { toolCall: ReadToolCall; anchorId: string }) {
   const hasResult = toolCall.result !== undefined
-  const hasRawToolUseResult = toolCall.rawToolUseResult !== undefined
 
   return (
     <ExpandableMessageCard
@@ -48,15 +48,7 @@ function ReadToolCallEntry({ toolCall, anchorId }: { toolCall: ReadToolCall; anc
             <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
               {toolCall.result}
             </pre>
-            {hasRawToolUseResult && (
-              <>
-                <hr className="border-gray-200 my-2" />
-                <div className="text-sm font-medium text-gray-600 mb-2">Raw Tool Result:</div>
-                <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
-                  {JSON.stringify(toolCall.rawToolUseResult, null, 2)}
-                </pre>
-              </>
-            )}
+            <RawToolResult data={toolCall.rawToolUseResult} />
           </div>
         ) : undefined
       }
@@ -115,11 +107,7 @@ function EditToolCallEntry({ toolCall, anchorId }: { toolCall: EditToolCall; anc
         hasResult ? (
           <div>
             {renderDiff()}
-            <hr className="border-gray-200 my-2" />
-            <div className="text-sm font-medium text-gray-600 mb-2">Raw Tool Result:</div>
-            <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
-              {JSON.stringify(toolCall.rawToolUseResult || toolCall.input, null, 2)}
-            </pre>
+            <RawToolResult data={toolCall.rawToolUseResult || toolCall.input} />
           </div>
         ) : undefined
       }
@@ -129,7 +117,6 @@ function EditToolCallEntry({ toolCall, anchorId }: { toolCall: EditToolCall; anc
 
 function GenericToolCallEntry({ toolCall, anchorId }: { toolCall: GenericToolCall; anchorId: string }) {
   const hasResult = toolCall.result !== undefined
-  const hasRawToolUseResult = toolCall.rawToolUseResult !== undefined
 
   return (
     <ExpandableMessageCard
@@ -153,15 +140,7 @@ function GenericToolCallEntry({ toolCall, anchorId }: { toolCall: GenericToolCal
             <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
               {toolCall.result}
             </pre>
-            {hasRawToolUseResult && (
-              <>
-                <hr className="border-gray-200 my-2" />
-                <div className="text-sm font-medium text-gray-600 mb-2">Raw Tool Result:</div>
-                <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
-                  {JSON.stringify(toolCall.rawToolUseResult, null, 2)}
-                </pre>
-              </>
-            )}
+            <RawToolResult data={toolCall.rawToolUseResult} />
           </div>
         ) : undefined
       }
