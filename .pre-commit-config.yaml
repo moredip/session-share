@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: session-viewer-check
+        name: session-viewer checks
+        entry: bin/pre-commit
+        language: system
+        pass_filenames: false
