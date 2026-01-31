@@ -1,7 +1,9 @@
 import { Tool } from '@geist-ui/icons'
-import type { ToolCall, ReadToolCall, GenericToolCall } from '../domain/transcriptEntry'
+import type { ToolCall, ReadToolCall, EditToolCall, GenericToolCall } from '../domain/transcriptEntry'
 import { isReadToolCall, isEditToolCall, extractFileName } from '../domain/transcriptEntry'
 import { ExpandableMessageCard } from './ExpandableMessageCard'
+import { parseDiff, Diff, Hunk } from 'react-diff-view'
+import 'react-diff-view/style/index.css'
 
 interface ToolCallEntryProps {
   toolCall: ToolCall
@@ -28,6 +30,7 @@ function formatReadToolHeader(toolCall: ReadToolCall): string {
 
 function ReadToolCallEntry({ toolCall, anchorId }: { toolCall: ReadToolCall; anchorId: string }) {
   const hasResult = toolCall.result !== undefined
+  const hasRawToolUseResult = toolCall.rawToolUseResult !== undefined
 
   return (
     <ExpandableMessageCard
@@ -41,9 +44,83 @@ function ReadToolCallEntry({ toolCall, anchorId }: { toolCall: ReadToolCall; anc
       alwaysVisibleContent={null}
       expandedContent={
         hasResult ? (
-          <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
-            {toolCall.result}
-          </pre>
+          <div>
+            <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
+              {toolCall.result}
+            </pre>
+            {hasRawToolUseResult && (
+              <>
+                <hr className="border-gray-200 my-2" />
+                <div className="text-sm font-medium text-gray-600 mb-2">Raw Tool Result:</div>
+                <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
+                  {JSON.stringify(toolCall.rawToolUseResult, null, 2)}
+                </pre>
+              </>
+            )}
+          </div>
+        ) : undefined
+      }
+    />
+  )
+}
+
+function EditToolCallEntry({ toolCall, anchorId }: { toolCall: EditToolCall; anchorId: string }) {
+  const fileName = extractFileName(toolCall.input.file_path)
+  const hasResult = toolCall.result !== undefined
+  const hasDiffData = toolCall.toolUseResult?.structuredPatch !== undefined
+
+  // Convert structuredPatch to unified diff format for react-diff-view
+  const generateUnifiedDiff = () => {
+    if (!toolCall.toolUseResult) return ''
+
+    const { filePath, structuredPatch } = toolCall.toolUseResult
+    let diff = `--- a/${filePath}\n+++ b/${filePath}\n`
+
+    for (const hunk of structuredPatch) {
+      diff += `@@ -${hunk.oldStart},${hunk.oldLines} +${hunk.newStart},${hunk.newLines} @@\n`
+      diff += hunk.lines.join('\n') + '\n'
+    }
+
+    return diff
+  }
+
+  const renderDiff = () => {
+    if (!hasDiffData) return null
+
+    const unifiedDiff = generateUnifiedDiff()
+    const [diffFile] = parseDiff(unifiedDiff)
+
+    if (!diffFile) return null
+
+    return (
+      <div className="mb-4">
+        <Diff viewType="unified" diffType={diffFile.type} hunks={diffFile.hunks}>
+          {(hunks) => hunks.map((hunk) => <Hunk key={hunk.content} hunk={hunk} />)}
+        </Diff>
+      </div>
+    )
+  }
+
+  return (
+    <ExpandableMessageCard
+      anchorId={anchorId}
+      canExpand={hasResult}
+      headerContent={
+        <span className="flex items-center gap-1.5">
+          <Tool size={14} /> Edit {fileName}
+        </span>
+      }
+      alwaysVisibleContent={null}
+      expandedContent={
+        hasResult ? (
+          <div>
+            {renderDiff()}
+            <hr className="border-gray-200 my-2" />
+            <div className="text-sm font-medium text-gray-600 mb-2">Raw Tool Result:</div>
+            <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
+              {JSON.stringify(toolCall.rawToolUseResult || toolCall.input, null, 2)}
+            </pre>
+          </div>
         ) : undefined
       }
     />
@@ -52,6 +129,7 @@ function ReadToolCallEntry({ toolCall, anchorId }: { toolCall: ReadToolCall; anc
 
 function GenericToolCallEntry({ toolCall, anchorId }: { toolCall: GenericToolCall; anchorId: string }) {
   const hasResult = toolCall.result !== undefined
+  const hasRawToolUseResult = toolCall.rawToolUseResult !== undefined
 
   return (
     <ExpandableMessageCard
@@ -75,6 +153,15 @@ function GenericToolCallEntry({ toolCall, anchorId }: { toolCall: GenericToolCal
             <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
               {toolCall.result}
             </pre>
+            {hasRawToolUseResult && (
+              <>
+                <hr className="border-gray-200 my-2" />
+                <div className="text-sm font-medium text-gray-600 mb-2">Raw Tool Result:</div>
+                <pre className="text-xs bg-gray-50 p-3 overflow-x-auto border border-gray-200 whitespace-pre-wrap">
+                  {JSON.stringify(toolCall.rawToolUseResult, null, 2)}
+                </pre>
+              </>
+            )}
           </div>
         ) : undefined
       }
@@ -88,9 +175,7 @@ export function ToolCallEntry({ toolCall, anchorId }: ToolCallEntryProps) {
   }
 
   if (isEditToolCall(toolCall)) {
-    // TODO: Implement EditToolCallEntry component
-    // For now, render as generic to satisfy TypeScript
-    return <GenericToolCallEntry toolCall={toolCall as unknown as GenericToolCall} anchorId={anchorId} />
+    return <EditToolCallEntry toolCall={toolCall} anchorId={anchorId} />
   }
 
   return <GenericToolCallEntry toolCall={toolCall} anchorId={anchorId} />

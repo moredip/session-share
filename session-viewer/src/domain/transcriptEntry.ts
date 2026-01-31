@@ -35,6 +35,7 @@ export interface BaseToolCall {
   id: string
   name: string
   result?: string
+  rawToolUseResult?: unknown
 }
 
 export interface GenericToolCall extends BaseToolCall {
@@ -61,10 +62,29 @@ export interface EditToolInput {
   replace_all: boolean
 }
 
+export interface EditToolPatchHunk {
+  oldStart: number
+  oldLines: number
+  newStart: number
+  newLines: number
+  lines: string[]
+}
+
+export interface EditToolResult {
+  filePath: string
+  oldString: string
+  newString: string
+  originalFile: string
+  structuredPatch: EditToolPatchHunk[]
+  userModified: boolean
+  replaceAll: boolean
+}
+
 export interface EditToolCall extends BaseToolCall {
   kind: 'edit'
   name: 'Edit'
   input: EditToolInput
+  toolUseResult?: EditToolResult
 }
 
 // Discriminated union (extensible for future tools)
