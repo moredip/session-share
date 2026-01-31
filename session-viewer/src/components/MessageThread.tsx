@@ -8,7 +8,7 @@ import {
 import { UserMessage } from './UserMessage'
 import { AssistantMessage } from './AssistantMessage'
 import { AssistantThinking } from './AssistantThinking'
-import { ToolCallEntry } from './ToolCallEntry'
+import { ToolCallEntry } from './tool-calls/ToolCallEntry'
 
 interface MessageEntryProps {
   entry: MessageEntry & {
