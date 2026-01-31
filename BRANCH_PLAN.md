@@ -41,10 +41,10 @@ E2E test should exercise different Edit tool scenarios:
 ## Tasks
 
 - [x] Add e2e test for Edit tool variants with fixture files
-- [ ] Add EditToolInputSchema to gistGateway.ts with Zod validation
-- [ ] Extend ToolCall discriminated union with EditToolCall type in transcriptEntry.ts
-- [ ] Add isEditToolCall type guard and helper functions to transcriptEntry.ts
-- [ ] Update parseToolCall() in gistGateway.ts to detect and parse Edit tools
+- [x] Add EditToolInputSchema to gistGateway.ts with Zod validation
+- [x] Extend ToolCall discriminated union with EditToolCall type in transcriptEntry.ts
+- [x] Add isEditToolCall type guard and helper functions to transcriptEntry.ts
+- [x] Update parseToolCall() in gistGateway.ts to detect and parse Edit tools
 - [ ] Implement EditToolCallEntry component in ToolCallEntry.tsx
 - [ ] Update e2e tests to verify rendering matches expected format
 - [ ] Update TODO.md to mark Edit rendering as complete

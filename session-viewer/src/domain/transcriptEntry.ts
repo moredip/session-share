@@ -54,11 +54,28 @@ export interface ReadToolCall extends BaseToolCall {
   input: ReadToolInput
 }
 
+export interface EditToolInput {
+  file_path: string
+  old_string: string
+  new_string: string
+  replace_all: boolean
+}
+
+export interface EditToolCall extends BaseToolCall {
+  kind: 'edit'
+  name: 'Edit'
+  input: EditToolInput
+}
+
 // Discriminated union (extensible for future tools)
-export type ToolCall = GenericToolCall | ReadToolCall
+export type ToolCall = GenericToolCall | ReadToolCall | EditToolCall
 
 export function isReadToolCall(toolCall: ToolCall): toolCall is ReadToolCall {
   return toolCall.kind === 'read'
+}
+
+export function isEditToolCall(toolCall: ToolCall): toolCall is EditToolCall {
+  return toolCall.kind === 'edit'
 }
 
 export function extractFileName(filePath: string): string {

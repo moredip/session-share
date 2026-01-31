@@ -1,6 +1,6 @@
 import { Tool } from '@geist-ui/icons'
 import type { ToolCall, ReadToolCall, GenericToolCall } from '../domain/transcriptEntry'
-import { isReadToolCall, extractFileName } from '../domain/transcriptEntry'
+import { isReadToolCall, isEditToolCall, extractFileName } from '../domain/transcriptEntry'
 import { ExpandableMessageCard } from './ExpandableMessageCard'
 
 interface ToolCallEntryProps {
@@ -85,6 +85,12 @@ function GenericToolCallEntry({ toolCall, anchorId }: { toolCall: GenericToolCal
 export function ToolCallEntry({ toolCall, anchorId }: ToolCallEntryProps) {
   if (isReadToolCall(toolCall)) {
     return <ReadToolCallEntry toolCall={toolCall} anchorId={anchorId} />
+  }
+
+  if (isEditToolCall(toolCall)) {
+    // TODO: Implement EditToolCallEntry component
+    // For now, render as generic to satisfy TypeScript
+    return <GenericToolCallEntry toolCall={toolCall as unknown as GenericToolCall} anchorId={anchorId} />
   }
 
   return <GenericToolCallEntry toolCall={toolCall} anchorId={anchorId} />

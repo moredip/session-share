@@ -49,6 +49,13 @@ const ReadToolInputSchema = z.object({
   limit: z.number().optional(),
 })
 
+const EditToolInputSchema = z.object({
+  file_path: z.string(),
+  old_string: z.string(),
+  new_string: z.string(),
+  replace_all: z.boolean(),
+})
+
 const AssistantContentBlockSchema = z.discriminatedUnion('type', [
   TextBlockSchema,
   ToolUseBlockSchema,
@@ -134,6 +141,24 @@ function parseToolCall(block: z.infer<typeof ToolUseBlockSchema>): ToolCall {
     // Invalid Read tool input - log warning and fall back to generic
     console.warn(
       `Read tool call has invalid input (id: ${block.id}):`,
+      result.error.format(),
+      block.input
+    )
+  }
+
+  if (block.name === 'Edit') {
+    const result = EditToolInputSchema.safeParse(block.input)
+    if (result.success) {
+      return {
+        kind: 'edit',
+        id: block.id,
+        name: 'Edit',
+        input: result.data,
+      }
+    }
+    // Invalid Edit tool input - log warning and fall back to generic
+    console.warn(
+      `Edit tool call has invalid input (id: ${block.id}):`,
       result.error.format(),
       block.input
     )
