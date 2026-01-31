@@ -31,6 +31,7 @@
   - [x] Read(XXX)
     - https://custardseed.com/g/e74f702fc43c0cef06b16cd3c5dacb60 shows different Read variants we want to support
   - [ ] Edit(XXX)
+    - https://custardseed.com/g/8871fc0f6a113826235b2428fbb27709 shows different Edit variants
   - [ ] Fetch(url)
   - [ ] Web Search(query)
   - [ ] Bash(command)
