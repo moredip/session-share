@@ -1,6 +1,6 @@
 import { Tool } from '@geist-ui/icons'
-import type { ReadToolCall } from '../../domain/transcriptEntry'
-import { extractFileName } from '../../domain/transcriptEntry'
+import type { ReadToolCall } from '../../../domain/transcriptEntry'
+import { extractFileName } from '../../../domain/transcriptEntry'
 import { ExpandableMessageCard } from '../ExpandableMessageCard'
 import { RawToolResult } from './RawToolResult'
 

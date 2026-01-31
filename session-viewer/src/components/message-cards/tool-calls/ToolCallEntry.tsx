@@ -1,5 +1,5 @@
-import type { ToolCall } from '../../domain/transcriptEntry'
-import { isReadToolCall, isEditToolCall } from '../../domain/transcriptEntry'
+import type { ToolCall } from '../../../domain/transcriptEntry'
+import { isReadToolCall, isEditToolCall } from '../../../domain/transcriptEntry'
 import { ReadToolCallEntry } from './ReadToolCallEntry'
 import { EditToolCallEntry } from './EditToolCallEntry'
 import { GenericToolCallEntry } from './GenericToolCallEntry'

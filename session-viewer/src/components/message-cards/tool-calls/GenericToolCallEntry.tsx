@@ -1,5 +1,5 @@
 import { Tool } from '@geist-ui/icons'
-import type { GenericToolCall } from '../../domain/transcriptEntry'
+import type { GenericToolCall } from '../../../domain/transcriptEntry'
 import { ExpandableMessageCard } from '../ExpandableMessageCard'
 import { RawToolResult } from './RawToolResult'
 

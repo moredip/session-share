@@ -1,4 +1,4 @@
-import { BrainIcon } from './icons/BrainIcon'
+import { BrainIcon } from '../icons/BrainIcon'
 import { ExpandableMessageCard } from './ExpandableMessageCard'
 
 interface AssistantThinkingProps {

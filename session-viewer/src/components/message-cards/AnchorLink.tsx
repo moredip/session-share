@@ -1,5 +1,5 @@
 import { Link } from '@geist-ui/icons'
-import { useNavigateToAnchor } from '../hooks/useNavigateToAnchor'
+import { useNavigateToAnchor } from '../../hooks/useNavigateToAnchor'
 
 interface AnchorLinkProps {
   anchorId: string

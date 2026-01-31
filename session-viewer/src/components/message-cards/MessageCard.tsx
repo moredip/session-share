@@ -1,5 +1,5 @@
 import { AnchorLink } from './AnchorLink'
-import { type ColorVariant, variantStyles } from '../styles/cardVariants'
+import { type ColorVariant, variantStyles } from '../../styles/cardVariants'
 
 interface MessageCardProps {
   anchorId: string

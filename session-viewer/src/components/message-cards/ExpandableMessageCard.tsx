@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ChevronUp, ChevronDown } from '@geist-ui/icons'
 import { AnchorLink } from './AnchorLink'
-import { type ColorVariant, variantStyles } from '../styles/cardVariants'
+import { type ColorVariant, variantStyles } from '../../styles/cardVariants'
 
 interface ExpandableMessageCardProps {
   anchorId: string

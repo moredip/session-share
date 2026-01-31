@@ -1,6 +1,6 @@
 import { Tool } from '@geist-ui/icons'
-import type { EditToolCall } from '../../domain/transcriptEntry'
-import { extractFileName } from '../../domain/transcriptEntry'
+import type { EditToolCall } from '../../../domain/transcriptEntry'
+import { extractFileName } from '../../../domain/transcriptEntry'
 import { ExpandableMessageCard } from '../ExpandableMessageCard'
 import { RawToolResult } from './RawToolResult'
 import { parseDiff, Diff, Hunk } from 'react-diff-view'
