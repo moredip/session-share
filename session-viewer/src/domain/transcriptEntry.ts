@@ -128,7 +128,7 @@ export type MessageStructuredEntry =
 export interface UserStructuredEntry {
   kind: 'user'
   role: 'user'
-  content: string
+  content: UserContentBlock[]
   isToolResultOnly?: boolean
 }
 
