@@ -14,5 +14,17 @@ def test_session_with_image_can_be_published(create_publish_then_view_session, t
 
     page = create_publish_then_view_session(prompt)
 
-    # TODO: verify image renders once image support is implemented
-    expect(page.locator("body")).to_be_visible()
+    # Find and expand the Read tool call that contains the image
+    read_tool_header = page.get_by_text("Read test_image.png")
+    expect(read_tool_header).to_be_visible()
+    read_tool_header.click()
+
+    # Verify the image is rendered in the expanded tool result
+    img_locator = page.locator("img[alt='Tool result image']")
+    expect(img_locator).to_be_visible()
+
+    # Verify the image src is a proper data URI
+    src = img_locator.get_attribute("src")
+    assert src is not None and src.startswith("data:image/"), (
+        f"Expected image src to be a data URI, got: {src[:100] if src else None}"
+    )
