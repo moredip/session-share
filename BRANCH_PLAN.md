@@ -215,34 +215,17 @@ export function ToolResultContent({ content }: ToolResultContentProps) {
 
 Replace `<CodeBlock>{toolCall.result}</CodeBlock>` with `<ToolResultContent content={toolCall.result!} />`.
 
-### Phase 7: Add Rendering Verification to E2E Test ✅
+### Phase 7: Add Rendering Verification to E2E Test
 
 Update the e2e test to verify the image is rendered:
 
 ```python
-def test_session_with_image_can_be_published(create_publish_then_view_session, tmp_path):
-    """Publish a session containing an image and verify the viewer loads it."""
-    fixtures = copy_fixtures_to_temp(tmp_path, "test_image.png")
-    image_path = fixtures["test_image.png"]
-
-    prompt = f"Describe this image briefly: {image_path}"
-
-    page = create_publish_then_view_session(prompt)
-
-    # Find and expand the Read tool call that contains the image
-    read_tool_header = page.get_by_text("Read test_image.png")
-    expect(read_tool_header).to_be_visible()
-    read_tool_header.click()
-
-    # Verify the image is rendered in the expanded tool result
-    img_locator = page.locator("img[alt='Tool result image']")
-    expect(img_locator).to_be_visible()
-
-    # Verify the image src is a proper data URI
-    src = img_locator.get_attribute("src")
-    assert src is not None and src.startswith("data:image/"), (
-        f"Expected image src to be a data URI, got: {src[:100] if src else None}"
-    )
+def test_session_with_image_renders_correctly(create_publish_then_view_session, tmp_path):
+    """Create, publish, and view a session containing an image."""
+    # ... existing setup ...
+    # Navigate to the published session
+    # Verify <img> tag appears with correct src attribute
+    expect(page.locator("img[alt='Tool result image']")).to_be_visible()
 ```
 
 ## File Summary

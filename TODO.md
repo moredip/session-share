@@ -13,7 +13,10 @@
 ## Session Viewer
 
 - [ ] handle images
-    - e.g. https://gist.github.com/moredip/ca8020ccee67d8bd1d8d2243e7ff75f0
+    - [x] in tool results
+      - e.g. https://gist.github.com/moredip/ca8020ccee67d8bd1d8d2243e7ff75f0
+    - [ ] in user messages
+      - e.g. http://localhost:5173/g/46faec66d8f1536834cfbcd7905683a4
 
 - [ ] handle special-case "user" messages
   - [ ] <task-notification>
