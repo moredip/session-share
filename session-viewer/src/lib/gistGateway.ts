@@ -25,6 +25,22 @@ const TextBlockSchema = z.object({
   text: z.string(),
 })
 
+const Base64SourceSchema = z.object({
+  type: z.literal('base64'),
+  media_type: z.string(),
+  data: z.string(),
+})
+
+const ImageBlockSchema = z.object({
+  type: z.literal('image'),
+  source: Base64SourceSchema,
+})
+
+const ToolResultContentItemSchema = z.discriminatedUnion('type', [
+  TextBlockSchema,
+  ImageBlockSchema,
+])
+
 const ToolUseBlockSchema = z.object({
   type: z.literal('tool_use'),
   id: z.string(),
@@ -40,7 +56,7 @@ const ThinkingBlockSchema = z.object({
 const ToolResultBlockSchema = z.object({
   type: z.literal('tool_result'),
   tool_use_id: z.string(),
-  content: z.union([z.string(), z.array(TextBlockSchema)]),
+  content: z.union([z.string(), z.array(ToolResultContentItemSchema)]),
 })
 
 const ReadToolInputSchema = z.object({
@@ -142,7 +158,7 @@ export interface TranscriptData {
 /** Extracted tool result for correlation */
 interface ExtractedToolResult {
   toolUseId: string
-  content: string
+  content: z.infer<typeof ToolResultContentItemSchema>[]
 }
 
 /** Extracted toolUseResult for correlation */
@@ -237,13 +253,15 @@ function parseUserStructuredEntry(parsed: unknown):
   )
 
   for (const block of toolResultBlocks) {
-    const resultContent =
+    // Normalize string content to TextBlock array for consistent domain representation
+    const content =
       typeof block.content === 'string'
-        ? block.content
-        : block.content.map((tb) => tb.text).join('\n')
+        ? [{ type: 'text' as const, text: block.content }]
+        : block.content
+
     toolResults.push({
       toolUseId: block.tool_use_id,
-      content: resultContent,
+      content,
     })
 
     // Extract toolUseResult if present (for Edit tools)

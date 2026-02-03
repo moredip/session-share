@@ -2,8 +2,8 @@ import { Tool } from '@geist-ui/icons'
 import type { ReadToolCall } from '../../../domain/transcriptEntry'
 import { extractFileName } from '../../../domain/transcriptEntry'
 import { ExpandableMessageCard } from '../ExpandableMessageCard'
-import { CodeBlock } from './CodeBlock'
 import { RawToolResult } from './RawToolResult'
+import { ToolResultContent } from './ToolResultContent'
 
 function formatReadToolHeader(toolCall: ReadToolCall): string {
   const fileName = extractFileName(toolCall.input.file_path)
@@ -44,7 +44,7 @@ export function ReadToolCallEntry({ toolCall, anchorId }: ReadToolCallEntryProps
       expandedContent={
         hasResult ? (
           <div>
-            <CodeBlock>{toolCall.result}</CodeBlock>
+            <ToolResultContent content={toolCall.result!} />
             <RawToolResult data={toolCall.rawToolUseResult} />
           </div>
         ) : undefined
