@@ -56,8 +56,13 @@ export function TranscriptViewer() {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-red-500">{error}</div>
+      <div className="flex items-center justify-center min-h-screen p-4">
+        <div className="text-red-500 max-w-2xl">
+          <p className="font-medium">Error loading transcript</p>
+          <pre className="text-sm mt-2 whitespace-pre-wrap break-words font-mono bg-red-50 p-3 rounded max-h-96 overflow-auto">
+            {error}
+          </pre>
+        </div>
       </div>
     )
   }
