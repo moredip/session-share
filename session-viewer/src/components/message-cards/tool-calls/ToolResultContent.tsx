@@ -19,7 +19,7 @@ export function ToolResultContent({ content }: ToolResultContentProps) {
               key={index}
               src={src}
               alt="Tool result image"
-              className="max-w-full rounded-lg border border-gray-200"
+              className="max-w-full border border-gray-200"
             />
           )
         }

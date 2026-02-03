@@ -77,7 +77,7 @@ Images appear inside `tool_result` content blocks when Claude reads an image fil
 
 ## Implementation Plan
 
-### Phase 1: Create Sample Session with Image (E2E Test)
+### Phase 1: Create Sample Session with Image (E2E Test) ✅
 
 Create an e2e test that runs a Claude session with an image and publishes it. This serves two purposes:
 1. Creates a real sample transcript containing an image block
@@ -85,43 +85,47 @@ Create an e2e test that runs a Claude session with an image and publishes it. Th
 
 **File:** `e2e-tests/test_image_rendering.py`
 
-```python
-def test_session_with_image_can_be_published(tmp_path):
-    """Create and publish a session containing an image."""
-    # Copy a small test image to tmp_path
-    # Run claude with: "What do you see in this image? [path]"
-    # Publish the session
-    # (No rendering verification yet - just confirms the session can be created)
-```
-
-The published gist from this test provides a real sample with image data that we can use for local development.
-
-### Phase 2: Add ImageBlock Domain Type
+### Phase 2: Add ImageBlock Domain Type ✅
 
 **File:** `session-viewer/src/domain/transcriptEntry.ts`
 
 ```typescript
-export interface ImageBlock {
-  type: 'image'
-  source: ImageSource
-}
-
-export type ImageSource = {
+export interface ImageSource {
   type: 'base64'
   media_type: string
   data: string
 }
 
-// ImageBlock appears inside ToolResultBlock.content
-export type ToolResultContentItem = string | ImageBlock
+export interface ImageBlock {
+  type: 'image'
+  source: ImageSource
+}
+
+// Content items inside tool_result blocks
+export type ToolResultContentItem = TextBlock | ImageBlock
+
+// ToolResultBlock.content is always normalized to an array
+export interface ToolResultBlock {
+  type: 'tool_result'
+  tool_use_id: string
+  content: ToolResultContentItem[]
+}
+
+// Tool calls store results as content item arrays
+export interface BaseToolCall {
+  id: string
+  name: string
+  result?: ToolResultContentItem[]
+  rawToolUseResult?: unknown
+}
 ```
 
-### Phase 3: Update Zod Schema for Parsing
+### Phase 3: Update Zod Schema for Parsing ✅
 
 **File:** `session-viewer/src/lib/gistGateway.ts`
 
 ```typescript
-const ImageSourceSchema = z.object({
+const Base64SourceSchema = z.object({
   type: z.literal('base64'),
   media_type: z.string(),
   data: z.string(),
@@ -129,98 +133,91 @@ const ImageSourceSchema = z.object({
 
 const ImageBlockSchema = z.object({
   type: z.literal('image'),
-  source: ImageSourceSchema,
+  source: Base64SourceSchema,
 })
 
-// tool_result content can contain images
-const ToolResultContentItemSchema = z.union([
-  z.string(),
+const ToolResultContentItemSchema = z.discriminatedUnion('type', [
+  TextBlockSchema,
   ImageBlockSchema,
 ])
 
-// Update ToolResultBlockSchema to parse content array with images
+// Zod schema accepts string | array (matching JSON), normalization happens in parsing
+const ToolResultBlockSchema = z.object({
+  type: z.literal('tool_result'),
+  tool_use_id: z.string(),
+  content: z.union([z.string(), z.array(ToolResultContentItemSchema)]),
+})
 ```
 
-### Phase 4: Extract Images from Tool Results
+### Phase 4: Normalize and Correlate Tool Results ✅
 
 **File:** `session-viewer/src/lib/gistGateway.ts`
 
-Images live inside `tool_result` content arrays. When parsing user entries, extract images from tool results:
+Tool result content is normalized from `string | array` to `ToolResultContentItem[]` during parsing, then correlated to tool calls:
 
 ```typescript
-// In parseUserStructuredEntry or similar:
-const images: ImageBlock[] = []
-for (const block of entryData.message.content) {
-  if (block.type === 'tool_result' && Array.isArray(block.content)) {
-    for (const item of block.content) {
-      if (typeof item === 'object' && item.type === 'image') {
-        images.push(item)
-      }
-    }
-  }
+for (const block of toolResultBlocks) {
+  // Normalize string content to TextBlock array for consistent domain representation
+  const content =
+    typeof block.content === 'string'
+      ? [{ type: 'text' as const, text: block.content }]
+      : block.content
+
+  toolResults.push({
+    toolUseId: block.tool_use_id,
+    content,
+  })
 }
+
+// Later, correlate to tool calls:
+toolCall.result = toolResult.content
 ```
 
-### Phase 5: Create Image Rendering Component
+### Phase 5: Create Tool Result Rendering Component ✅
 
-**File:** `session-viewer/src/components/message-cards/ImageBlock.tsx`
+**File:** `session-viewer/src/components/message-cards/tool-calls/ToolResultContent.tsx`
 
 ```typescript
-interface ImageBlockProps {
-  source: ImageSource
+interface ToolResultContentProps {
+  content: ToolResultContentItem[]
 }
 
-export function ImageBlockDisplay({ source }: ImageBlockProps) {
-  const src = source.type === 'base64'
-    ? `data:${source.media_type};base64,${source.data}`
-    : source.url
-
+export function ToolResultContent({ content }: ToolResultContentProps) {
   return (
-    <img
-      src={src}
-      alt="User-provided image"
-      className="max-w-full rounded-lg border border-gray-200"
-    />
+    <>
+      {content.map((item, index) => {
+        if (item.type === 'text') {
+          return <CodeBlock key={index}>{item.text}</CodeBlock>
+        }
+        if (item.type === 'image') {
+          const src = `data:${item.source.media_type};base64,${item.source.data}`
+          return (
+            <img
+              key={index}
+              src={src}
+              alt="Tool result image"
+              className="max-w-full rounded-lg border border-gray-200"
+            />
+          )
+        }
+        return null
+      })}
+    </>
   )
 }
 ```
 
-### Phase 6: Update UserMessage to Render Images
+### Phase 6: Update Tool Call Entries to Render Results ✅
 
-**File:** `session-viewer/src/components/message-cards/UserMessage.tsx`
+**Files:**
+- `session-viewer/src/components/message-cards/tool-calls/GenericToolCallEntry.tsx`
+- `session-viewer/src/components/message-cards/tool-calls/ReadToolCallEntry.tsx`
 
-```typescript
-interface UserMessageProps {
-  content: string
-  images?: ImageBlock[]
-  anchorId: string
-}
+Replace `<CodeBlock>{toolCall.result}</CodeBlock>` with `<ToolResultContent content={toolCall.result!} />`.
 
-export function UserMessage({ content, images, anchorId }: UserMessageProps) {
-  return (
-    <MessageCard anchorId={anchorId} label="user" align="right" variant="sky">
-      {images?.map((img, i) => (
-        <ImageBlockDisplay key={i} source={img.source} />
-      ))}
-      {content && (
-        <div className="prose prose-sm max-w-none">
-          <ReactMarkdown>{content}</ReactMarkdown>
-        </div>
-      )}
-    </MessageCard>
-  )
-}
-```
+### Phase 7: Add Rendering Verification to E2E Test
 
-### Phase 7: Update MessageThread to Pass Images
-
-**File:** `session-viewer/src/components/MessageThread.tsx`
-
-Pass `images` prop from `UserStructuredEntry` to `UserMessage`.
-
-### Phase 8: Add Rendering Verification to E2E Test
-
-Update the Phase 1 test to verify the image is rendered:
+Update the e2e test to verify the image is rendered:
 
 ```python
 def test_session_with_image_renders_correctly(create_publish_then_view_session, tmp_path):
@@ -228,25 +225,25 @@ def test_session_with_image_renders_correctly(create_publish_then_view_session, 
     # ... existing setup ...
     # Navigate to the published session
     # Verify <img> tag appears with correct src attribute
-    expect(page.locator("img[alt='User-provided image']")).to_be_visible()
+    expect(page.locator("img[alt='Tool result image']")).to_be_visible()
 ```
 
 ## File Summary
 
 | File | Change |
 |------|--------|
-| `e2e-tests/test_image_rendering.py` | New test file (creates sample session with image) |
+| `e2e-tests/test_image_rendering.py` | E2E test for sessions with images |
 | `e2e-tests/fixtures/test_image.png` | Small test image for e2e tests |
-| `domain/transcriptEntry.ts` | Add `ImageBlock`, `ImageSource` types; extend `UserStructuredEntry` |
-| `lib/gistGateway.ts` | Add Zod schemas; extract images in parser |
-| `components/message-cards/ImageBlock.tsx` | New component for rendering images |
-| `components/message-cards/UserMessage.tsx` | Accept and render images |
-| `components/MessageThread.tsx` | Pass images to UserMessage |
+| `domain/transcriptEntry.ts` | Add `ImageBlock`, `ImageSource`, `ToolResultContentItem` types |
+| `lib/gistGateway.ts` | Add Zod schemas; normalize content in parser |
+| `components/message-cards/tool-calls/ToolResultContent.tsx` | New component for rendering tool results |
+| `components/message-cards/tool-calls/GenericToolCallEntry.tsx` | Use ToolResultContent |
+| `components/message-cards/tool-calls/ReadToolCallEntry.tsx` | Use ToolResultContent |
 
 ## Testing Strategy
 
 1. **E2E test (Phase 1):** Creates a real session with an image, publishes it
-2. **E2E test (Phase 8):** Add rendering verification to the same test
+2. **E2E test (Phase 7):** Add rendering verification to the same test
 3. **Manual test:** View the published gist locally during development
 
 ## Risks & Considerations
