@@ -8,11 +8,11 @@ interface UserContentBlocksProps {
 
 export function UserContentBlocks({ content }: UserContentBlocksProps) {
   return (
-    <div className="space-y-2">
+    <div className="divide-y divide-gray-300 space-y-3">
       {content.map((block, index) => {
         if (block.type === 'text') {
           return (
-            <div key={index} className="prose prose-sm max-w-none">
+            <div key={index} className="prose prose-sm max-w-none pt-3 first:pt-0">
               <ReactMarkdown>{block.text}</ReactMarkdown>
             </div>
           )
