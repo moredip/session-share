@@ -3,6 +3,7 @@ import type { GenericToolCall } from '../../../domain/transcriptEntry'
 import { ExpandableMessageCard } from '../ExpandableMessageCard'
 import { CodeBlock } from './CodeBlock'
 import { RawToolResult } from './RawToolResult'
+import { ToolResultContent } from './ToolResultContent'
 
 interface GenericToolCallEntryProps {
   toolCall: GenericToolCall
@@ -29,7 +30,7 @@ export function GenericToolCallEntry({ toolCall, anchorId }: GenericToolCallEntr
           <div>
             <hr className="border-gray-200 my-2" />
             <div className="text-sm font-medium text-gray-600 mb-2">Result:</div>
-            <CodeBlock>{toolCall.result}</CodeBlock>
+            <ToolResultContent content={toolCall.result!} />
             <RawToolResult data={toolCall.rawToolUseResult} />
           </div>
         ) : undefined

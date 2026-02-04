@@ -7,13 +7,17 @@
 - [ ] add an arg to the slash command that lets the user specify private or public
   - [ ] if they don't specify, ask them
 - [ ] if we publish multiple times, update the existing gist
+- [ ] rework version checking so that it doesn't run as a separate script (do it as part of publishing the session, or as a hook perhaps)
 
 - [ ] make best-effort attempt to detect secrets (using https://pypi.org/project/detect-secrets/?)
 
 ## Session Viewer
 
 - [ ] handle images
-    - e.g. https://gist.github.com/moredip/ca8020ccee67d8bd1d8d2243e7ff75f0
+    - [x] in tool results
+      - e.g. https://gist.github.com/moredip/ca8020ccee67d8bd1d8d2243e7ff75f0
+    - [ ] in user messages
+      - e.g. http://localhost:5173/g/46faec66d8f1536834cfbcd7905683a4
 
 - [ ] handle special-case "user" messages
   - [ ] <task-notification>
@@ -30,7 +34,7 @@
     - local session /resume 88f04c6a-d128-40bf-96b3-6b2aa787f62c
   - [x] Read(XXX)
     - https://custardseed.com/g/e74f702fc43c0cef06b16cd3c5dacb60 shows different Read variants we want to support
-  - [ ] Edit(XXX)
+  - [x] Edit(XXX)
     - https://custardseed.com/g/8871fc0f6a113826235b2428fbb27709 shows different Edit variants
   - [ ] Fetch(url)
   - [ ] Web Search(query)

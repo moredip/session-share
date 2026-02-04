@@ -8,6 +8,7 @@ import type {
   ToolCall,
   AssistantStructuredEntry,
   UserStructuredEntry,
+  UserContentBlock,
 } from '../domain/transcriptEntry'
 
 interface GistFile {
@@ -25,6 +26,22 @@ const TextBlockSchema = z.object({
   text: z.string(),
 })
 
+const Base64SourceSchema = z.object({
+  type: z.literal('base64'),
+  media_type: z.string(),
+  data: z.string(),
+})
+
+const ImageBlockSchema = z.object({
+  type: z.literal('image'),
+  source: Base64SourceSchema,
+})
+
+const ToolResultContentItemSchema = z.discriminatedUnion('type', [
+  TextBlockSchema,
+  ImageBlockSchema,
+])
+
 const ToolUseBlockSchema = z.object({
   type: z.literal('tool_use'),
   id: z.string(),
@@ -40,7 +57,7 @@ const ThinkingBlockSchema = z.object({
 const ToolResultBlockSchema = z.object({
   type: z.literal('tool_result'),
   tool_use_id: z.string(),
-  content: z.union([z.string(), z.array(TextBlockSchema)]),
+  content: z.union([z.string(), z.array(ToolResultContentItemSchema)]),
 })
 
 const ReadToolInputSchema = z.object({
@@ -82,6 +99,7 @@ const AssistantContentBlockSchema = z.discriminatedUnion('type', [
 
 const UserContentBlockSchema = z.discriminatedUnion('type', [
   TextBlockSchema,
+  ImageBlockSchema, // Accept images in Zod parsing, filter out in domain layer
   ToolResultBlockSchema,
 ])
 
@@ -142,7 +160,7 @@ export interface TranscriptData {
 /** Extracted tool result for correlation */
 interface ExtractedToolResult {
   toolUseId: string
-  content: string
+  content: z.infer<typeof ToolResultContentItemSchema>[]
 }
 
 /** Extracted toolUseResult for correlation */
@@ -196,6 +214,40 @@ function parseToolCall(block: z.infer<typeof ToolUseBlockSchema>): ToolCall {
   }
 }
 
+function parseToolResultBlock(
+  block: z.infer<typeof ToolResultBlockSchema>,
+  rawParsed: unknown
+): {
+  contentBlock: UserContentBlock
+  toolResult: ExtractedToolResult
+  toolUseResult?: ExtractedToolUseResult
+} {
+  // Normalize string content to TextBlock array for consistent domain representation
+  const normalizedContent =
+    typeof block.content === 'string'
+      ? [{ type: 'text' as const, text: block.content }]
+      : block.content
+
+  const contentBlock: UserContentBlock = {
+    type: 'tool_result',
+    tool_use_id: block.tool_use_id,
+    content: normalizedContent,
+  }
+
+  const toolResult: ExtractedToolResult = {
+    toolUseId: block.tool_use_id,
+    content: normalizedContent,
+  }
+
+  // Extract toolUseResult if present (for Edit tools)
+  const raw = rawParsed as Record<string, unknown>
+  const toolUseResult = raw.toolUseResult
+    ? { toolUseId: block.tool_use_id, data: raw.toolUseResult }
+    : undefined
+
+  return { contentBlock, toolResult, toolUseResult }
+}
+
 /**
  * Parse a user message entry into a structured entry
  */
@@ -212,58 +264,41 @@ function parseUserStructuredEntry(parsed: unknown):
   const entryData = result.data
   const toolResults: ExtractedToolResult[] = []
   const toolUseResults: ExtractedToolUseResult[] = []
+  const contentBlocks: UserContentBlock[] = []
 
+  // Normalize raw string content to a single TextBlock
   if (typeof entryData.message.content === 'string') {
-    return {
-      entry: {
-        kind: 'user',
-        role: 'user',
-        content: entryData.message.content,
-      },
-      toolResults: [],
-      toolUseResults: [],
-    }
-  }
-
-  // Extract text content
-  const textBlocks = entryData.message.content.filter(
-    (block): block is TextBlock => block.type === 'text'
-  )
-  const content = textBlocks.map((block) => block.text).join('\n')
-
-  // Extract tool results
-  const toolResultBlocks = entryData.message.content.filter(
-    (block): block is z.infer<typeof ToolResultBlockSchema> => block.type === 'tool_result'
-  )
-
-  for (const block of toolResultBlocks) {
-    const resultContent =
-      typeof block.content === 'string'
-        ? block.content
-        : block.content.map((tb) => tb.text).join('\n')
-    toolResults.push({
-      toolUseId: block.tool_use_id,
-      content: resultContent,
-    })
-
-    // Extract toolUseResult if present (for Edit tools)
-    const rawParsed = parsed as Record<string, unknown>
-    if (rawParsed.toolUseResult) {
-      toolUseResults.push({
-        toolUseId: block.tool_use_id,
-        data: rawParsed.toolUseResult,
-      })
+    contentBlocks.push({ type: 'text', text: entryData.message.content })
+  } else {
+    for (const block of entryData.message.content) {
+      if (block.type === 'text') {
+        contentBlocks.push({ type: 'text', text: block.text })
+      } else if (block.type === 'image') {
+        contentBlocks.push({
+          type: 'image',
+          source: block.source,
+        })
+      } else if (block.type === 'tool_result') {
+        const { contentBlock, toolResult, toolUseResult } = parseToolResultBlock(block, parsed)
+        contentBlocks.push(contentBlock)
+        toolResults.push(toolResult)
+        if (toolUseResult) {
+          toolUseResults.push(toolUseResult)
+        }
+      }
+      // Other block types are ignored
     }
   }
 
   // Determine if this is a tool-result-only message (no text content)
-  const isToolResultOnly = textBlocks.length === 0 && toolResultBlocks.length > 0
+  const textBlocks = contentBlocks.filter((block): block is TextBlock => block.type === 'text')
+  const isToolResultOnly = textBlocks.length === 0 && toolResults.length > 0
 
   return {
     entry: {
       kind: 'user',
       role: 'user',
-      content,
+      content: contentBlocks,
       isToolResultOnly,
     },
     toolResults,

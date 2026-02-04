@@ -6,6 +6,17 @@ export interface TextBlock {
   text: string
 }
 
+export interface ImageSource {
+  type: 'base64'
+  media_type: string
+  data: string
+}
+
+export interface ImageBlock {
+  type: 'image'
+  source: ImageSource
+}
+
 export interface ToolUseBlock {
   type: 'tool_use'
   id: string
@@ -18,13 +29,15 @@ export interface ThinkingBlock {
   thinking: string
 }
 
+export type ToolResultContentItem = TextBlock | ImageBlock
+
 export interface ToolResultBlock {
   type: 'tool_result'
   tool_use_id: string
-  content: string | TextBlock[]
+  content: ToolResultContentItem[]
 }
 
-export type UserContentBlock = TextBlock | ToolResultBlock
+export type UserContentBlock = TextBlock | ImageBlock | ToolResultBlock
 export type AssistantContentBlock = TextBlock | ToolUseBlock | ThinkingBlock
 
 /**
@@ -34,7 +47,7 @@ export type AssistantContentBlock = TextBlock | ToolUseBlock | ThinkingBlock
 export interface BaseToolCall {
   id: string
   name: string
-  result?: string
+  result?: ToolResultContentItem[]
   rawToolUseResult?: unknown
 }
 
@@ -115,7 +128,7 @@ export type MessageStructuredEntry =
 export interface UserStructuredEntry {
   kind: 'user'
   role: 'user'
-  content: string
+  content: UserContentBlock[]
   isToolResultOnly?: boolean
 }
 
