@@ -392,7 +392,7 @@ function isMetaType(type: string): type is (typeof META_TYPES)[number] {
   return META_TYPES.includes(type as (typeof META_TYPES)[number])
 }
 
-function parseEntries(jsonlContent: string): TranscriptEntry[] {
+export function parseEntries(jsonlContent: string): TranscriptEntry[] {
   const lines = jsonlContent.trim().split('\n')
   const entries: TranscriptEntry[] = []
 
