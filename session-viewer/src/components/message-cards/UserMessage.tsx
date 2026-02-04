@@ -1,6 +1,6 @@
 import { MessageCard } from './MessageCard'
 import { UserContentBlocks } from './UserContentBlocks'
-import type { TextBlock, UserContentBlock } from '../../domain/transcriptEntry'
+import type { TextBlock, ImageBlock, UserContentBlock } from '../../domain/transcriptEntry'
 
 interface UserMessageProps {
   content: UserContentBlock[]
@@ -8,8 +8,11 @@ interface UserMessageProps {
 }
 
 export function UserMessage({ content, anchorId }: UserMessageProps) {
-  // Filter to only text blocks (tool results are rendered separately as tool call entries)
-  const visibleContent = content.filter((block): block is TextBlock => block.type === 'text')
+  // Filter out tool results (they're rendered separately as tool call entries)
+  // Keep text and images for display in the user message
+  const visibleContent = content.filter(
+    (block): block is TextBlock | ImageBlock => block.type === 'text' || block.type === 'image'
+  )
 
   if (visibleContent.length === 0) {
     return null

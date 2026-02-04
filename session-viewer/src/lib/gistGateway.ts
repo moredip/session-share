@@ -273,6 +273,11 @@ function parseUserStructuredEntry(parsed: unknown):
     for (const block of entryData.message.content) {
       if (block.type === 'text') {
         contentBlocks.push({ type: 'text', text: block.text })
+      } else if (block.type === 'image') {
+        contentBlocks.push({
+          type: 'image',
+          source: block.source,
+        })
       } else if (block.type === 'tool_result') {
         const { contentBlock, toolResult, toolUseResult } = parseToolResultBlock(block, parsed)
         contentBlocks.push(contentBlock)
@@ -281,7 +286,7 @@ function parseUserStructuredEntry(parsed: unknown):
           toolUseResults.push(toolUseResult)
         }
       }
-      // Skip other block types (like images) for now - will be added in Phase B
+      // Other block types are ignored
     }
   }
 

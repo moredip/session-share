@@ -37,7 +37,7 @@ export interface ToolResultBlock {
   content: ToolResultContentItem[]
 }
 
-export type UserContentBlock = TextBlock | ToolResultBlock
+export type UserContentBlock = TextBlock | ImageBlock | ToolResultBlock
 export type AssistantContentBlock = TextBlock | ToolUseBlock | ThinkingBlock
 
 /**

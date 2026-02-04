@@ -1,5 +1,6 @@
 import type { ToolResultContentItem } from '../../../domain/transcriptEntry'
 import { CodeBlock } from './CodeBlock'
+import { Base64Image } from '../Base64Image'
 
 interface ToolResultContentProps {
   content: ToolResultContentItem[]
@@ -13,15 +14,7 @@ export function ToolResultContent({ content }: ToolResultContentProps) {
           return <CodeBlock key={index}>{item.text}</CodeBlock>
         }
         if (item.type === 'image') {
-          const src = `data:${item.source.media_type};base64,${item.source.data}`
-          return (
-            <img
-              key={index}
-              src={src}
-              alt="Tool result image"
-              className="max-w-full border border-gray-200"
-            />
-          )
+          return <Base64Image key={index} source={item.source} alt="Tool result image" />
         }
         return null
       })}
