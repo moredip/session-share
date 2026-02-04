@@ -7,6 +7,7 @@
 - [ ] add an arg to the slash command that lets the user specify private or public
   - [ ] if they don't specify, ask them
 - [ ] if we publish multiple times, update the existing gist
+- [ ] rework version checking so that it doesn't run as a separate script (do it as part of publishing the session, or as a hook perhaps)
 
 - [ ] make best-effort attempt to detect secrets (using https://pypi.org/project/detect-secrets/?)
 
