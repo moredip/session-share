@@ -1,29 +1,5 @@
 import { describe, it, expect } from 'vitest'
 import { parseEntries } from '../../src/lib/gistGateway'
-import type {
-  TranscriptEntry,
-  MessageEntry,
-  UserStructuredEntry,
-  AssistantStructuredEntry,
-} from '../../src/domain/transcriptEntry'
-
-function assertIsMessageEntry(entry: TranscriptEntry): asserts entry is MessageEntry {
-  expect(entry).toHaveProperty('uuid')
-}
-
-function assertIsUserStructured(
-  entry: MessageEntry
-): asserts entry is MessageEntry & { structuredEntry: UserStructuredEntry } {
-  expect(entry.type).toBe('user')
-  expect(entry.structuredEntry.kind).toBe('user')
-}
-
-function assertIsAssistantStructured(
-  entry: MessageEntry
-): asserts entry is MessageEntry & { structuredEntry: AssistantStructuredEntry } {
-  expect(entry.type).toBe('assistant')
-  expect(entry.structuredEntry.kind).toBe('assistant')
-}
 
 describe('transcription parsing integration', () => {
   it('parses a complete conversation with user and assistant messages', () => {
@@ -32,7 +8,7 @@ describe('transcription parsing integration', () => {
       parentUuid: null,
       type: 'user',
       timestamp: '2026-02-04T10:00:00.000Z',
-      sessionId: 'session-abc',
+      sessionId: 'blah',
       message: {
         role: 'user',
         content: 'Hello, Claude!',
@@ -44,7 +20,7 @@ describe('transcription parsing integration', () => {
       parentUuid: 'user-123',
       type: 'assistant',
       timestamp: '2026-02-04T10:00:01.000Z',
-      sessionId: 'session-abc',
+      sessionId: 'blah',
       message: {
         role: 'assistant',
         content: [{ type: 'text', text: 'Hello! How can I help you today?' }],
@@ -57,37 +33,33 @@ describe('transcription parsing integration', () => {
 
     expect(entries).toHaveLength(2)
 
-    // --- First entry: User message ---
-    const userEntry = entries[0]
-    assertIsMessageEntry(userEntry)
-    assertIsUserStructured(userEntry)
-
-    expect(userEntry.uuid).toBe('user-123')
-    expect(userEntry.timestamp).toBe('2026-02-04T10:00:00.000Z')
-    expect(userEntry.raw).toEqual(userMessage)
-
-    expect(userEntry.structuredEntry.role).toBe('user')
-    expect(userEntry.structuredEntry.isToolResultOnly).toBe(false)
-    expect(userEntry.structuredEntry.content).toHaveLength(1)
-    expect(userEntry.structuredEntry.content[0]).toEqual({
-      type: 'text',
-      text: 'Hello, Claude!',
+    expect(entries[0]).toEqual({
+      uuid: 'user-123',
+      type: 'user',
+      timestamp: '2026-02-04T10:00:00.000Z',
+      raw: userMessage,
+      structuredEntry: {
+        kind: 'user',
+        role: 'user',
+        isToolResultOnly: false,
+        content: [{ type: 'text', text: 'Hello, Claude!' }],
+      },
     })
 
-    // --- Second entry: Assistant message ---
-    const assistantEntry = entries[1]
-    assertIsMessageEntry(assistantEntry)
-    assertIsAssistantStructured(assistantEntry)
-
-    expect(assistantEntry.uuid).toBe('assistant-456')
-    expect(assistantEntry.timestamp).toBe('2026-02-04T10:00:01.000Z')
-    expect(assistantEntry.raw).toEqual(assistantMessage)
-
-    expect(assistantEntry.structuredEntry.role).toBe('assistant')
-    expect(assistantEntry.structuredEntry.content).toBe('Hello! How can I help you today?')
-    expect(assistantEntry.structuredEntry.hasToolUse).toBe(false)
-    expect(assistantEntry.structuredEntry.hasThinking).toBe(false)
-    expect(assistantEntry.structuredEntry.thinkingContent).toBeUndefined()
-    expect(assistantEntry.structuredEntry.toolCalls).toBeUndefined()
+    expect(entries[1]).toEqual({
+      uuid: 'assistant-456',
+      type: 'assistant',
+      timestamp: '2026-02-04T10:00:01.000Z',
+      raw: assistantMessage,
+      structuredEntry: {
+        kind: 'assistant',
+        role: 'assistant',
+        content: 'Hello! How can I help you today?',
+        hasToolUse: false,
+        hasThinking: false,
+        thinkingContent: undefined,
+        toolCalls: undefined,
+      },
+    })
   })
 })
