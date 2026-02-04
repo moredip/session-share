@@ -7,7 +7,5 @@ interface Base64ImageProps {
 
 export function Base64Image({ source, alt }: Base64ImageProps) {
   const src = `data:${source.media_type};base64,${source.data}`
-  return (
-    <img src={src} alt={alt} className="max-w-full rounded-lg border border-gray-200 shadow-sm" />
-  )
+  return <img src={src} alt={alt} className="max-w-full border border-gray-200 shadow-sm" />
 }
