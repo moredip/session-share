@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig, Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
@@ -40,5 +41,8 @@ export default defineConfig({
         app: resolve(__dirname, 'app.html'),
       },
     },
+  },
+  test: {
+    include: ['test/**/*.test.ts'],
   },
 })

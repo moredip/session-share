@@ -13,7 +13,8 @@
       "Skill(orient)",
       "Skill(orient:*)",
       "Bash(gh issue view:*)",
-      "Bash(uv run pytest:*)"
+      "Bash(uv run pytest:*)",
+      "Bash(npx @fission-ai/openspec:*)"
     ]
   },
   "enabledPlugins": {

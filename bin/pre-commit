@@ -1,5 +1,9 @@
 #!/bin/bash
 set -e
 
-cd "$(dirname "$0")/../session-viewer"
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+
+cd "$REPO_ROOT/session-viewer"
 npm run check
+
+"$REPO_ROOT/bin/test"
