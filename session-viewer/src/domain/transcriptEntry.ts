@@ -46,13 +46,13 @@ export type AssistantContentBlock = TextBlock | ToolUseBlock | ThinkingBlock
 
 export interface BaseToolCall {
   id: string
-  name: string
   result?: ToolResultContentItem[]
   rawToolUseResult?: unknown
 }
 
 export interface GenericToolCall extends BaseToolCall {
   kind: 'generic'
+  name: string
   input: Record<string, unknown>
 }
 
@@ -64,7 +64,6 @@ export interface ReadToolInput {
 
 export interface ReadToolCall extends BaseToolCall {
   kind: 'read'
-  name: 'Read'
   input: ReadToolInput
 }
 
@@ -95,7 +94,6 @@ export interface EditToolResult {
 
 export interface EditToolCall extends BaseToolCall {
   kind: 'edit'
-  name: 'Edit'
   input: EditToolInput
   toolUseResult?: EditToolResult
 }

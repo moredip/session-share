@@ -176,7 +176,6 @@ function parseToolCall(block: z.infer<typeof ToolUseBlockSchema>): ToolCall {
       return {
         kind: 'read',
         id: block.id,
-        name: 'Read',
         input: result.data,
       }
     }
@@ -194,7 +193,6 @@ function parseToolCall(block: z.infer<typeof ToolUseBlockSchema>): ToolCall {
       return {
         kind: 'edit',
         id: block.id,
-        name: 'Edit',
         input: result.data,
       }
     }
