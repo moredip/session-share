@@ -1,12 +1,12 @@
 ## 1. Setup
 
-- [ ] 1.1 Create fixtures directory at `session-viewer/test/INTEGRATION/fixtures/`
-- [ ] 1.2 Review existing test pattern in `transcription-parsing.test.ts`
+- [x] 1.1 Create fixtures directory at `session-viewer/test/INTEGRATION/fixtures/`
+- [x] 1.2 Review existing test pattern in `transcription-parsing.test.ts`
 
 ## 2. Tool Rendering Pattern Tests
 
-- [ ] 2.1 Extract Read tool variants fixture from gist e74f702fc43c0cef06b16cd3c5dacb60
-- [ ] 2.2 Create `read-tool-variants.test.ts` with explicit assertions for Read tool parsing
+- [x] 2.1 Extract Read tool variants fixture from gist e74f702fc43c0cef06b16cd3c5dacb60
+- [x] 2.2 Create `read-tool-variants.test.ts` with explicit assertions for Read tool parsing
 - [ ] 2.3 Extract Edit tool variants fixture from gist 8871fc0f6a113826235b2428fbb27709
 - [ ] 2.4 Create `edit-tool-variants.test.ts` with explicit assertions for Edit tool parsing
 - [ ] 2.5 Extract general tool calls fixture from gist 95599dbc3a863bd0febe19c323b8c24f

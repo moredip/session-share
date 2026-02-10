@@ -103,14 +103,6 @@ export interface EditToolCall extends BaseToolCall {
 // Discriminated union (extensible for future tools)
 export type ToolCall = GenericToolCall | ReadToolCall | EditToolCall
 
-export function isReadToolCall(toolCall: ToolCall): toolCall is ReadToolCall {
-  return toolCall.kind === 'read'
-}
-
-export function isEditToolCall(toolCall: ToolCall): toolCall is EditToolCall {
-  return toolCall.kind === 'edit'
-}
-
 export function extractFileName(filePath: string): string {
   return filePath.split('/').pop() ?? filePath
 }
@@ -181,13 +173,28 @@ export interface MetaEntry {
  */
 export type TranscriptEntry = MessageEntry | MetaEntry
 
+/**
+ * Type guards
+ */
+
+export function isReadToolCall(toolCall: ToolCall): toolCall is ReadToolCall {
+  return toolCall.kind === 'read'
+}
+
+export function isEditToolCall(toolCall: ToolCall): toolCall is EditToolCall {
+  return toolCall.kind === 'edit'
+}
+
 export function isMessageEntry(entry: TranscriptEntry): entry is MessageEntry {
   return 'uuid' in entry
 }
 
-/**
- * Type guard for displayable entries (user/assistant messages)
- */
+export function isAssistantEntry(
+  entry: TranscriptEntry
+): entry is MessageEntry & { structuredEntry: AssistantStructuredEntry } {
+  return isMessageEntry(entry) && entry.structuredEntry.kind === 'assistant'
+}
+
 export function isDisplayableEntry(entry: TranscriptEntry): entry is MessageEntry & {
   structuredEntry: UserStructuredEntry | AssistantStructuredEntry
 } {

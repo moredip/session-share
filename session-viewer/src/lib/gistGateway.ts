@@ -401,6 +401,7 @@ export function parseEntries(jsonlContent: string): TranscriptEntry[] {
 
   for (const line of lines) {
     if (!line.trim()) continue
+    if (line.trim().startsWith('//')) continue
 
     const parsed = JSON.parse(line)
     const type = parsed.type ?? 'unknown'

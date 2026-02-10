@@ -15,7 +15,7 @@ The existing test pattern (in `test/INTEGRATION/transcription-parsing.test.ts`) 
 **Non-Goals:**
 - Snapshot testing (explicitly rejected by user preference)
 - Testing every possible transcript variation (focus on representative examples)
-- Modifying the parser behavior itself (tests only, no parser changes)
+- Modifying the parser's transcript handling logic (minor fixture-support additions are ok)
 - Automated fixture extraction from gists (manual extraction preferred for clarity)
 
 ## Decisions
@@ -30,6 +30,14 @@ The existing test pattern (in `test/INTEGRATION/transcription-parsing.test.ts`) 
 - Matches the user's plan document which explicitly calls for `.jsonl` fixture files
 
 **Alternative considered**: Inline construction (like the existing test) - rejected because real-world tool calls and image data are too verbose.
+
+### Decision: Fixture source attribution
+**Chosen**: Each `.jsonl` fixture file begins with `//` comment lines identifying the source gist and what the fixture demonstrates.
+
+**Rationale**:
+- Makes it easy to trace a fixture back to its origin
+- Documents intent without requiring a separate README
+- The parser skips `//` comment lines (added support for this pattern)
 
 ### Decision: Fixture size and editing
 **Chosen**: Start with minimal extracted examples; expand only if needed
