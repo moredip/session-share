@@ -1,3 +1,3 @@
 @AGENTS.md
 
-when invoking `openspec`, use `npx @@fission-ai/openspec`
+when invoking `openspec`, use `npx @fission-ai/openspec`
