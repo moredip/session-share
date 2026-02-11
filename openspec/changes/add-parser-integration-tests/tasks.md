@@ -14,10 +14,10 @@
 
 ## 3. Content Variety Tests
 
-- [ ] 3.1 Extract images in tool results fixture from gist ca8020ccee67d8bd1d8d2243e7ff75f0
-- [ ] 3.2 Create `images-in-tool-results.test.ts` with explicit assertions for image element validation
-- [ ] 3.3 Extract images in user messages fixture from local gist 46faec66d8f1536834cfbcd7905683a4
-- [ ] 3.4 Create `images-in-user-messages.test.ts` with explicit assertions for user message images
+- [x] 3.1 Extract images in tool results fixture from gist ca8020ccee67d8bd1d8d2243e7ff75f0
+- [x] 3.2 Create `images-in-tool-results.test.ts` with explicit assertions for image element validation
+- [x] 3.3 Extract images in user messages fixture from local gist 46faec66d8f1536834cfbcd7905683a4
+- [x] 3.4 Create `images-in-user-messages.test.ts` with explicit assertions for user message images
 
 ## 4. Special Message Type Tests
 
