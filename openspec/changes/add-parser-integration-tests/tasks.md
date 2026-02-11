@@ -9,8 +9,8 @@
 - [x] 2.2 Create `read-tool-variants.test.ts` with explicit assertions for Read tool parsing
 - [x] 2.3 Extract Edit tool variants fixture from gist 8871fc0f6a113826235b2428fbb27709
 - [x] 2.4 Create `edit-tool-variants.test.ts` with explicit assertions for Edit tool parsing
-- [ ] 2.5 Extract general tool calls fixture from gist 95599dbc3a863bd0febe19c323b8c24f
-- [ ] 2.6 Create `general-tool-calls.test.ts` with explicit assertions for complex tool patterns
+- [x] 2.5 Extract general tool calls fixture from gist 95599dbc3a863bd0febe19c323b8c24f
+- [x] 2.6 Create `general-tool-calls.test.ts` with explicit assertions for complex tool patterns
 
 ## 3. Content Variety Tests
 

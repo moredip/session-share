@@ -183,6 +183,10 @@ export function isEditToolCall(toolCall: ToolCall): toolCall is EditToolCall {
   return toolCall.kind === 'edit'
 }
 
+export function isGenericToolCall(toolCall: ToolCall): toolCall is GenericToolCall {
+  return toolCall.kind === 'generic'
+}
+
 export function isMessageEntry(entry: TranscriptEntry): entry is MessageEntry {
   return 'uuid' in entry
 }
