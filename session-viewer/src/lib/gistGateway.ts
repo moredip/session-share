@@ -490,7 +490,8 @@ export async function fetchGistTranscriptFull(gistId: string): Promise<Transcrip
 
   const gist: GistResponse = await metaResponse.json()
 
-  const jsonlFile = Object.values(gist.files).find((f) => f.filename.endsWith('.jsonl'))
+  const allJsonlFiles = Object.values(gist.files).filter((f) => f.filename.endsWith('.jsonl'))
+  const jsonlFile = allJsonlFiles.find((f) => !f.filename.startsWith('agent-')) ?? allJsonlFiles[0]
 
   if (!jsonlFile) {
     throw new Error('No .jsonl file found in gist')
