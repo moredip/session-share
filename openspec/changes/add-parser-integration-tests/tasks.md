@@ -7,8 +7,8 @@
 
 - [x] 2.1 Extract Read tool variants fixture from gist e74f702fc43c0cef06b16cd3c5dacb60
 - [x] 2.2 Create `read-tool-variants.test.ts` with explicit assertions for Read tool parsing
-- [ ] 2.3 Extract Edit tool variants fixture from gist 8871fc0f6a113826235b2428fbb27709
-- [ ] 2.4 Create `edit-tool-variants.test.ts` with explicit assertions for Edit tool parsing
+- [x] 2.3 Extract Edit tool variants fixture from gist 8871fc0f6a113826235b2428fbb27709
+- [x] 2.4 Create `edit-tool-variants.test.ts` with explicit assertions for Edit tool parsing
 - [ ] 2.5 Extract general tool calls fixture from gist 95599dbc3a863bd0febe19c323b8c24f
 - [ ] 2.6 Create `general-tool-calls.test.ts` with explicit assertions for complex tool patterns
 
