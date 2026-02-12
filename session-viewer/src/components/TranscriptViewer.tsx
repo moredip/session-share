@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
+import { extractSessionMetadata } from '../domain/transcriptEntry'
 import { fetchGistTranscriptFull, type TranscriptData } from '../lib/gistGateway'
 import { MessageThread } from './MessageThread'
 import { RawTranscriptView } from './RawTranscriptView'
+import { SessionMetadataHeader } from './SessionMetadataHeader'
 import { ViewToggle, type ViewMode } from './ViewToggle'
 
 export function TranscriptViewer() {
@@ -46,6 +48,8 @@ export function TranscriptViewer() {
     }
   }, [data, location.hash])
 
+  const metadata = useMemo(() => (data ? extractSessionMetadata(data.entries) : null), [data])
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -77,6 +81,7 @@ export function TranscriptViewer() {
         <h1 className="text-xl font-semibold text-gray-700">Session Transcript</h1>
         <ViewToggle currentView={viewMode} onViewChange={setViewMode} />
       </div>
+      {metadata && <SessionMetadataHeader metadata={metadata} />}
       {viewMode === 'conversation' ? (
         <MessageThread entries={data.entries} />
       ) : (

@@ -207,3 +207,43 @@ export function isDisplayableEntry(entry: TranscriptEntry): entry is MessageEntr
   }
   return entry.structuredEntry.kind === 'assistant'
 }
+
+export interface SessionMetadata {
+  sessionId: string
+  gitBranch: string | null
+  startTime: string
+  endTime: string
+  userMessageCount: number
+}
+
+export function extractSessionMetadata(entries: TranscriptEntry[]): SessionMetadata | null {
+  let sessionId: string | null = null
+  let gitBranch: string | null = null
+  let startTime: string | null = null
+  let endTime: string | null = null
+  let userMessageCount = 0
+
+  for (const entry of entries) {
+    if (entry.timestamp) {
+      if (!startTime || entry.timestamp < startTime) startTime = entry.timestamp
+      if (!endTime || entry.timestamp > endTime) endTime = entry.timestamp
+    }
+
+    if (isMessageEntry(entry)) {
+      if (!sessionId) {
+        const raw = entry.raw as Record<string, unknown>
+        if (typeof raw.sessionId === 'string') {
+          sessionId = raw.sessionId
+          gitBranch = typeof raw.gitBranch === 'string' ? raw.gitBranch : null
+        }
+      }
+      if (entry.structuredEntry.kind === 'user' && !entry.structuredEntry.isToolResultOnly) {
+        userMessageCount++
+      }
+    }
+  }
+
+  if (!sessionId || !startTime || !endTime) return null
+
+  return { sessionId, gitBranch, startTime, endTime, userMessageCount }
+}
