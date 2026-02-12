@@ -13,12 +13,6 @@
 
 ## Session Viewer
 
-- [ ] handle images
-    - [x] in tool results
-      - e.g. https://gist.github.com/moredip/ca8020ccee67d8bd1d8d2243e7ff75f0
-    - [ ] in user messages
-      - e.g. http://localhost:5173/g/46faec66d8f1536834cfbcd7905683a4
-
 - [ ] handle special-case "user" messages
   - [ ] <task-notification>
   - [ ] <ide-file-open>
@@ -39,6 +33,7 @@
   - [ ] Fetch(url)
   - [ ] Web Search(query)
   - [ ] Bash(command)
+  - [ ] AskUserQuestion
 
 - [x] anchors, links between messages
 
@@ -51,7 +46,11 @@
   - [ ] time the session started
   - [ ] what else can we extract?
 
-- [ ] support subagent transcripts
+- [ ] display sub-agent transcripts too
+  - perhaps as hyperlinks to a separate page
+  - or nested within the same page
+
+- perhaps some sort of mouse-over behavior where you can sneak-peek preview what's in a specific block
 
 
 ## BUGS
