@@ -466,7 +466,7 @@ export function parseEntries(jsonlContent: string): TranscriptEntry[] {
     }
 
     if (!structuredEntry) {
-      throw new Error(`Failed to parse message entry of type "${type}": ${JSON.stringify(parsed)}`)
+      structuredEntry = { kind: 'unsupported', originalType: type }
     }
 
     const messageEntry: MessageEntry = {

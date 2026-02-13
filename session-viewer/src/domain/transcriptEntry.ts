@@ -114,6 +114,12 @@ export type MessageStructuredEntry =
   | AssistantStructuredEntry
   | ProgressStructuredEntry
   | SystemStructuredEntry
+  | UnsupportedStructuredEntry
+
+export interface UnsupportedStructuredEntry {
+  kind: 'unsupported'
+  originalType: string
+}
 
 export interface UserStructuredEntry {
   kind: 'user'
@@ -155,7 +161,7 @@ export type MetaType = 'file-history-snapshot' | 'queue-operation' | 'summary'
 export interface MessageEntry {
   uuid: string
   timestamp: string
-  type: MessageType
+  type: string
   raw: unknown
   structuredEntry: MessageStructuredEntry
 }
@@ -198,14 +204,14 @@ export function isAssistantEntry(
 }
 
 export function isDisplayableEntry(entry: TranscriptEntry): entry is MessageEntry & {
-  structuredEntry: UserStructuredEntry | AssistantStructuredEntry
+  structuredEntry: UserStructuredEntry | AssistantStructuredEntry | UnsupportedStructuredEntry
 } {
   if (!isMessageEntry(entry)) return false
   if (entry.structuredEntry.kind === 'user') {
     // Skip user messages that only contain tool results
     return !entry.structuredEntry.isToolResultOnly
   }
-  return entry.structuredEntry.kind === 'assistant'
+  return entry.structuredEntry.kind === 'assistant' || entry.structuredEntry.kind === 'unsupported'
 }
 
 export interface SessionMetadata {
