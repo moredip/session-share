@@ -21,6 +21,7 @@ GitHub handles storage and access control. The viewer is a static site that fetc
 | [session-viewer](session-viewer/) | React app that renders transcripts |
 | [infra](infra/) | Terraform IaC for GCP hosting |
 | [docs](docs/) | Architecture and roadmap |
+| [samples](samples/) | Sample transcripts and tooling |
 
 ## Development
 
@@ -29,6 +30,21 @@ After cloning, set up git hooks:
 ```bash
 uvx pre-commit install
 ```
+
+## Sample transcripts
+
+`samples/gist-samples/` is a place to keep a personal corpus of your own published transcripts for use as local test data. It is not pre-populated — each developer builds their own by running:
+
+```bash
+python3 samples/scripts/fetch_gist_samples.py
+```
+
+This discovers all your CustardSeed gists (via `gh api`), downloads the JSONL files locally, and generates:
+
+- `index.md` — human-readable table (entry counts, tools used, subagents, images, thinking)
+- `index.json` — machine-readable metadata for each gist
+
+Raw JSONL files are gitignored; only the index files are committed. Requires `gh auth login`.
 
 ## Current status
 

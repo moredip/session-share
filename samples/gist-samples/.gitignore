@@ -1,0 +1,4 @@
+# Ignore raw transcript files and per-gist directories.
+# Only index.json and index.md are committed.
+*/
+*.jsonl

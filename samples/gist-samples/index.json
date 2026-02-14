@@ -1,0 +1,3057 @@
+[
+  {
+    "gist_id": "4f715591ca9137bf5842a5dee418848c",
+    "viewer_url": "https://custardseed.com/g/4f715591ca9137bf5842a5dee418848c",
+    "fetched_at": "2026-02-14T01:54:15.090944+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 7,
+        "assistant": 11
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 5,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 20,
+      "filename": "b39f65ec-1199-43ba-8189-ca283783520e.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "a775143f0069d9c0371ea37f8087c7ec",
+    "viewer_url": "https://custardseed.com/g/a775143f0069d9c0371ea37f8087c7ec",
+    "fetched_at": "2026-02-14T01:54:16.640741+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 5
+      },
+      "content_block_counts": {
+        "tool_use": 3,
+        "tool_result": 1,
+        "text": 3
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 11,
+      "filename": "ca9e6dd3-8049-4f54-9bf5-ca5c2aaa6306.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-a47dc27.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "fc18a51b64d3ade0e2d8480a2b68e57d",
+    "viewer_url": "https://custardseed.com/g/fc18a51b64d3ade0e2d8480a2b68e57d",
+    "fetched_at": "2026-02-14T01:54:18.280182+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 5
+      },
+      "content_block_counts": {
+        "tool_use": 3,
+        "tool_result": 1,
+        "text": 3
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": true,
+      "total_entries": 11,
+      "filename": "12df74e2-c1d6-4490-a99e-ca68a821cdf4.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "d0d430bacd4e4f3a2a2e4fe9c96b283e",
+    "viewer_url": "https://custardseed.com/g/d0d430bacd4e4f3a2a2e4fe9c96b283e",
+    "fetched_at": "2026-02-14T01:54:19.922104+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 9,
+      "filename": "d788986b-b9e8-4e37-a58e-01a6db791051.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "e69460ca3df4ebe9c7be5ea7be238ff8",
+    "viewer_url": "https://custardseed.com/g/e69460ca3df4ebe9c7be5ea7be238ff8",
+    "fetched_at": "2026-02-14T01:54:22.956583+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 10,
+        "assistant": 16
+      },
+      "content_block_counts": {
+        "text": 8,
+        "tool_use": 9,
+        "tool_result": 7
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 28,
+      "filename": "a181906e-ab83-4374-a3c2-5707efe9a5eb.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "1ac2c00f1c6f2e5deba2a69e1d5c2051",
+    "viewer_url": "https://custardseed.com/g/1ac2c00f1c6f2e5deba2a69e1d5c2051",
+    "fetched_at": "2026-02-14T01:54:25.323198+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "file-history-snapshot": 3,
+        "user": 12,
+        "assistant": 16,
+        "progress": 2
+      },
+      "content_block_counts": {
+        "thinking": 6,
+        "tool_use": 8,
+        "tool_result": 7,
+        "text": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Grep",
+        "LSP"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 33,
+      "filename": "41c287f8-3b37-4d40-a473-c7c84a8aa15e.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "51641326b1c1e24dbf9c1271896224e7",
+    "viewer_url": "https://custardseed.com/g/51641326b1c1e24dbf9c1271896224e7",
+    "fetched_at": "2026-02-14T01:54:27.112377+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "file-history-snapshot": 8,
+        "user": 16,
+        "assistant": 16,
+        "progress": 2
+      },
+      "content_block_counts": {
+        "thinking": 6,
+        "tool_use": 5,
+        "tool_result": 4,
+        "text": 6
+      },
+      "tools_used": [
+        "Bash",
+        "Grep"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 42,
+      "filename": "05356966-7ee9-4855-a3ee-f199a196f89a.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "8aeb0cfdcb52330fa073e0d7aab0d872",
+    "viewer_url": "https://custardseed.com/g/8aeb0cfdcb52330fa073e0d7aab0d872",
+    "fetched_at": "2026-02-14T01:54:29.150817+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "file-history-snapshot": 9,
+        "user": 20,
+        "assistant": 19,
+        "progress": 1
+      },
+      "content_block_counts": {
+        "text": 10,
+        "thinking": 5,
+        "tool_use": 6,
+        "tool_result": 5
+      },
+      "tools_used": [
+        "Bash",
+        "Grep"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 49,
+      "filename": "d2a3fb4f-293f-4324-b9b9-46b034824d29.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "556a5f876b54aae6765922acf44b4acc",
+    "viewer_url": "https://custardseed.com/g/556a5f876b54aae6765922acf44b4acc",
+    "fetched_at": "2026-02-14T01:54:31.492187+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 7,
+        "assistant": 11
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 5,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 20,
+      "filename": "4c658cf7-b2ec-41cb-94f4-31603d83970a.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "1cca95366ed4e0509feeb6edb0a26ab5",
+    "viewer_url": "https://custardseed.com/g/1cca95366ed4e0509feeb6edb0a26ab5",
+    "fetched_at": "2026-02-14T01:54:33.126699+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 12,
+      "filename": "23b48965-da92-49ef-9893-f44d8f586d7c.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-ae1adf3.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "efcbfe46ecba63faa04a684449ea26c5",
+    "viewer_url": "https://custardseed.com/g/efcbfe46ecba63faa04a684449ea26c5",
+    "fetched_at": "2026-02-14T01:54:34.869230+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": true,
+      "total_entries": 12,
+      "filename": "514a6606-0cf8-4f2f-8811-0f237fcfa119.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "0db535550bb09cc2bfb4fd6e0386c208",
+    "viewer_url": "https://custardseed.com/g/0db535550bb09cc2bfb4fd6e0386c208",
+    "fetched_at": "2026-02-14T01:54:36.446060+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 9,
+      "filename": "6f75606c-24bb-4c55-a7f2-713558d6c792.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "bceb7ed5f212c68b0af84091bc86e5de",
+    "viewer_url": "https://custardseed.com/g/bceb7ed5f212c68b0af84091bc86e5de",
+    "fetched_at": "2026-02-14T01:54:39.602194+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 10,
+        "assistant": 16
+      },
+      "content_block_counts": {
+        "text": 8,
+        "tool_use": 9,
+        "tool_result": 7
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 28,
+      "filename": "58782386-b60a-423e-9476-252aece10210.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "009f49b43866ac246733254806516cd1",
+    "viewer_url": "https://custardseed.com/g/009f49b43866ac246733254806516cd1",
+    "fetched_at": "2026-02-14T01:54:41.182813+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 7,
+        "assistant": 11
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 5,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 20,
+      "filename": "e8513cdf-dd2c-4a86-bb53-aac09a07357c.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "977c28b8c9fc9e12c23d5b5a870f5aa9",
+    "viewer_url": "https://custardseed.com/g/977c28b8c9fc9e12c23d5b5a870f5aa9",
+    "fetched_at": "2026-02-14T01:54:42.738469+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 5
+      },
+      "content_block_counts": {
+        "tool_use": 3,
+        "tool_result": 1,
+        "text": 3
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 11,
+      "filename": "d690dcf7-dd90-48f8-b798-efd454d5b6a2.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 4,
+          "assistant": 6,
+          "progress": 2
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 3,
+          "tool_result": 3
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 12,
+        "filename": "agent-a9988d3.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "1de3428aad0c8acb975dc6685de8fafd",
+    "viewer_url": "https://custardseed.com/g/1de3428aad0c8acb975dc6685de8fafd",
+    "fetched_at": "2026-02-14T01:54:44.409280+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 5
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 2,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": true,
+      "total_entries": 11,
+      "filename": "9023eae0-f2e2-4d84-8d70-2b892f248179.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "7da2f0073e7a8e7461d7b9a2dc5391df",
+    "viewer_url": "https://custardseed.com/g/7da2f0073e7a8e7461d7b9a2dc5391df",
+    "fetched_at": "2026-02-14T01:54:45.946082+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 9,
+      "filename": "2b695ce1-82c6-4d57-b3e1-474cd3461c30.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "7e47f12a903f256d3ed084ba43f78495",
+    "viewer_url": "https://custardseed.com/g/7e47f12a903f256d3ed084ba43f78495",
+    "fetched_at": "2026-02-14T01:54:50.257039+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 10,
+        "assistant": 16
+      },
+      "content_block_counts": {
+        "text": 8,
+        "tool_use": 9,
+        "tool_result": 7
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 28,
+      "filename": "2e08478d-8b3a-491e-aaa5-111e454727dc.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "8ca211a2da3fb840e95ff6657951d7ce",
+    "viewer_url": "https://custardseed.com/g/8ca211a2da3fb840e95ff6657951d7ce",
+    "fetched_at": "2026-02-14T01:54:52.613227+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "file-history-snapshot": 7,
+        "user": 17,
+        "assistant": 23,
+        "progress": 67,
+        "system": 3
+      },
+      "content_block_counts": {
+        "thinking": 9,
+        "text": 8,
+        "tool_use": 8,
+        "tool_result": 6
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 117,
+      "filename": "4e9577e6-d1ba-40d1-a37c-3d4b655f8bad.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "42eabd83e5e9c8b1bf877ad44a56139d",
+    "viewer_url": "https://custardseed.com/g/42eabd83e5e9c8b1bf877ad44a56139d",
+    "fetched_at": "2026-02-14T01:54:54.340681+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "file-history-snapshot": 21,
+        "user": 56,
+        "assistant": 94,
+        "progress": 93,
+        "system": 5
+      },
+      "content_block_counts": {
+        "thinking": 37,
+        "text": 31,
+        "tool_use": 32,
+        "tool_result": 29
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "EnterPlanMode",
+        "ExitPlanMode",
+        "Read",
+        "Task",
+        "WebSearch",
+        "Write"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 269,
+      "filename": "ee22fe52-4929-4501-8c46-a47b237633b1.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 8,
+          "assistant": 11,
+          "progress": 6
+        },
+        "content_block_counts": {
+          "text": 4,
+          "tool_use": 7,
+          "tool_result": 7
+        },
+        "tools_used": [
+          "Bash",
+          "Read"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 25,
+        "filename": "agent-a7526ef.jsonl"
+      },
+      {
+        "entry_type_counts": {
+          "user": 24,
+          "assistant": 34,
+          "progress": 25
+        },
+        "content_block_counts": {
+          "text": 11,
+          "tool_use": 23,
+          "tool_result": 23
+        },
+        "tools_used": [
+          "Bash",
+          "Glob",
+          "Read",
+          "WebFetch",
+          "WebSearch"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 83,
+        "filename": "agent-ae97e0e.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "52936940c23031179b357cf0ab179809",
+    "viewer_url": "https://custardseed.com/g/52936940c23031179b357cf0ab179809",
+    "fetched_at": "2026-02-14T01:54:56.110843+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 1,
+        "assistant": 2
+      },
+      "content_block_counts": {
+        "text": 3,
+        "thinking": 1
+      },
+      "tools_used": [],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 7,
+      "filename": "fe05fd38-edcf-4ef0-812b-93c789925700.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "d31998b9f6d6f5af966e6981d3b6b676",
+    "viewer_url": "https://custardseed.com/g/d31998b9f6d6f5af966e6981d3b6b676",
+    "fetched_at": "2026-02-14T01:54:57.837736+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 7,
+        "assistant": 12
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 6,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 21,
+      "filename": "e5e104ac-92a7-4f43-9f52-aefb8e665900.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "958ecf12f421f01766cd1627a7239e26",
+    "viewer_url": "https://custardseed.com/g/958ecf12f421f01766cd1627a7239e26",
+    "fetched_at": "2026-02-14T01:54:59.580397+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 12,
+      "filename": "6d30b6dc-d07f-43b2-bd62-f01f831d3c24.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-a1d490f.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "c2d5f8b8238a39a00e5846b3a284a33d",
+    "viewer_url": "https://custardseed.com/g/c2d5f8b8238a39a00e5846b3a284a33d",
+    "fetched_at": "2026-02-14T01:55:01.253933+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": true,
+      "total_entries": 12,
+      "filename": "0bc725b4-cb24-4680-bef5-4d8bb0b9e459.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "204ef944ecdea496bcfaa0a0f7c431e7",
+    "viewer_url": "https://custardseed.com/g/204ef944ecdea496bcfaa0a0f7c431e7",
+    "fetched_at": "2026-02-14T01:55:02.995474+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 9,
+      "filename": "a82627cb-765c-409e-94cf-887524d5373b.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "5654dbee7225b1024f6790941277d49e",
+    "viewer_url": "https://custardseed.com/g/5654dbee7225b1024f6790941277d49e",
+    "fetched_at": "2026-02-14T01:55:04.494533+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 10,
+        "assistant": 16
+      },
+      "content_block_counts": {
+        "text": 8,
+        "tool_use": 9,
+        "tool_result": 7
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 28,
+      "filename": "0067ceb1-9aac-46d4-925a-c9fa71803cc6.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "46faec66d8f1536834cfbcd7905683a4",
+    "viewer_url": "https://custardseed.com/g/46faec66d8f1536834cfbcd7905683a4",
+    "fetched_at": "2026-02-14T01:55:06.104240+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 3,
+        "user": 9,
+        "assistant": 11,
+        "summary": 1
+      },
+      "content_block_counts": {
+        "text": 14,
+        "image": 2,
+        "thinking": 4,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": true,
+      "has_images": true,
+      "total_entries": 26,
+      "filename": "47bf5f5c-9e11-4f51-8a29-7ad38ecdf17c.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "75e63aa9731756eeb1c04c3180b4e305",
+    "viewer_url": "https://custardseed.com/g/75e63aa9731756eeb1c04c3180b4e305",
+    "fetched_at": "2026-02-14T01:55:08.000916+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": true,
+      "total_entries": 12,
+      "filename": "061d26f3-ba56-45d4-9730-71a22efea077.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "2537b22ee02fc327c9df043e8233884a",
+    "viewer_url": "https://custardseed.com/g/2537b22ee02fc327c9df043e8233884a",
+    "fetched_at": "2026-02-14T01:55:09.580197+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": true,
+      "total_entries": 12,
+      "filename": "aad3365d-6ab1-4f83-a90c-dce97e05a269.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "f38f8199cf9677508d6dd62cf8c21d53",
+    "viewer_url": "https://custardseed.com/g/f38f8199cf9677508d6dd62cf8c21d53",
+    "fetched_at": "2026-02-14T01:55:11.070392+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 7,
+        "assistant": 12
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 6,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 21,
+      "filename": "f6b2a8a6-f614-4118-91bb-6e333dcfba43.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "c5e16c4a3b48fa54ff3d17fd9bc1951c",
+    "viewer_url": "https://custardseed.com/g/c5e16c4a3b48fa54ff3d17fd9bc1951c",
+    "fetched_at": "2026-02-14T01:55:12.623674+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 12,
+      "filename": "40448d41-5af3-467a-89f7-201dcc47d487.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-a0a93ae.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "f55c988fac7c21d39356223809282892",
+    "viewer_url": "https://custardseed.com/g/f55c988fac7c21d39356223809282892",
+    "fetched_at": "2026-02-14T01:55:14.273651+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 5
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 2,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": true,
+      "total_entries": 11,
+      "filename": "5d569d6b-14a1-46e1-8a22-b385d1326838.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "ed94a40f6a5d8f5411787f49f8310be5",
+    "viewer_url": "https://custardseed.com/g/ed94a40f6a5d8f5411787f49f8310be5",
+    "fetched_at": "2026-02-14T01:55:15.801597+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 3,
+        "assistant": 3
+      },
+      "content_block_counts": {
+        "text": 2,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 8,
+      "filename": "82a3e5e6-efc2-4b87-b9b3-ee42a92d56b3.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "b9edb58b275097d13024129e1b4d5a0f",
+    "viewer_url": "https://custardseed.com/g/b9edb58b275097d13024129e1b4d5a0f",
+    "fetched_at": "2026-02-14T01:55:17.341406+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 10,
+        "assistant": 16
+      },
+      "content_block_counts": {
+        "text": 8,
+        "tool_use": 9,
+        "tool_result": 7
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 28,
+      "filename": "99ecccf1-dda6-4a5f-a8b7-35ce4dea6c37.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "4c3c4e7a3b24cae4636e253147d1a707",
+    "viewer_url": "https://custardseed.com/g/4c3c4e7a3b24cae4636e253147d1a707",
+    "fetched_at": "2026-02-14T01:55:18.932780+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": true,
+      "total_entries": 12,
+      "filename": "95d1db93-a26d-4aa5-8725-cdcb0cb355e2.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "08fab1ce0966bd32a2b3ec7a02287119",
+    "viewer_url": "https://custardseed.com/g/08fab1ce0966bd32a2b3ec7a02287119",
+    "fetched_at": "2026-02-14T01:55:21.020017+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": true,
+      "total_entries": 12,
+      "filename": "ed30bbe5-9b2b-44e7-9afd-3261eff47960.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "f7ff4d0444f1f7759a30dfb4040b6512",
+    "viewer_url": "https://custardseed.com/g/f7ff4d0444f1f7759a30dfb4040b6512",
+    "fetched_at": "2026-02-14T01:55:22.584352+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": true,
+      "total_entries": 12,
+      "filename": "fce8e062-cec9-4949-b981-e4ef402bc2d9.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "fbf51f4753bb550309178614d708f91e",
+    "viewer_url": "https://custardseed.com/g/fbf51f4753bb550309178614d708f91e",
+    "fetched_at": "2026-02-14T01:55:24.269532+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "file-history-snapshot": 8,
+        "user": 59,
+        "assistant": 72,
+        "progress": 116,
+        "system": 2,
+        "summary": 2
+      },
+      "content_block_counts": {
+        "text": 19,
+        "thinking": 9,
+        "tool_use": 48,
+        "tool_result": 46
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Read",
+        "Skill",
+        "Task",
+        "WebFetch",
+        "WebSearch",
+        "Write"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 259,
+      "filename": "683973ec-447e-4dd6-8aa8-21ada8a7c688.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 36,
+          "assistant": 49,
+          "progress": 27
+        },
+        "content_block_counts": {
+          "text": 14,
+          "tool_use": 35,
+          "tool_result": 35
+        },
+        "tools_used": [
+          "Bash",
+          "Glob",
+          "Grep",
+          "Read"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 112,
+        "filename": "agent-afd2518.jsonl"
+      },
+      {
+        "entry_type_counts": {},
+        "content_block_counts": {},
+        "tools_used": [],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 0,
+        "filename": "agent-aprompt_suggestion-6b2014.jsonl"
+      },
+      {
+        "entry_type_counts": {},
+        "content_block_counts": {},
+        "tools_used": [],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 0,
+        "filename": "agent-aprompt_suggestion-d7a125.jsonl"
+      },
+      {
+        "entry_type_counts": {},
+        "content_block_counts": {},
+        "tools_used": [],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 0,
+        "filename": "agent-aprompt_suggestion-d832b0.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "a199e124a65ba5570c6a93255ed30542",
+    "viewer_url": "https://custardseed.com/g/a199e124a65ba5570c6a93255ed30542",
+    "fetched_at": "2026-02-14T01:55:26.299110+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "file-history-snapshot": 6,
+        "user": 42,
+        "assistant": 47,
+        "progress": 92,
+        "system": 1,
+        "summary": 1
+      },
+      "content_block_counts": {
+        "text": 15,
+        "thinking": 1,
+        "tool_use": 34,
+        "tool_result": 32
+      },
+      "tools_used": [
+        "Bash",
+        "Glob",
+        "Grep",
+        "Read",
+        "Skill",
+        "Task",
+        "WebFetch",
+        "WebSearch",
+        "Write"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 189,
+      "filename": "683973ec-447e-4dd6-8aa8-21ada8a7c688.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 36,
+          "assistant": 50,
+          "progress": 27
+        },
+        "content_block_counts": {
+          "text": 15,
+          "tool_use": 35,
+          "tool_result": 35
+        },
+        "tools_used": [
+          "Bash",
+          "Glob",
+          "Grep",
+          "Read"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 113,
+        "filename": "agent-afd2518.jsonl"
+      },
+      {
+        "entry_type_counts": {
+          "user": 1,
+          "assistant": 1
+        },
+        "content_block_counts": {
+          "text": 1
+        },
+        "tools_used": [],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 2,
+        "filename": "agent-aprompt_suggestion-d832b0.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "f68839e0c43666dbd9a3632aba26d96d",
+    "viewer_url": "https://custardseed.com/g/f68839e0c43666dbd9a3632aba26d96d",
+    "fetched_at": "2026-02-14T01:55:31.287445+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 7,
+        "assistant": 12
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 6,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 21,
+      "filename": "39b10cfc-4af4-4bbb-b2f5-01fe42e9b332.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "7edd9005b30984e2c80bc976ebfd1fb2",
+    "viewer_url": "https://custardseed.com/g/7edd9005b30984e2c80bc976ebfd1fb2",
+    "fetched_at": "2026-02-14T01:55:32.835956+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 12,
+      "filename": "2fc29b34-aaea-4618-84c1-609f86fab5f3.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-a2e0b81.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "5e1f860494610146f4fc63cc044c9d8d",
+    "viewer_url": "https://custardseed.com/g/5e1f860494610146f4fc63cc044c9d8d",
+    "fetched_at": "2026-02-14T01:55:34.396699+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 9,
+      "filename": "b1e9ecaf-81bb-48cc-9449-869d1dcaefef.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "057c0f8e905e869ca856a0d6e01c6e04",
+    "viewer_url": "https://custardseed.com/g/057c0f8e905e869ca856a0d6e01c6e04",
+    "fetched_at": "2026-02-14T01:55:35.960277+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 10,
+        "assistant": 16
+      },
+      "content_block_counts": {
+        "text": 8,
+        "tool_use": 9,
+        "tool_result": 7
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 28,
+      "filename": "fe3b624c-e217-4c88-af84-11cbc904aa04.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "940dae83be38fe95bdc5131f35498e1c",
+    "viewer_url": "https://custardseed.com/g/940dae83be38fe95bdc5131f35498e1c",
+    "fetched_at": "2026-02-14T01:55:37.808010+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 7,
+        "assistant": 12
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 6,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 21,
+      "filename": "b4e71b13-d152-4b59-90e8-66bc45d263e8.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "7c789f7a5023dca05647434c7451d2ef",
+    "viewer_url": "https://custardseed.com/g/7c789f7a5023dca05647434c7451d2ef",
+    "fetched_at": "2026-02-14T01:55:39.755119+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 12,
+      "filename": "6a54ad32-675a-46df-8c0b-10ba7e9292d7.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-aa4e6d2.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "6e73cbe2cd15d09be9085e15f9be09e6",
+    "viewer_url": "https://custardseed.com/g/6e73cbe2cd15d09be9085e15f9be09e6",
+    "fetched_at": "2026-02-14T01:55:42.018835+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 9,
+      "filename": "e367d4a5-9456-4f6b-be84-606ebe717041.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "c752aa4bd780fdc9c8f993cfac08cd65",
+    "viewer_url": "https://custardseed.com/g/c752aa4bd780fdc9c8f993cfac08cd65",
+    "fetched_at": "2026-02-14T01:55:45.725516+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 10,
+        "assistant": 16
+      },
+      "content_block_counts": {
+        "text": 8,
+        "tool_use": 9,
+        "tool_result": 7
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 28,
+      "filename": "8c96996c-f2ab-4cec-812d-2eae1dde7be6.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "429aaa26b9ae6ecf0b1b0f5ca950df45",
+    "viewer_url": "https://custardseed.com/g/429aaa26b9ae6ecf0b1b0f5ca950df45",
+    "fetched_at": "2026-02-14T01:55:49.154586+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 6,
+        "file-history-snapshot": 13,
+        "user": 96,
+        "assistant": 153,
+        "progress": 216,
+        "summary": 1
+      },
+      "content_block_counts": {
+        "text": 39,
+        "thinking": 46,
+        "tool_use": 84,
+        "tool_result": 84
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Read",
+        "Task",
+        "TodoWrite",
+        "WebFetch",
+        "Write"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 485,
+      "filename": "db4adacf-0457-4f61-b27e-3db0d6127364.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 5,
+          "assistant": 8,
+          "progress": 2
+        },
+        "content_block_counts": {
+          "text": 4,
+          "tool_use": 4,
+          "tool_result": 4
+        },
+        "tools_used": [
+          "Read",
+          "WebFetch"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 15,
+        "filename": "agent-ad6bc32.jsonl"
+      },
+      {
+        "entry_type_counts": {
+          "assistant": 2,
+          "user": 1
+        },
+        "content_block_counts": {
+          "text": 2
+        },
+        "tools_used": [],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 3,
+        "filename": "agent-aprompt_suggestion-618d61.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "ece9ef18ecc44f8ac0293ce98a276804",
+    "viewer_url": "https://custardseed.com/g/ece9ef18ecc44f8ac0293ce98a276804",
+    "fetched_at": "2026-02-14T01:55:51.281458+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 6,
+        "file-history-snapshot": 13,
+        "user": 96,
+        "assistant": 155,
+        "progress": 216,
+        "summary": 1
+      },
+      "content_block_counts": {
+        "text": 39,
+        "thinking": 47,
+        "tool_use": 85,
+        "tool_result": 84
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Read",
+        "Task",
+        "TodoWrite",
+        "WebFetch",
+        "Write"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 487,
+      "filename": "db4adacf-0457-4f61-b27e-3db0d6127364.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 5,
+          "assistant": 8,
+          "progress": 2
+        },
+        "content_block_counts": {
+          "text": 4,
+          "tool_use": 4,
+          "tool_result": 4
+        },
+        "tools_used": [
+          "Read",
+          "WebFetch"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 15,
+        "filename": "agent-ad6bc32.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "8871fc0f6a113826235b2428fbb27709",
+    "viewer_url": "https://custardseed.com/g/8871fc0f6a113826235b2428fbb27709",
+    "fetched_at": "2026-02-14T01:55:53.006106+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 5,
+        "user": 10,
+        "assistant": 16
+      },
+      "content_block_counts": {
+        "text": 8,
+        "tool_use": 9,
+        "tool_result": 7
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 33,
+      "filename": "1656b075-7af5-4b06-a123-1330c620f60c.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "09e6ca85d4f0188c8b560e7b9ce63485",
+    "viewer_url": "https://custardseed.com/g/09e6ca85d4f0188c8b560e7b9ce63485",
+    "fetched_at": "2026-02-14T01:55:54.882557+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 5,
+        "user": 10,
+        "assistant": 16
+      },
+      "content_block_counts": {
+        "text": 8,
+        "tool_use": 9,
+        "tool_result": 7
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 33,
+      "filename": "44ca3285-2603-4ef3-9164-bc0867a59313.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "eee129b02b2691c5c4a6b91022a21b15",
+    "viewer_url": "https://custardseed.com/g/eee129b02b2691c5c4a6b91022a21b15",
+    "fetched_at": "2026-02-14T01:55:56.466487+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 5,
+        "user": 11,
+        "assistant": 18
+      },
+      "content_block_counts": {
+        "text": 9,
+        "tool_use": 10,
+        "tool_result": 8
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 36,
+      "filename": "8e45bafd-65ce-4651-8f15-b11413f6213f.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "ab67e6217346458cf4fda21da91d73b0",
+    "viewer_url": "https://custardseed.com/g/ab67e6217346458cf4fda21da91d73b0",
+    "fetched_at": "2026-02-14T01:55:57.991203+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 5,
+        "user": 11,
+        "assistant": 18
+      },
+      "content_block_counts": {
+        "text": 9,
+        "tool_use": 10,
+        "tool_result": 8
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 36,
+      "filename": "2971e6f4-1247-4551-8a93-614928891d82.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "a7a8e15645c80fb9ecaf81ec1b184cb5",
+    "viewer_url": "https://custardseed.com/g/a7a8e15645c80fb9ecaf81ec1b184cb5",
+    "fetched_at": "2026-02-14T01:55:59.614101+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 11,
+        "assistant": 18
+      },
+      "content_block_counts": {
+        "text": 9,
+        "tool_use": 10,
+        "tool_result": 8
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 33,
+      "filename": "a5f4fe9b-1446-4b97-b6cb-34cd327e56c5.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "b1623c901357ca9356fcc8b76bbd4f21",
+    "viewer_url": "https://custardseed.com/g/b1623c901357ca9356fcc8b76bbd4f21",
+    "fetched_at": "2026-02-14T01:56:01.220308+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 8,
+        "assistant": 11
+      },
+      "content_block_counts": {
+        "text": 6,
+        "tool_use": 6,
+        "tool_result": 5
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 23,
+      "filename": "d6585cb0-9029-4389-bedf-69844ca5073b.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "a0bb6bc125ab60deb5c32abca5968b61",
+    "viewer_url": "https://custardseed.com/g/a0bb6bc125ab60deb5c32abca5968b61",
+    "fetched_at": "2026-02-14T01:56:02.955089+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 7,
+        "assistant": 11
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 5,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 20,
+      "filename": "f2f031a5-eba5-4cde-88ec-97d70be739af.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "236aa50166d07081ac4344ded96eec08",
+    "viewer_url": "https://custardseed.com/g/236aa50166d07081ac4344ded96eec08",
+    "fetched_at": "2026-02-14T01:56:04.530838+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 12,
+      "filename": "672b7667-1d9c-4c6f-89ad-277d3ced4bce.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-a2bce00.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "807f4afdc150eefb877b1e8f770bbdd0",
+    "viewer_url": "https://custardseed.com/g/807f4afdc150eefb877b1e8f770bbdd0",
+    "fetched_at": "2026-02-14T01:56:06.300655+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 9,
+      "filename": "d4e485e7-52cf-4dfd-aa94-e483e8aa06d1.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "0680435ce1ed7ff6ca2eea01ba477056",
+    "viewer_url": "https://custardseed.com/g/0680435ce1ed7ff6ca2eea01ba477056",
+    "fetched_at": "2026-02-14T01:56:07.978116+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 7,
+        "assistant": 12
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 6,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 23,
+      "filename": "a9e47bb9-0d44-45f1-829d-2c97ee93c795.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "1ff467a551f436d657bb2dc695571b7e",
+    "viewer_url": "https://custardseed.com/g/1ff467a551f436d657bb2dc695571b7e",
+    "fetched_at": "2026-02-14T01:56:09.621487+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 14,
+      "filename": "63f092e4-5da6-4978-91ab-3e3878a4bf49.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-a4239f3.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "6640359bf8245efd451d3552e9ca9bec",
+    "viewer_url": "https://custardseed.com/g/6640359bf8245efd451d3552e9ca9bec",
+    "fetched_at": "2026-02-14T01:56:11.944212+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 11,
+      "filename": "f77a2430-fe7f-46f8-8b12-03ff287acbef.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "05efdc85753e042319f8c466eff9c49b",
+    "viewer_url": "https://custardseed.com/g/05efdc85753e042319f8c466eff9c49b",
+    "fetched_at": "2026-02-14T01:56:13.536163+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 7,
+        "assistant": 12
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 6,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 23,
+      "filename": "2b3d6d8e-2feb-4ccd-937e-411dd7a22695.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "e13177cc3961d955b34c7c836f69e20c",
+    "viewer_url": "https://custardseed.com/g/e13177cc3961d955b34c7c836f69e20c",
+    "fetched_at": "2026-02-14T01:56:15.123649+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 14,
+      "filename": "b3a83af6-82f4-44c4-9339-2932d930da4e.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-afef1d7.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "496982251f47654be2cb5eb3f03f3ddc",
+    "viewer_url": "https://custardseed.com/g/496982251f47654be2cb5eb3f03f3ddc",
+    "fetched_at": "2026-02-14T01:56:16.694378+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 11,
+      "filename": "929b7069-07f9-449b-bd82-3d1decc862dd.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "6af475fa4da16b7d6cf2d6b923f5c3c1",
+    "viewer_url": "https://custardseed.com/g/6af475fa4da16b7d6cf2d6b923f5c3c1",
+    "fetched_at": "2026-02-14T01:56:18.232092+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 7,
+        "assistant": 11
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 5,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 22,
+      "filename": "8b72baa4-9c6b-40e8-a4e1-4e710f823505.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "8206e421be4f76a577c893cb95165a83",
+    "viewer_url": "https://custardseed.com/g/8206e421be4f76a577c893cb95165a83",
+    "fetched_at": "2026-02-14T01:56:19.916236+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 4,
+        "assistant": 6
+      },
+      "content_block_counts": {
+        "text": 4,
+        "tool_use": 3,
+        "tool_result": 1
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 14,
+      "filename": "3c07e789-6fe5-445f-8386-bac308e7c811.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-a8fd5bf.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "794c6870ebcf7a0aca9cc2d19734ff2b",
+    "viewer_url": "https://custardseed.com/g/794c6870ebcf7a0aca9cc2d19734ff2b",
+    "fetched_at": "2026-02-14T01:56:21.667029+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 11,
+      "filename": "1cb651a4-13d2-4f17-b6e1-8e4d5e49943c.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "6a971bafe760497b164ae96658e23558",
+    "viewer_url": "https://custardseed.com/g/6a971bafe760497b164ae96658e23558",
+    "fetched_at": "2026-02-14T01:56:23.471561+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 7,
+        "assistant": 12
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 6,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 23,
+      "filename": "8480753b-d4cb-4108-a217-794327455e0c.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "10057768d89fd05343f6b6e77a1c0f08",
+    "viewer_url": "https://custardseed.com/g/10057768d89fd05343f6b6e77a1c0f08",
+    "fetched_at": "2026-02-14T01:56:25.016318+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 7,
+        "assistant": 12
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 6,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 23,
+      "filename": "b8f6ca84-d8ae-468c-aa3f-ea7495373ac7.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "98a634cbf1d58f57bc148c9146ce1b09",
+    "viewer_url": "https://custardseed.com/g/98a634cbf1d58f57bc148c9146ce1b09",
+    "fetched_at": "2026-02-14T01:56:26.556328+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 7,
+        "assistant": 12
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 6,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 23,
+      "filename": "533a01e2-5613-4e95-b3bd-0eaffddf4abb.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "fab752159c58ba0041bcbbdc500006d9",
+    "viewer_url": "https://custardseed.com/g/fab752159c58ba0041bcbbdc500006d9",
+    "fetched_at": "2026-02-14T01:56:28.166653+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 18,
+        "file-history-snapshot": 35,
+        "user": 112,
+        "assistant": 204,
+        "progress": 163
+      },
+      "content_block_counts": {
+        "text": 57,
+        "thinking": 85,
+        "tool_use": 93,
+        "tool_result": 92
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "ExitPlanMode",
+        "Glob",
+        "Read",
+        "Skill",
+        "Task",
+        "TodoWrite",
+        "Write"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 532,
+      "filename": "39a1ac1b-6ea1-44ee-a878-066157907aab.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {},
+        "content_block_counts": {},
+        "tools_used": [],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 0,
+        "filename": "agent-aac6046.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "e74f702fc43c0cef06b16cd3c5dacb60",
+    "viewer_url": "https://custardseed.com/g/e74f702fc43c0cef06b16cd3c5dacb60",
+    "fetched_at": "2026-02-14T01:56:29.704200+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 7,
+        "assistant": 12
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 6,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 21,
+      "filename": "334e78d3-6677-4e38-94a5-e20d32a63a3a.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "96cbd6dd275f6dfaf5c850325d8bcd57",
+    "viewer_url": "https://custardseed.com/g/96cbd6dd275f6dfaf5c850325d8bcd57",
+    "fetched_at": "2026-02-14T01:56:31.285775+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 7,
+        "assistant": 11
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 5,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 20,
+      "filename": "c55f39c6-90e4-4c5c-8ec1-09d4f612f081.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "f218665f6bb5d5fcd5ae272fa89c2e3b",
+    "viewer_url": "https://custardseed.com/g/f218665f6bb5d5fcd5ae272fa89c2e3b",
+    "fetched_at": "2026-02-14T01:56:32.846398+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 7,
+        "assistant": 12
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 6,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 21,
+      "filename": "a44e6f62-353e-46c5-845e-fa55f76f3bd6.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "01ca0390f14305bd7dc2e20f533c6095",
+    "viewer_url": "https://custardseed.com/g/01ca0390f14305bd7dc2e20f533c6095",
+    "fetched_at": "2026-02-14T01:56:34.439768+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 7,
+        "assistant": 11
+      },
+      "content_block_counts": {
+        "text": 7,
+        "tool_use": 5,
+        "tool_result": 4
+      },
+      "tools_used": [
+        "Bash",
+        "Read"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 20,
+      "filename": "edb5c9fd-df9e-4c3d-bb27-72f3ea902c4e.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "f062e1703f524ea7771814891665e9cc",
+    "viewer_url": "https://custardseed.com/g/f062e1703f524ea7771814891665e9cc",
+    "fetched_at": "2026-02-14T01:56:36.104291+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 4,
+        "assistant": 5
+      },
+      "content_block_counts": {
+        "tool_use": 3,
+        "tool_result": 1,
+        "text": 3
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 11,
+      "filename": "ad1430c2-4607-4dc7-b9f9-b2054135c4a0.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-a29568f.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "e7b107edc612cb06db78c36cdddbe81c",
+    "viewer_url": "https://custardseed.com/g/e7b107edc612cb06db78c36cdddbe81c",
+    "fetched_at": "2026-02-14T01:56:39.660591+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 9,
+      "filename": "1181b1c4-a378-46a1-8eb7-2511e3c9c4ef.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "cc0fb9ce22facd24f64773efab90e215",
+    "viewer_url": "https://custardseed.com/g/cc0fb9ce22facd24f64773efab90e215",
+    "fetched_at": "2026-02-14T01:56:41.228292+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 4,
+        "assistant": 5
+      },
+      "content_block_counts": {
+        "tool_use": 3,
+        "tool_result": 1,
+        "text": 3
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 13,
+      "filename": "54982ed9-7c83-416d-aae8-52d33d8dbe7d.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-adf8c26.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "2d37d77e98dff9e7c73da6fc78eac9ac",
+    "viewer_url": "https://custardseed.com/g/2d37d77e98dff9e7c73da6fc78eac9ac",
+    "fetched_at": "2026-02-14T01:56:42.809777+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 4,
+        "assistant": 5
+      },
+      "content_block_counts": {
+        "tool_use": 3,
+        "tool_result": 1,
+        "text": 3
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 13,
+      "filename": "8e5216c1-859a-455d-8867-908c8d70a56b.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-a3038a7.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "d4f8f150172cb1c304f02b64212efec1",
+    "viewer_url": "https://custardseed.com/g/d4f8f150172cb1c304f02b64212efec1",
+    "fetched_at": "2026-02-14T01:56:44.458495+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "file-history-snapshot": 2,
+        "user": 4,
+        "assistant": 5
+      },
+      "content_block_counts": {
+        "tool_use": 3,
+        "tool_result": 1,
+        "text": 3
+      },
+      "tools_used": [
+        "Bash",
+        "Task"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 13,
+      "filename": "bdb3e7b8-3849-43f8-9023-785d9f373523.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 3,
+          "assistant": 5,
+          "progress": 1
+        },
+        "content_block_counts": {
+          "text": 3,
+          "tool_use": 2,
+          "tool_result": 2
+        },
+        "tools_used": [
+          "Bash",
+          "Glob"
+        ],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 9,
+        "filename": "agent-abe388f.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "e1e22d2596cd4e0516dff89cc4cf6ec6",
+    "viewer_url": "https://custardseed.com/g/e1e22d2596cd4e0516dff89cc4cf6ec6",
+    "fetched_at": "2026-02-14T01:56:46.039341+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 9,
+      "filename": "b1eb2c0c-4258-4209-9030-5ca8e0b5ead6.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "bdf81bf102ad46ee75741e875fe7623e",
+    "viewer_url": "https://custardseed.com/g/bdf81bf102ad46ee75741e875fe7623e",
+    "fetched_at": "2026-02-14T01:56:47.526932+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 9,
+      "filename": "54f3b24a-c2ac-4069-b994-520d515964d2.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "aa8606b5cd88fa18321b1cd80627f864",
+    "viewer_url": "https://custardseed.com/g/aa8606b5cd88fa18321b1cd80627f864",
+    "fetched_at": "2026-02-14T01:56:49.094318+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 2,
+        "user": 3,
+        "assistant": 4
+      },
+      "content_block_counts": {
+        "text": 3,
+        "tool_use": 2
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 9,
+      "filename": "b1886f7d-055d-48e6-835b-fa5572648204.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "9ef3330cb3bf1538056598492940e9f3",
+    "viewer_url": "https://custardseed.com/g/9ef3330cb3bf1538056598492940e9f3",
+    "fetched_at": "2026-02-14T01:56:50.692593+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 1,
+        "user": 1,
+        "assistant": 1
+      },
+      "content_block_counts": {
+        "text": 1
+      },
+      "tools_used": [],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 3,
+      "filename": "4b3ad8a6-a752-4bcd-b49e-c23314b6a7fc.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "6ed0c46ad80af8f3209e3118acc5040f",
+    "viewer_url": "https://custardseed.com/g/6ed0c46ad80af8f3209e3118acc5040f",
+    "fetched_at": "2026-02-14T01:56:52.395479+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 1,
+        "user": 1,
+        "assistant": 1
+      },
+      "content_block_counts": {
+        "text": 1
+      },
+      "tools_used": [],
+      "has_thinking": false,
+      "has_images": false,
+      "total_entries": 3,
+      "filename": "106a06b3-f0a4-46b7-9bbd-250d45278c1c.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "511f537a3c0f6be9567445081f055bfd",
+    "viewer_url": "https://custardseed.com/g/511f537a3c0f6be9567445081f055bfd",
+    "fetched_at": "2026-02-14T01:56:53.986850+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "file-history-snapshot": 6,
+        "user": 28,
+        "assistant": 38,
+        "progress": 39,
+        "queue-operation": 2,
+        "system": 1,
+        "summary": 1
+      },
+      "content_block_counts": {
+        "thinking": 1,
+        "tool_use": 26,
+        "tool_result": 24,
+        "text": 13
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "Glob",
+        "Read",
+        "Skill",
+        "Write"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 115,
+      "filename": "2f892a8c-5823-4f77-ae67-40622616b944.jsonl"
+    },
+    "subagent_transcripts": [
+      {
+        "entry_type_counts": {
+          "user": 1,
+          "assistant": 1
+        },
+        "content_block_counts": {
+          "text": 1
+        },
+        "tools_used": [],
+        "has_thinking": false,
+        "has_images": false,
+        "total_entries": 2,
+        "filename": "agent-aprompt_suggestion-0284c8.jsonl"
+      }
+    ],
+    "has_subagents": true
+  },
+  {
+    "gist_id": "1673f114381d3835cf6403bdc6a7d85a",
+    "viewer_url": "https://custardseed.com/g/1673f114381d3835cf6403bdc6a7d85a",
+    "fetched_at": "2026-02-14T01:56:55.653318+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 5,
+        "file-history-snapshot": 9,
+        "user": 48,
+        "assistant": 89,
+        "progress": 23
+      },
+      "content_block_counts": {
+        "text": 15,
+        "thinking": 31,
+        "tool_use": 46,
+        "tool_result": 46
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "ExitPlanMode",
+        "Glob",
+        "KillShell",
+        "Read",
+        "Skill",
+        "Task",
+        "TodoWrite",
+        "Write",
+        "mcp__plugin_playwright_playwright__browser_click",
+        "mcp__plugin_playwright_playwright__browser_close",
+        "mcp__plugin_playwright_playwright__browser_navigate",
+        "mcp__plugin_playwright_playwright__browser_wait_for"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 174,
+      "filename": "912746a2-bd22-4ef9-8911-7e29cc32f3b2.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "e192764590e0f0d9bce55596672bbd84",
+    "viewer_url": "https://custardseed.com/g/e192764590e0f0d9bce55596672bbd84",
+    "fetched_at": "2026-02-14T01:56:57.397856+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "queue-operation": 18,
+        "file-history-snapshot": 35,
+        "user": 112,
+        "assistant": 204,
+        "progress": 163
+      },
+      "content_block_counts": {
+        "text": 57,
+        "thinking": 85,
+        "tool_use": 93,
+        "tool_result": 92
+      },
+      "tools_used": [
+        "Bash",
+        "Edit",
+        "ExitPlanMode",
+        "Glob",
+        "Read",
+        "Skill",
+        "Task",
+        "TodoWrite",
+        "Write"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 532,
+      "filename": "39a1ac1b-6ea1-44ee-a878-066157907aab.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "dbfdce6c9aad3e3ac067a89639fdbe81",
+    "viewer_url": "https://custardseed.com/g/dbfdce6c9aad3e3ac067a89639fdbe81",
+    "fetched_at": "2026-02-14T01:56:59.068008+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "file-history-snapshot": 6,
+        "user": 9,
+        "assistant": 10
+      },
+      "content_block_counts": {
+        "thinking": 4,
+        "text": 6,
+        "tool_use": 1
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 25,
+      "filename": "65ffddb0-1f82-4a63-baa6-ac1e8960f52c.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  },
+  {
+    "gist_id": "d136273753a00cfbd341ddc35d409aa3",
+    "viewer_url": "https://custardseed.com/g/d136273753a00cfbd341ddc35d409aa3",
+    "fetched_at": "2026-02-14T01:57:00.639067+00:00",
+    "main_transcript": {
+      "entry_type_counts": {
+        "file-history-snapshot": 6,
+        "user": 10,
+        "assistant": 8
+      },
+      "content_block_counts": {
+        "thinking": 3,
+        "text": 5,
+        "tool_use": 1
+      },
+      "tools_used": [
+        "Bash"
+      ],
+      "has_thinking": true,
+      "has_images": false,
+      "total_entries": 24,
+      "filename": "2f2395c2-cb68-4a15-86f4-eba5756d85b9.jsonl"
+    },
+    "subagent_transcripts": [],
+    "has_subagents": false
+  }
+]
